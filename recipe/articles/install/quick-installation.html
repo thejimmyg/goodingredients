@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Quick Install of Debian Lenny</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../../index.html">Home</a></li>
+          <li><a href="../../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="../index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Quick Install of Debian Lenny<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../../Context/breadcrumbs.cti" -->
+<a href="../../index.html">Recipes</a> &gt;
+<a href="../index.html">Core Recipes</a> &gt;
+.. &gt;
+Quick Install of Debian Lenny
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">Pre-Requisites:</th><td class="field-body">None</td>
+</tr>
+<tr class="field"><th class="docinfo-name">Required Reading:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Now we can start the base install. Select <tt class="docutils literal"><span class="pre">Install</span></tt> to start the text
+installer.</p>
+<img alt="install-debian-lenny/boot-screen.png" src="install-debian-lenny/boot-screen.png" />
+<p>I speak <tt class="docutils literal"><span class="pre">English</span></tt> so that's what I choose:</p>
+<img alt="install-debian-lenny/choose-language.png" src="install-debian-lenny/choose-language.png" />
+<p>Next you choose your country. The choice of country determines the mirror
+which will be used for packages so answer accurately. I choose
+<tt class="docutils literal"><span class="pre">United</span> <span class="pre">Kingdom</span></tt></p>
+<img alt="install-debian-lenny/choose-language-2.png" src="install-debian-lenny/choose-language-2.png" />
+<p>Select a keyboard layout:</p>
+<img alt="install-debian-lenny/select-a-keyboard-layout.png" src="install-debian-lenny/select-a-keyboard-layout.png" />
+<p>Hardware drivers are loaded along with additional components, network
+drivers are loaded and then DHCP is configured if there is a DHCP
+server on the network.</p>
+<img alt="install-debian-lenny/loading-additional-components.png" src="install-debian-lenny/loading-additional-components.png" />
+<img alt="install-debian-lenny/configuring-the-network-with-dhcp.png" src="install-debian-lenny/configuring-the-network-with-dhcp.png" />
+<p>Eventually you are asked for a hostname. So that this tutorial is consistent with other tutorials such as the ones on howtoforge.com we're going to call
+this server <tt class="docutils literal"><span class="pre">server1.example.com</span></tt>, so you should enter <tt class="docutils literal"><span class="pre">server1</span></tt> as the hostname:</p>
+<p>You should choose your own hostname.</p>
+<img alt="install-debian-lenny/configure-the-network.png" src="install-debian-lenny/configure-the-network.png" />
+<p>This machine is to be accessed on the internet as <tt class="docutils literal"><span class="pre">doppler.3aims.com</span></tt>. The
+domain is therefore <tt class="docutils literal"><span class="pre">3aims.com</span></tt>. You should enter your own domain. The
+settings can be changed later but it is worth getting them right now.</p>
+<img alt="install-debian-lenny/configure-the-network-2.png" src="install-debian-lenny/configure-the-network-2.png" />
+<p>The installer performs some processing including getting the current time:</p>
+<img alt="install-debian-lenny/getting-time.png" src="install-debian-lenny/getting-time.png" />
+<p>Then the partitioner starts.</p>
+<img alt="install-debian-lenny/partition-disks-0.png" src="install-debian-lenny/partition-disks-0.png" />
+<div class="section" id="partitioning-disks">
+<h2>Partitioning Disks</h2>
+<p>Just choose <tt class="docutils literal"><span class="pre">Guided</span> <span class="pre">Partitioning</span></tt> and place everything in one partition. The installer will set up the swap space.</p>
+</div>
+<div class="section" id="base-install">
+<h2>Base Install</h2>
+<p>The base system now installs:</p>
+<img alt="install-debian-lenny/base.png" src="install-debian-lenny/base.png" />
+<div class="section" id="users">
+<h3>Users</h3>
+<p>Enter a root password:</p>
+<img alt="install-debian-lenny/base-1.png" src="install-debian-lenny/base-1.png" />
+<p>and confirm it:</p>
+<img alt="install-debian-lenny/base-2.png" src="install-debian-lenny/base-2.png" />
+<p>Now you need to set up a username and password for an ordinary user. First enter their name:</p>
+<img alt="install-debian-lenny/base-3.png" src="install-debian-lenny/base-3.png" />
+<p>Then choose a username:</p>
+<img alt="install-debian-lenny/base-4.png" src="install-debian-lenny/base-4.png" />
+<p>Next choose a password:</p>
+<img alt="install-debian-lenny/base-5.png" src="install-debian-lenny/base-5.png" />
+<p>and confirm it:</p>
+<img alt="install-debian-lenny/base-6.png" src="install-debian-lenny/base-6.png" />
+</div>
+<div class="section" id="mirrors">
+<h3>Mirrors</h3>
+<p>Let Debian know the country you are in so it can suggest a mirror nearby:</p>
+<img alt="install-debian-lenny/base-7.png" src="install-debian-lenny/base-7.png" />
+<p>Now select a mirror from one of the options:</p>
+<img alt="install-debian-lenny/base-8.png" src="install-debian-lenny/base-8.png" />
+</div>
+<div class="section" id="proxy">
+<h3>Proxy</h3>
+<p>If you access the internet through a proxy, enter the details now. I don't so I leave it blank:</p>
+<img alt="install-debian-lenny/base-9.png" src="install-debian-lenny/base-9.png" />
+<p>Apt is configured:</p>
+<img alt="install-debian-lenny/base-10.png" src="install-debian-lenny/base-10.png" />
+<p>Apt downloads and installs any updates you need. This can take a few minutes.</p>
+<img alt="install-debian-lenny/base-11.png" src="install-debian-lenny/base-11.png" />
+<p>The post install scripts run:</p>
+<img alt="install-debian-lenny/base-12.png" src="install-debian-lenny/base-12.png" />
+<p>You are given the choice of participating in the popularity contest.</p>
+<img alt="install-debian-lenny/base-13.png" src="install-debian-lenny/base-13.png" />
+</div>
+<div class="section" id="system-packages">
+<h3>System Packages</h3>
+<p>You are asked which packages to install but we don't want the default. Unselect Statndard System, we'll install everything we want ourselves.</p>
+<img alt="install-debian-lenny/base-15.png" src="install-debian-lenny/base-15.png" />
+<p>New packages are downloaded:</p>
+<img alt="install-debian-lenny/base-16.png" src="install-debian-lenny/base-16.png" />
+<p>You are asked if you want to install Grub:</p>
+<img alt="install-debian-lenny/base-17.png" src="install-debian-lenny/base-17.png" />
+<p>Grub is installed:</p>
+<img alt="install-debian-lenny/base-18.png" src="install-debian-lenny/base-18.png" />
+<p>Final changes are made:</p>
+<img alt="install-debian-lenny/base-19.png" src="install-debian-lenny/base-19.png" />
+<p>The installation is finished:</p>
+<img alt="install-debian-lenny/base-20.png" src="install-debian-lenny/base-20.png" />
+<p>information is gathered for the final report:</p>
+<img alt="install-debian-lenny/base-21.png" src="install-debian-lenny/base-21.png" />
+<p>The system reboots:</p>
+<img alt="install-debian-lenny/base-22.png" src="install-debian-lenny/base-22.png" />
+<p>First of all it is far easier to install from an SSH console rather than in the
+Virtual Machine Manager because you can copy and paste commands.</p>
+<p>See the <a class="reference external" href="articles/set-up-openssh-server.html">Set up OpenSSH Server</a> article.</p>
+<p>Now continue the tutorial.</p>
+<p>Install <tt class="docutils literal"><span class="pre">openssh-server</span></tt>:</p>
+<pre class="literal-block">
+# apt-get install openssh-server
+</pre>
+<img alt="install-debian-lenny/ssh-1.png" src="install-debian-lenny/ssh-1.png" />
+<p>This uses 19Mb of space. Press ENTER to continue.</p>
+<p>You can find out the IP address with <tt class="docutils literal"><span class="pre">ifconfig</span></tt>. In my case with KVM it is
+192.168.122.82. From a console on your computer connect like this:</p>
+<pre class="literal-block">
+james&#64;dirac:~$ ssh root&#64;192.168.122.82
+The authenticity of host '192.168.122.82 (192.168.122.82)' can't be established.
+RSA key fingerprint is 85:2d:25:af:9c:af:27:6b:73:61:af:37:ce:d5:7f:25.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.122.82' (RSA) to the list of known hosts.
+root&#64;192.168.122.82's password:
+</pre>
+<p>Enter the root password and you'll see this:</p>
+<pre class="literal-block">
+Linux server1 2.6.26-2-amd64 #1 SMP Fri Mar 27 04:02:59 UTC 2009 x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Apr 20 00:19:22 2009
+server1:~#
+</pre>
+<p>Now you can copy and paste commands into the terminal, without having to type
+out each command in full.</p>
+</div>
+</div><p class="text-right">(<a href="quick-installation.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

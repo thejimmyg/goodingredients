@@ -1,0 +1,94 @@
+Load Virtual Machine Manager, and connect to localhost by double clicking 
+``localhost (System)``.
+
+Click the ``New`` button:
+
+.. image :: install-debian-lenny/vmm-new-vm.png
+
+The wizard starts:
+
+.. image :: install-debian-lenny/vmm-create-a-new-virtual-system.png
+
+Choose a name for you virtual machine, I've chosen ``debian-lenny-base-server``:
+
+.. image :: install-debian-lenny/vmm-naming-your-virtual-system.png
+
+Choose a fully virtulized system, I'm not sure OpenVZ will work under a 
+paravirtulized setup.
+
+.. image :: install-debian-lenny/vmm-choosing-a-virtualization-method.png
+
+At this stage you need to specify the installation method. I've downloaded the
+Debian Lenny net install CD for my architecture (amd64) so I specify it here:
+
+.. image :: install-debian-lenny/vmm-choosing-installation-method.png
+
+Specify the location of the ``.iso`` file you want to use:
+
+.. image :: install-debian-lenny/vmm-locating-installation-media.png
+
+You are going to create a RAID-1 setup so we need two disks, one to represent 
+``/dev/sda`` and one to represent ``/dev/sdb``. At this stage you can only 
+create one disk so name it with ``sda`` at the end so that once you've 
+created the second one you will have a sensible naming convention. I put 
+mine in ``/home/james/debian-lenny-base-server-sda.img``.
+
+.. image :: install-debian-lenny/vmm-assigning-storage-space.png
+
+We'll use the host virtual network for this setup, after all, this version 
+isn't going to be used in production.
+
+.. image :: install-debian-lenny/vmm-connect-to-host-network.png
+
+Next allocate memory and CPU. You can set the number of VPUs to match the 
+number of CPUs your system has. Bear in mind that our test setup needs to 
+run three Debian virtual machines so you are likely to need at least 1GB of
+RAM:
+
+.. image :: install-debian-lenny/vmm-allocate-memory-and-cpu.png
+
+The installation is now ready to start:
+
+.. image :: install-debian-lenny/vmm-all.png
+
+The installation starts and shows you a progress dialog. Creating the image
+can take a couple of minutes.
+
+.. image :: install-debian-lenny/vmm-progress-dialog.png
+
+After a while the installation completes and you are shown the boot screen:
+
+.. image :: install-debian-lenny/vmm-boot-screen.png
+
+You'll also notice the new virtual machine in the Virtual Machine Manager:
+
+.. image :: install-debian-lenny/vmm-virtual-machine-manager.png
+
+At this point the disk image you created has nothing on it so make a copy of
+it with ``sdb`` at the end of the filename. You will be able to attach it 
+later to simulate the second disk for a RAID array.
+
+Check you have enough free space:
+
+::
+
+    $ df -h
+    Filesystem            Size  Used Avail Use% Mounted on
+    /dev/sda3              48G   35G   11G  77% /
+    tmpfs                 985M     0  985M   0% /lib/init/rw
+    varrun                985M  136K  985M   1% /var/run
+    varlock               985M     0  985M   0% /var/lock
+    udev                  985M  3.1M  982M   1% /dev
+    tmpfs                 985M  512K  984M   1% /dev/shm
+    lrm                   985M  2.4M  982M   1% /lib/modules/2.6.27-11-generic/volatile
+
+Then copy the disk image:
+
+::
+
+    $ cp /home/james/debian-lenny-base-server-sda.img /home/james/debian-lenny-base-server-sdb.img 
+
+(Don't use the Take Screenshot option from the menu, this crashes the Virtual
+Machine on Intrepid Ibex!)
+
+

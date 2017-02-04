@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Bind Secondary Nameserver</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../index.html">Home</a></li>
+          <li><a href="../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Bind Secondary Nameserver<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../Context/breadcrumbs.cti" -->
+<a href="../index.html">Recipes</a> &gt;
+<a href="index.html">Core Recipes</a> &gt;
+Bind Secondary Nameserver
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">Pre-Requisites:</th><td class="field-body">None</td>
+</tr>
+<tr class="field"><th class="docinfo-name">Required Reading:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#installing-bind" id="id1">Installing BIND</a></li>
+<li><a class="reference internal" href="#changes-to-the-primary-nameserver" id="id2">Changes to the Primary Nameserver</a></li>
+<li><a class="reference internal" href="#configuring-the-secondary-nameserver" id="id3">Configuring the Secondary Nameserver</a></li>
+<li><a class="reference internal" href="#testing" id="id4">Testing</a></li>
+</ul>
+</div>
+<p>Make sure you've followed this tutorial to the end for the primary nameserver:</p>
+<ul class="simple">
+<li><a class="reference external" href="bind-primary-nameserver.html">Bind Primary Nameserver</a></li>
+</ul>
+<p>A secondary nameserver can get the zone information from a primary which means
+you only have to update the primary when you want to make changes. Having more
+than one nameserver provides some resilience and can help deal with high loads.</p>
+<div class="section" id="installing-bind">
+<h2><a class="toc-backref" href="#id1">Installing BIND</a></h2>
+<p>The initial install of BIND into a chroot is the same for a secondary
+nameserver as for a primary nameserver. Rather than going over it again in
+detail we'll just summarise the instructions here:</p>
+<p>Install BIND and some tools to help with debugging:</p>
+<pre class="literal-block">
+$ sudo apt-get install bind9 dnsutils
+</pre>
+<p>Stop BIND:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 stop
+Stopping domain name service...: bind9 waiting for pid 1028 to die.
+</pre>
+<p>Create the chroot directories and devices:</p>
+<pre class="literal-block">
+sudo mkdir -p /var/chroot/bind9/{etc,dev,var/cache/bind,var/run/bind/run}
+sudo chown -R bind:bind /var/chroot/bind9/var/*
+sudo mknod /var/chroot/bind9/dev/null c 1 3
+sudo mknod /var/chroot/bind9/dev/random c 1 8
+sudo chmod 666 /var/chroot/bind9/dev/{null,random}
+</pre>
+<p>Move the BIND configuration directory and add a link so that any future Debian
+updates will still work:</p>
+<pre class="literal-block">
+sudo mv /etc/bind /var/chroot/bind9/etc
+sudo ln -s /var/chroot/bind9/etc/bind /etc/bind
+</pre>
+<p>Create <tt class="docutils literal"><span class="pre">/etc/rsyslog.d/bind-chroot.conf</span></tt> and add the line:</p>
+<pre class="literal-block">
+$AddUnixListenSocket /var/chroot/bind9/dev/log
+</pre>
+<p>Restart syslogd:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/rsyslog restart
+Restarting system log daemon: syslogd.
+</pre>
+<p>Edit <tt class="docutils literal"><span class="pre">/etc/default/bind9</span></tt> and replace this:</p>
+<pre class="literal-block">
+OPTIONS=&quot;-u bind&quot;
+</pre>
+<p>with this:</p>
+<pre class="literal-block">
+OPTIONS=&quot;-u bind -t /var/chroot/bind9&quot;
+</pre>
+<p>This tells BIND to use the chroot. Now start BIND:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 start
+Starting domain name service...: bind.
+</pre>
+<p>If you have any problems, go back and follow the more detailed steps in the
+primary nameserver article.</p>
+</div>
+<div class="section" id="changes-to-the-primary-nameserver">
+<h2><a class="toc-backref" href="#id2">Changes to the Primary Nameserver</a></h2>
+<p>You need to specify the IP address of the slave servers in the primary
+nameserver's <tt class="docutils literal"><span class="pre">/etc/bind/named.conf.options</span></tt> file before the master will allow
+another nameserver to access its zone information. Update the
+<tt class="docutils literal"><span class="pre">allow-transfer</span></tt> option to look like this:</p>
+<pre class="literal-block">
+allow-transfer { 192.168.100.3; };
+</pre>
+<p>Then restart bind:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 restart
+</pre>
+<p>and check <tt class="docutils literal"><span class="pre">/var/log/syslog</span></tt> to ensure everything worked correctly:</p>
+<pre class="literal-block">
+$ sudo tail -f /var/log/syslog
+May 25 22:33:45 plpa named[959]: command channel listening on ::1#953
+May 25 22:33:45 plpa named[959]: zone 0.in-addr.arpa/IN: loaded serial 1
+May 25 22:33:45 plpa named[959]: zone 127.in-addr.arpa/IN: loaded serial 1
+May 25 22:33:45 plpa named[959]: zone 122.168.192.in-addr.arpa/IN: loaded serial 2009052300
+May 25 22:33:45 plpa named[959]: zone 255.in-addr.arpa/IN: loaded serial 1
+May 25 22:33:45 plpa named[959]: zone example.com/IN: loaded serial 2009052300
+May 25 22:33:45 plpa named[959]: zone localhost/IN: loaded serial 2
+May 25 22:33:45 plpa named[959]: zone example.com/IN: sending notifies (serial 2009052300)
+May 25 22:33:45 plpa named[959]: zone 122.168.192.in-addr.arpa/IN: sending notifies (serial 2009052300)
+May 25 22:33:45 plpa named[959]: running
+</pre>
+</div>
+<div class="section" id="configuring-the-secondary-nameserver">
+<h2><a class="toc-backref" href="#id3">Configuring the Secondary Nameserver</a></h2>
+<p>Unlike on the primary, you don't need to create any <tt class="docutils literal"><span class="pre">db.*</span></tt> files, instead you
+just specify the zones in <tt class="docutils literal"><span class="pre">/etc/bind/named.conf.local</span></tt> but within those
+definitions, specify the <tt class="docutils literal"><span class="pre">type</span></tt> as <tt class="docutils literal"><span class="pre">slave</span></tt> and add the IP address of the
+master from which those files can be obtained. Edit
+<tt class="docutils literal"><span class="pre">/etc/bind/named.conf.local</span></tt> and add this to the end:</p>
+<pre class="literal-block">
+zone &quot;example.com&quot; {
+    type slave;
+    file &quot;/etc/bind/db.example.com&quot;;
+    masters {
+        192.168.100.2;
+    };
+};
+</pre>
+<p>Let's also add an entry for the reverse zone:</p>
+<pre class="literal-block">
+zone &quot;122.168.192.in-addr.arpa&quot; {
+    type slave;
+    file &quot;/etc/bind/db.122.168.192.in-addr.arpa&quot;;
+    masters {
+        192.168.100.2;
+    };
+};
+</pre>
+<p>With these changes in place, reload the configuration:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 reload
+</pre>
+<p>If you look at <tt class="docutils literal"><span class="pre">/var/log/syslog</span></tt> you'll see that the zone transfer failed because of a permission problem</p>
+<pre class="literal-block">
+$ sudo tail -f /var/log/syslog
+...
+May 25 22:45:15 plpb named[1447]: zone example.com/IN: Transfer started.
+May 25 22:45:15 plpb named[1447]: transfer of 'example.com/IN' from 192.168.100.2#53: connected using 192.168.100.3#41069
+May 25 22:45:15 plpb named[1447]: dumping master file: /etc/bind/tmp-4h0Q5PEDYM: open: permission denied
+May 25 22:45:15 plpb named[1447]: transfer of 'example.com/IN' from 192.168.100.2#53: failed while receiving responses: permission denied
+May 25 22:45:15 plpb named[1447]: transfer of 'example.com/IN' from 192.168.100.2#53: Transfer completed: 0 messages, 14 records, 0 bytes, 0.030 secs (0 bytes/sec)
+...
+</pre>
+<p>To fix this you need to set the group of the symlink <tt class="docutils literal"><span class="pre">/etc/bind</span></tt> to be <tt class="docutils literal"><span class="pre">bind</span></tt>, give the group right access and then reload:</p>
+<pre class="literal-block">
+$ sudo chgrp --no-dereference bind /etc/bind
+$ sudo chmod g+w /etc/bind
+$ sudo /etc/init.d/bind9 reload
+</pre>
+<p>This time the transfers are successful:</p>
+<pre class="literal-block">
+james&#64;plpb:~$ sudo tail -f /var/log/syslog
+...
+May 25 22:56:21 plpb named[1508]: zone 122.168.192.in-addr.arpa/IN: Transfer started.
+May 25 22:56:21 plpb named[1508]: transfer of '122.168.192.in-addr.arpa/IN' from 192.168.100.2#53: connected using 192.168.100.3#41738
+May 25 22:56:21 plpb named[1508]: zone 122.168.192.in-addr.arpa/IN: transferred serial 2009052300
+May 25 22:56:21 plpb named[1508]: transfer of '122.168.192.in-addr.arpa/IN' from 192.168.100.2#53: Transfer completed: 1 messages, 8 records, 241 bytes, 0.002 secs (120500 bytes/sec)
+...
+</pre>
+<p>From now on, each time you make a change to the zone files on the primary and
+increment the serial number, bind sends a NOTIFY to all secondaries. The
+secondaries then check to see if the serial number matches the files they
+already have and if not they perform a zone transfer to get the updated zone
+information.</p>
+<p>The only time you should need to modify the settings on the secondary is when
+you've added a new zone on the primary which the secondary isn't aware of.</p>
+</div>
+<div class="section" id="testing">
+<h2><a class="toc-backref" href="#id4">Testing</a></h2>
+<p>You can test this nameserver as you did with the primary:</p>
+<pre class="literal-block">
+$ dig &#64;localhost www.example.com
+
+; &lt;&lt;&gt;&gt; DiG 9.5.1-P1 &lt;&lt;&gt;&gt; &#64;localhost www.example.com
+; (1 server found)
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 38231
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 2, ADDITIONAL: 2
+
+;; QUESTION SECTION:
+;www.example.com.                   IN      A
+
+;; ANSWER SECTION:
+www.example.com.            84924   IN      A       192.168.100.2
+www.example.com.            84924   IN      A       192.168.100.3
+
+;; AUTHORITY SECTION:
+example.com.                84924   IN      NS      ns1.example.com.
+example.com.                84924   IN      NS      ns0.example.com.
+
+;; ADDITIONAL SECTION:
+ns0.example.com.            84924   IN      A       192.168.100.2
+ns1.example.com.            84924   IN      A       192.168.100.3
+
+;; Query time: 4 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Mon May 25 22:58:41 2009
+;; MSG SIZE  rcvd: 131
+</pre>
+<p>Now edit <tt class="docutils literal"><span class="pre">/etc/bind/db.example.com</span></tt> on the master and add a new domain by adding this line at the end:</p>
+<pre class="literal-block">
+new.example.com.            84924   IN      A       192.168.100.5
+</pre>
+<p>Reload the master:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 reload
+</pre>
+<p>On the secondary you'll see these messages in <tt class="docutils literal"><span class="pre">/var/log/syslog</span></tt>:</p>
+<pre class="literal-block">
+May 25 23:03:55 plpb named[1508]: client 192.168.100.2#27684: received notify for zone 'example.com'
+May 25 23:03:55 plpb named[1508]: zone example.com/IN: notify from 192.168.100.2#27684: zone is up to date
+May 25 23:03:56 plpb named[1508]: client 192.168.100.2#54635: received notify for zone '122.168.192.in-addr.arpa'
+May 25 23:03:56 plpb named[1508]: zone 122.168.192.in-addr.arpa/IN: notify from 192.168.100.2#54635: zone is up to date
+</pre>
+<p>The secondary has been notified of the change but thinks the changed zone is up to date because we didn't update the serial number. You can check this for yourself by running this on the secondary:</p>
+<pre class="literal-block">
+$ dig &#64;localhost new.example.com
+</pre>
+<p>You won't get an <tt class="docutils literal"><span class="pre">ANSWER</span> <span class="pre">SECTION</span></tt> because the DNS entry doesn't exist on the secondary yet.</p>
+<p>Update the serial number on the master and reload:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 reload
+</pre>
+<p>On the secondary you'll see these messages in <tt class="docutils literal"><span class="pre">/var/log/syslog</span></tt>:</p>
+<pre class="literal-block">
+May 25 23:07:08 plpb named[1508]: client 192.168.100.2#21504: received notify for zone 'example.com'
+May 25 23:07:08 plpb named[1508]: zone example.com/IN: Transfer started.
+May 25 23:07:08 plpb named[1508]: transfer of 'example.com/IN' from 192.168.100.2#53: connected using 192.168.100.3#33030
+May 25 23:07:08 plpb named[1508]: zone example.com/IN: transferred serial 2009052301
+May 25 23:07:08 plpb named[1508]: transfer of 'example.com/IN' from 192.168.100.2#53: Transfer completed: 1 messages, 15 records, 335 bytes, 0.003 secs (111666 bytes/sec)
+May 25 23:07:08 plpb named[1508]: zone example.com/IN: sending notifies (serial 2009052301)
+May 25 23:07:09 plpb named[1508]: client 192.168.100.2#12845: received notify for zone '122.168.192.in-addr.arpa'
+May 25 23:07:09 plpb named[1508]: zone 122.168.192.in-addr.arpa/IN: notify from 192.168.100.2#12845: zone is up to date
+</pre>
+<p>Notice this time the DNS entries were updated and <tt class="docutils literal"><span class="pre">dig</span></tt> returns the new record:</p>
+<pre class="literal-block">
+$ dig &#64;localhost new.example.com
+...
+;; ANSWER SECTION:
+new.example.com.            84924   IN      A       192.168.100.5
+...
+</pre>
+<p>That's it, you now have primary and secondary nameservers.</p>
+</div><p class="text-right">(<a href="bind-secondary-nameserver.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

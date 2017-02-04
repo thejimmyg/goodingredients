@@ -1,0 +1,1434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Install Debian Lenny on a Production Server</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../../index.html">Home</a></li>
+          <li><a href="../../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="../index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Install Debian Lenny on a Production Server<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../../Context/breadcrumbs.cti" -->
+<a href="../../index.html">Recipes</a> &gt;
+<a href="../index.html">Core Recipes</a> &gt;
+.. &gt;
+Install Debian Lenny on a...
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">Pre-Requisites:</th><td class="field-body">None</td>
+</tr>
+<tr class="field"><th class="docinfo-name">Required Reading:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Now we can start the base install. Select <tt class="docutils literal"><span class="pre">Install</span></tt> to start the text
+installer.</p>
+<img alt="install-debian-lenny/boot-screen.png" src="install-debian-lenny/boot-screen.png" />
+<p>I speak <tt class="docutils literal"><span class="pre">English</span></tt> so that's what I choose:</p>
+<img alt="install-debian-lenny/choose-language.png" src="install-debian-lenny/choose-language.png" />
+<p>Next you choose your country. The choice of country determines the mirror
+which will be used for packages so answer accurately. I choose
+<tt class="docutils literal"><span class="pre">United</span> <span class="pre">Kingdom</span></tt></p>
+<img alt="install-debian-lenny/choose-language-2.png" src="install-debian-lenny/choose-language-2.png" />
+<p>Select a keyboard layout:</p>
+<img alt="install-debian-lenny/select-a-keyboard-layout.png" src="install-debian-lenny/select-a-keyboard-layout.png" />
+<p>Hardware drivers are loaded along with additional components, network
+drivers are loaded and then DHCP is configured if there is a DHCP
+server on the network.</p>
+<img alt="install-debian-lenny/loading-additional-components.png" src="install-debian-lenny/loading-additional-components.png" />
+<img alt="install-debian-lenny/configuring-the-network-with-dhcp.png" src="install-debian-lenny/configuring-the-network-with-dhcp.png" />
+<p>Eventually you are asked for a hostname. So that this tutorial is consistent with other tutorials such as the ones on howtoforge.com we're going to call
+this server <tt class="docutils literal"><span class="pre">server1.example.com</span></tt>, so you should enter <tt class="docutils literal"><span class="pre">server1</span></tt> as the hostname:</p>
+<p>You should choose your own hostname.</p>
+<img alt="install-debian-lenny/configure-the-network.png" src="install-debian-lenny/configure-the-network.png" />
+<p>This machine is to be accessed on the internet as <tt class="docutils literal"><span class="pre">doppler.3aims.com</span></tt>. The
+domain is therefore <tt class="docutils literal"><span class="pre">3aims.com</span></tt>. You should enter your own domain. The
+settings can be changed later but it is worth getting them right now.</p>
+<img alt="install-debian-lenny/configure-the-network-2.png" src="install-debian-lenny/configure-the-network-2.png" />
+<p>The installer performs some processing including getting the current time:</p>
+<img alt="install-debian-lenny/getting-time.png" src="install-debian-lenny/getting-time.png" />
+<p>Then the partitioner starts.</p>
+<img alt="install-debian-lenny/partition-disks-0.png" src="install-debian-lenny/partition-disks-0.png" />
+<div class="section" id="partitioning-disks">
+<h2>Partitioning Disks</h2>
+<p>Next we have to parition disks. We need at least four partitions:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">/boot</span></tt></dt>
+<dd>It is always wise to have <tt class="docutils literal"><span class="pre">/boot</span></tt> as a straightforward ext3 primary
+partition so that you can be confident all kernels will be able to load
+data from them when the machine boots needing to be compiled with special
+drivers.</dd>
+<dt>swap</dt>
+<dd>Swap space should be 1-2x the amount of memory your server has. If the
+server has over 2G RAM you can usually get away with chosing a value equal to
+the RAM.</dd>
+<dt><tt class="docutils literal"><span class="pre">/</span></tt></dt>
+<dd>The root partition generally shouldn't be under LVM either so needs its
+own partition.</dd>
+<dt><tt class="docutils literal"><span class="pre">/data</span></tt></dt>
+<dd>All data will go in a LVM partition</dd>
+</dl>
+<p>In a production setup it is often a good idea to have lots of small partitions
+for the data rather than one large one. This is because using LVM you can
+easily create one logical volume group for them all anyway and by having lots
+of small partitions you have more flexibility if you ever want to change the
+structure of your disks.</p>
+<p>You have a choice of which of these should be primary partitions and which
+should be logical partitions. From the Linux Partition HOWTO:</p>
+<blockquote>
+<p>3.3. Primary Partitions</p>
+<p>The number of partitions on an Intel-based system was limited from the very
+beginning: The original partition table was installed as part of the boot
+sector and held space for only four partition entries. These partitions are
+now called primary partitions.</p>
+<p>3.4. Logical Partitions</p>
+<p>One primary partition of a hard drive may be subpartitioned. These are
+logical partitions. This effectively allows us to skirt the historical four
+partition limitation.</p>
+<p>The primary partition used to house the logical partitions is called an
+extended partition and it has its own file system type (0x05). Unlike primary
+partitions, logical partitions must be contiguous. Each logical partition
+contains a pointer to the next logical partition, which implies that the number
+of logical partitions is unlimited. However, linux imposes limits on the total
+number of any type of prtition on a drive, so this effectively limits the
+number of logical partitions. This is at most 15 partitions total on an SCSI
+disk and 63 total on an IDE disk.</p>
+</blockquote>
+<p>If you do add 4 primary partitions the remaining space becomes unusable:</p>
+<img alt="install-debian-lenny/partition-disks-0-unusable.png" src="install-debian-lenny/partition-disks-0-unusable.png" />
+<p>Because of this keep the total number of partitions below 15. For safety, the
+<tt class="docutils literal"><span class="pre">/boot</span></tt> partition should be within the first 1023 cylinders or 8GBytes of
+your hard drive. It does not matter whether <tt class="docutils literal"><span class="pre">/boot</span></tt> is a primary or logical
+partition. This partition will contain your bootloader and your kernel(s). A
+64MB partition should be well enough for quite a few kernel generations but
+I've had a problem where I ran out of boot space before so to be on the safe
+side I'd make a production system 500MB or more. The more kernels you wish to
+run on it the larger you make it.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>As an example, a clean debain install with 2 standard Debian kernels and an
+OpenVZ kernel uses 35MB in the <tt class="docutils literal"><span class="pre">/boot</span></tt> directory:</p>
+<pre class="last literal-block">
+# ls -lah /boot/
+total 35M
+drwxr-xr-x  3 root root 4.0K 2009-04-18 23:18 .
+drwxr-xr-x 21 root root 4.0K 2009-04-18 23:19 ..
+-rw-r--r--  1 root root  84K 2009-03-13 21:55 config-2.6.26-1-amd64
+-rw-r--r--  1 root root  84K 2009-03-27 07:18 config-2.6.26-2-amd64
+-rw-r--r--  1 root root  84K 2009-03-27 07:21 config-2.6.26-2-openvz-amd64
+drwxr-xr-x  2 root root 4.0K 2009-04-18 23:18 grub
+-rw-r--r--  1 root root 6.4M 2009-04-18 22:35 initrd.img-2.6.26-1-amd64
+-rw-r--r--  1 root root 6.4M 2009-04-18 22:36 initrd.img-2.6.26-2-amd64
+-rw-r--r--  1 root root 6.4M 2009-04-18 22:35 initrd.img-2.6.26-2-amd64.bak
+-rw-r--r--  1 root root 6.4M 2009-04-18 23:18 initrd.img-2.6.26-2-openvz-amd64
+-rw-r--r--  1 root root 1.2M 2009-03-13 21:55 System.map-2.6.26-1-amd64
+-rw-r--r--  1 root root 1.2M 2009-03-27 07:18 System.map-2.6.26-2-amd64
+-rw-r--r--  1 root root 1.2M 2009-03-27 07:21 System.map-2.6.26-2-openvz-amd64
+-rw-r--r--  1 root root 1.7M 2009-03-13 21:52 vmlinuz-2.6.26-1-amd64
+-rw-r--r--  1 root root 1.7M 2009-03-27 07:18 vmlinuz-2.6.26-2-amd64
+-rw-r--r--  1 root root 1.7M 2009-03-27 07:21 vmlinuz-2.6.26-2-openvz-amd64
+</pre>
+</div>
+<p>Since we only have 4GB of space let's partition like this. On a real server you
+would make larger data partitions and have more of them.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">At the time of writing a minimum install of Debian Lenny from the
+netinstall CD and with all package sets unselected (with no <tt class="docutils literal"><span class="pre">Standard</span> <span class="pre">System</span></tt>
+options either) comes in at 512Mb after first boot.</p>
+</div>
+<p>Again, I'm creating a tiny swap parititon for this example.</p>
+<p>Traditionally, a file server uses SCSI disks, but today SATA disks offer an
+attractive combination of speed and low cost. At the time of this writing, 250
+GB SATA drives are commonly available for around $100; for a terabyte, the cost
+is around $400.</p>
+<p>SATA drives are not named like ATA drives (hda, hdb), but like SCSI (sda, sdb).</p>
+<p>For our test we will use the following setup:</p>
+<p>Partition ID     Name     Mount point/Use Size for 4GB test
+========= ====== ======== =============== =================
+Primary   <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda1</span></tt> <tt class="docutils literal"><span class="pre">/boot</span></tt>       64Mb
+Primary   <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda2</span></tt> Swap            128MB
+Primary   <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda3</span></tt> <tt class="docutils literal"><span class="pre">/</span></tt>           1GB
+Extended  <tt class="docutils literal"><span class="pre">5</span></tt>  <tt class="docutils literal"><span class="pre">hda4</span></tt>
+Logical   <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda5</span></tt> Data A          1GB
+Logical   <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda6</span></tt> Data B          1GB
+Logical   <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda7</span></tt> Encrypted       500MB
+FREE                                      Remaining Space</p>
+<p>The example uses an encrypted parition so I can demonstrate how to use
+encrypted and unencrypted paritions. In a production setup it is unlikely you
+would need a mixture of encrypted and unencrypted volumes you could make all
+your data partitions encrypted or all unencrypted as you wish.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Bear in mind that having an encrypted volume will mean that you need to
+enter your passphrase every time you reboot the machine before the SSH server
+is loaded. This may not be practical on a remote machine. XXX Is this true?</p>
+</div>
+<p>For a production setup you would use a partitioning scheme like this:</p>
+<p>Partition type Name      Mount point/Use Recommended for 400GB disk
+============== ========= =============== ==========================
+Primary <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda1</span></tt>  <tt class="docutils literal"><span class="pre">/boot</span></tt>       500MB
+Primary <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda2</span></tt>  Swap            1-2x size of RAM eg 3GB
+Primary <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda3</span></tt>  <tt class="docutils literal"><span class="pre">/</span></tt>           10GB
+Logical <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda4</span></tt>  Data A          50GB
+Logical <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda5</span></tt>  Data B          50GB
+Logical <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda6</span></tt>  Data C          50GB
+...            ...       ...             ...
+Logical <tt class="docutils literal"><span class="pre">fd</span></tt> <tt class="docutils literal"><span class="pre">hda13</span></tt> Data J          50GB
+FREE                                     Remaining space</p>
+<p><a class="reference external" href="http://www.win.tue.nl/~aeb/partitions/partition_types-1.html">http://www.win.tue.nl/~aeb/partitions/partition_types-1.html</a></p>
+<p>8e Linux Logical Volume Manager partition
+fd Linux raid partition with autodetect using persistent superblock</p>
+<p># fdisk -l /dev/sdd</p>
+<pre class="literal-block">
+/boot    128Mb  primary
+swap     128Mb  primary
+/        1000Mb primary
+/data_01 1000Mb logical +
+/data_02 1000Mb logical +-- these are in an *extended* partition
+/enc     *Mb    logical +
+</pre>
+<p>I also want to set up an encrypted volume so I'll do that with whatever space
+is available at the end.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Virtual Machine Manger installation wizard treats a KB as 1024B whereas the Debian installer treats it as 1000B so you actually have 4.2GB of space available in the Debian installer if you created a 4000Mb partition in the Virtual Machine Manger installation wizard.</p>
+</div>
+<p><a class="reference external" href="http://www.linfo.org/logical_partition.html">http://www.linfo.org/logical_partition.html</a>
+<a class="reference external" href="http://www.gentoo.org/doc/en/lvm2.xml">http://www.gentoo.org/doc/en/lvm2.xml</a></p>
+<p>Let's get started. Here's what the screen currently looks like. We want
+<tt class="docutils literal"><span class="pre">Manual</span></tt> partitioning.</p>
+<img alt="install-debian-lenny/partition-disks.png" src="install-debian-lenny/partition-disks.png" />
+<p>Select the hard drive to parition.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">On your server it is likely the disk will be named <tt class="docutils literal"><span class="pre">sda</span></tt> rather than
+<tt class="docutils literal"><span class="pre">hda</span></tt> as it is in this example.</p>
+</div>
+<img alt="install-debian-lenny/partition-disks-2.png" src="install-debian-lenny/partition-disks-2.png" />
+<p>You want to create a partition table so choose <tt class="docutils literal"><span class="pre">Yes</span></tt>:</p>
+<img alt="install-debian-lenny/partition-disks-3.png" src="install-debian-lenny/partition-disks-3.png" />
+<p>You return to the previous screen but this time there is an empty partition
+list. Select the <tt class="docutils literal"><span class="pre">FREE</span> <span class="pre">SPACE</span></tt> and press Enter.</p>
+<img alt="install-debian-lenny/partition-disks-4.png" src="install-debian-lenny/partition-disks-4.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">partition</span></tt>:</p>
+<img alt="install-debian-lenny/partition-disks-5.png" src="install-debian-lenny/partition-disks-5.png" />
+<p>The first partition we are making is the <tt class="docutils literal"><span class="pre">/boot</span></tt> partition so enter <tt class="docutils literal"><span class="pre">500</span> <span class="pre">MB</span></tt>:</p>
+<img alt="install-debian-lenny/partition-disks-6.png" src="install-debian-lenny/partition-disks-6.png" />
+<p>Choose to make it a <tt class="docutils literal"><span class="pre">Primary</span></tt> partition (although you could choose logical):</p>
+<img alt="install-debian-lenny/partition-disks-7.png" src="install-debian-lenny/partition-disks-7.png" />
+<p>Choose to have it at the <tt class="docutils literal"><span class="pre">Beginning</span></tt> of the drive, although you could have it
+at the end too.</p>
+<img alt="install-debian-lenny/partition-disks-8.png" src="install-debian-lenny/partition-disks-8.png" />
+<p>You will arrive at the screen below. Even though this parition will eventually
+be mounted as <tt class="docutils literal"><span class="pre">/boot</span></tt> you do not need to change the mountpoint.</p>
+<img alt="install-debian-lenny/partition-disks-9.png" src="install-debian-lenny/partition-disks-9.png" />
+<p>Now set the partition to be bootable by highlighting <tt class="docutils literal"><span class="pre">Bootable</span> <span class="pre">flag</span></tt> and
+pressing Enter:</p>
+<img alt="install-debian-lenny/partition-disks-10.png" src="install-debian-lenny/partition-disks-10.png" />
+<p>You are returned to the same screen but the bootable flag has been updated:</p>
+<img alt="install-debian-lenny/partition-disks-11.png" src="install-debian-lenny/partition-disks-11.png" />
+<p>You want to change how this partition is used so press Enter with <tt class="docutils literal"><span class="pre">User</span> <span class="pre">as:</span></tt>
+still selected. You will see the screen below. Select <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span>
+<span class="pre">RAID</span></tt>:</p>
+<img alt="install-debian-lenny/partition-disks-12.png" src="install-debian-lenny/partition-disks-12.png" />
+<p>Once again you are taken back to the previous screen. This time you are
+finished so select <tt class="docutils literal"><span class="pre">Done</span> <span class="pre">setting</span> <span class="pre">up</span> <span class="pre">the</span> <span class="pre">partition</span></tt>:</p>
+<img alt="install-debian-lenny/partition-disks-13.png" src="install-debian-lenny/partition-disks-13.png" />
+<p>You are taken back to the parition table screen. The first partition is now set
+up.</p>
+<img alt="install-debian-lenny/partition-disks-14.png" src="install-debian-lenny/partition-disks-14.png" />
+</div>
+<div class="section" id="repeating-the-process">
+<h2>Repeating the Process</h2>
+<p>You should now set up the root and swap partitions in the free space in exactly
+the same way.</p>
+<p>The only differences for the root partition are that it will use a 1000 <tt class="docutils literal"><span class="pre">MB</span></tt>
+space, and not have the bootable flag set to <tt class="docutils literal"><span class="pre">on</span></tt>. The swap parition is set
+up in exaclty the same way as the boot parition. Again you don't need to worry
+about mount points or filesystems yet.</p>
+<p>Here are the screens, setting up the swap partition:</p>
+<img alt="install-debian-lenny/partition-disks-15.png" src="install-debian-lenny/partition-disks-15.png" />
+<img alt="install-debian-lenny/partition-disks-16.png" src="install-debian-lenny/partition-disks-16.png" />
+<img alt="install-debian-lenny/partition-disks-17.png" src="install-debian-lenny/partition-disks-17.png" />
+<img alt="install-debian-lenny/partition-disks-18.png" src="install-debian-lenny/partition-disks-18.png" />
+<img alt="install-debian-lenny/partition-disks-19.png" src="install-debian-lenny/partition-disks-19.png" />
+<p>There is no need to set the bootable flag this time so start by setting the partition type to RAID:</p>
+<img alt="install-debian-lenny/partition-disks-20.png" src="install-debian-lenny/partition-disks-20.png" />
+<img alt="install-debian-lenny/partition-disks-21.png" src="install-debian-lenny/partition-disks-21.png" />
+<img alt="install-debian-lenny/partition-disks-22.png" src="install-debian-lenny/partition-disks-22.png" />
+<img alt="install-debian-lenny/partition-disks-23.png" src="install-debian-lenny/partition-disks-23.png" />
+<p>Here are the screens for setting up the root partition</p>
+<img alt="install-debian-lenny/partition-disks-24.png" src="install-debian-lenny/partition-disks-24.png" />
+<img alt="install-debian-lenny/partition-disks-25.png" src="install-debian-lenny/partition-disks-25.png" />
+<img alt="install-debian-lenny/partition-disks-26.png" src="install-debian-lenny/partition-disks-26.png" />
+<img alt="install-debian-lenny/partition-disks-27.png" src="install-debian-lenny/partition-disks-27.png" />
+<img alt="install-debian-lenny/partition-disks-28.png" src="install-debian-lenny/partition-disks-28.png" />
+<p>Again, no need to set the bootable flag so start by setting the partition type to RAID:</p>
+<img alt="install-debian-lenny/partition-disks-29.png" src="install-debian-lenny/partition-disks-29.png" />
+<img alt="install-debian-lenny/partition-disks-30.png" src="install-debian-lenny/partition-disks-30.png" />
+<img alt="install-debian-lenny/partition-disks-31.png" src="install-debian-lenny/partition-disks-31.png" />
+<img alt="install-debian-lenny/partition-disks-32.png" src="install-debian-lenny/partition-disks-32.png" />
+<p>Now let's set up the two data partitions. The procedure for both these is
+identical and you would repeat it for as many data partitions as you wanted.
+I'm only going to show you how to set up the first one:</p>
+<img alt="install-debian-lenny/partition-disks-33.png" src="install-debian-lenny/partition-disks-33.png" />
+<img alt="install-debian-lenny/partition-disks-34.png" src="install-debian-lenny/partition-disks-34.png" />
+<img alt="install-debian-lenny/partition-disks-35.png" src="install-debian-lenny/partition-disks-35.png" />
+<p>This time, because the you already have 3 primary partitions, you need to make
+the next one a logical parition. If you don't the remaining free space on the
+drive will become unusable.</p>
+<p>Notice this time you are not asked whether you want a primary or logical parition.</p>
+<img alt="install-debian-lenny/partition-disks-36.png" src="install-debian-lenny/partition-disks-36.png" />
+<img alt="install-debian-lenny/partition-disks-37.png" src="install-debian-lenny/partition-disks-37.png" />
+<img alt="install-debian-lenny/partition-disks-38.png" src="install-debian-lenny/partition-disks-38.png" />
+<img alt="install-debian-lenny/partition-disks-39.png" src="install-debian-lenny/partition-disks-39.png" />
+<img alt="install-debian-lenny/partition-disks-40.png" src="install-debian-lenny/partition-disks-40.png" />
+<img alt="install-debian-lenny/partition-disks-41.png" src="install-debian-lenny/partition-disks-41.png" />
+<p>And the second data partition:</p>
+<img alt="install-debian-lenny/partition-disks-42.png" src="install-debian-lenny/partition-disks-42.png" />
+<p>Now let's set up the partition for the encrypted data:</p>
+<img alt="install-debian-lenny/computing-partition-table.png" src="install-debian-lenny/computing-partition-table.png" />
+<p>Once again you choose <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span> <span class="pre">RAID</span></tt>, not <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span>
+<span class="pre">encryption</span></tt>. We'll set up encryption in a minute.</p>
+<img alt="install-debian-lenny/partition-disks-41.png" src="install-debian-lenny/partition-disks-41.png" />
+<img alt="install-debian-lenny/partition-disks-42.png" src="install-debian-lenny/partition-disks-42.png" />
+<img alt="install-debian-lenny/partition-disks-43.png" src="install-debian-lenny/partition-disks-43.png" />
+<img alt="install-debian-lenny/partition-disks-44.png" src="install-debian-lenny/partition-disks-44.png" />
+<img alt="install-debian-lenny/partition-disks-45.png" src="install-debian-lenny/partition-disks-45.png" />
+<img alt="install-debian-lenny/partition-disks-46.png" src="install-debian-lenny/partition-disks-46.png" />
+<img alt="install-debian-lenny/partition-disks-47.png" src="install-debian-lenny/partition-disks-47.png" />
+<img alt="install-debian-lenny/partition-disks-48.png" src="install-debian-lenny/partition-disks-48.png" />
+<img alt="install-debian-lenny/partition-disks-49.png" src="install-debian-lenny/partition-disks-49.png" />
+<img alt="install-debian-lenny/partition-disks-50.png" src="install-debian-lenny/partition-disks-50.png" />
+<p>Now the disks are set up. Let's configure RAID:</p>
+<img alt="install-debian-lenny/raid-1.png" src="install-debian-lenny/raid-1.png" />
+<p>You are asked if you want to write your changes to disk. If you do, choose <tt class="docutils literal"><span class="pre">Yes</span></tt>:</p>
+<img alt="install-debian-lenny/raid-2.png" src="install-debian-lenny/raid-2.png" />
+<p>Once the partition table is written to disk, let's take a detour and see how
+the structure actually exists on the disk.</p>
+</div>
+<div class="section" id="inspecting-the-setup">
+<h2>Inspecting the Setup</h2>
+<p>Send the virtual machine a Ctrl+Alt+2 key (or press that combination if you are
+doing it for real):</p>
+<img alt="install-debian-lenny/vm-fdisk-1.png" src="install-debian-lenny/vm-fdisk-1.png" />
+<p>You are asked to activate the console. Press ENTER:</p>
+<img alt="install-debian-lenny/vm-fdisk-2.png" src="install-debian-lenny/vm-fdisk-2.png" />
+<p>You get access to a cut down shell with access to the BusyBox set of tools:</p>
+<img alt="install-debian-lenny/vm-fdisk-3.png" src="install-debian-lenny/vm-fdisk-3.png" />
+<p>At the prompt run:</p>
+<pre class="literal-block">
+# fdisk -l /dev/hda
+</pre>
+<p>You'll see that all the paritions are set up with an ID of <tt class="docutils literal"><span class="pre">fd</span></tt> meaning
+<tt class="docutils literal"><span class="pre">linux</span> <span class="pre">raid</span> <span class="pre">autodetect</span></tt> apart from the extended partition which contains all
+the logical partitions after it.</p>
+<img alt="install-debian-lenny/vm-fdisk-4.png" src="install-debian-lenny/vm-fdisk-4.png" />
+<p>Now send a Ctrl+Alt+F1 key to go back to the installer to configure RAID.</p>
+</div>
+<div class="section" id="configuring-raid">
+<h2>Configuring RAID</h2>
+<p>The RAID devices you create will end up as devices named <tt class="docutils literal"><span class="pre">/dev/md0</span></tt>, <tt class="docutils literal"><span class="pre">/dev/md1</span></tt> etc.
+Select <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">MD</span> <span class="pre">Device</span></tt>:</p>
+<img alt="install-debian-lenny/raid-3.png" src="install-debian-lenny/raid-3.png" />
+<p>Now choose the RAID scheme you wish to use. There is a good article on
+WikiPedia explaining the different schemes and their pros and cons:
+<a class="reference external" href="http://en.wikipedia.org/wiki/Standard_RAID_levels">http://en.wikipedia.org/wiki/Standard_RAID_levels</a></p>
+<p>We are going to choose RAID 1 so that all data on the first disk is mirrored on
+the second. This means that if either disk fails, all the data will still be
+available on the other.</p>
+<img alt="install-debian-lenny/raid-4.png" src="install-debian-lenny/raid-4.png" />
+<img alt="install-debian-lenny/raid-5.png" src="install-debian-lenny/raid-5.png" />
+<img alt="install-debian-lenny/raid-6.png" src="install-debian-lenny/raid-6.png" />
+<p>Such an array can only be as big as the smallest member disk.</p>
+<p>You are asked to select the two active partitions which will be used as the
+RAID devices but because the second hard disk isn't added yet the second
+partition isn't available. Just select <tt class="docutils literal"><span class="pre">/dev/hda1</span></tt> by pressing space and then
+continue:</p>
+<img alt="install-debian-lenny/raid-7.png" src="install-debian-lenny/raid-7.png" />
+<p>You are returned to the main RAID menu. Repeat the process for paritions
+<tt class="docutils literal"><span class="pre">/dev/hda2</span></tt>, <tt class="docutils literal"><span class="pre">/dev/hda3</span></tt>, <tt class="docutils literal"><span class="pre">/dev/hda5</span></tt>, <tt class="docutils literal"><span class="pre">/dev/hda6</span></tt>, <tt class="docutils literal"><span class="pre">/dev/hda7</span></tt>,
+choosing : <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">MD</span> <span class="pre">Device</span></tt>, <tt class="docutils literal"><span class="pre">RAID1</span></tt>, <tt class="docutils literal"><span class="pre">2</span></tt> active devices and <tt class="docutils literal"><span class="pre">0</span></tt>
+spares each time:</p>
+<img alt="install-debian-lenny/raid-8.png" src="install-debian-lenny/raid-8.png" />
+<img alt="install-debian-lenny/raid-9.png" src="install-debian-lenny/raid-9.png" />
+<img alt="install-debian-lenny/raid-10.png" src="install-debian-lenny/raid-10.png" />
+<img alt="install-debian-lenny/raid-11.png" src="install-debian-lenny/raid-11.png" />
+<img alt="install-debian-lenny/raid-12.png" src="install-debian-lenny/raid-12.png" />
+<img alt="install-debian-lenny/raid-13.png" src="install-debian-lenny/raid-13.png" />
+<img alt="install-debian-lenny/raid-14.png" src="install-debian-lenny/raid-14.png" />
+<img alt="install-debian-lenny/raid-15.png" src="install-debian-lenny/raid-15.png" />
+<img alt="install-debian-lenny/raid-16.png" src="install-debian-lenny/raid-16.png" />
+<p>If you go back to the other console and run <tt class="docutils literal"><span class="pre">fdisk</span> <span class="pre">-l</span></tt> and <tt class="docutils literal"><span class="pre">mdadm</span> <span class="pre">--detail</span>
+<span class="pre">--scan</span></tt> you'll see that the partition table hasn't changed but that the RAID
+devices have been created:</p>
+<img alt="install-debian-lenny/raid-17.png" src="install-debian-lenny/raid-17.png" />
+</div>
+<div class="section" id="setting-up-encryption">
+<h2>Setting up Encryption</h2>
+<p>You've now set up the physical partitions and the RAID layer, now you need to
+set up the encryption layer.</p>
+<p>At this point you have to decide which paritions you want to be encrypted. If
+you don't need encryption, I'd highly recommend not encrypting anything. It
+makes life much simpler and makes it easier to recover in the event of
+problems, after all the whole point of encryption is to make it difficult to
+get at your data and in a recovery situation this may not be what you want. It
+is possible to have encrypted root filesystem <tt class="docutils literal"><span class="pre">/</span></tt> and swap partitions in
+addition to encrypted data partitions. In short you can encrypt everything
+except <tt class="docutils literal"><span class="pre">/boot</span></tt> if you want.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you do have an encrypted data partition it is likely that some of that data
+will be used in memory from time to time and could therefore be swapped to
+disk. If you are using an encrypted data or root parition you should therefore
+also encrypt your swap partition.</p>
+</div>
+<p>For our example let's set up the swap partition and <tt class="docutils literal"><span class="pre">/dev/hda7</span></tt> as encrypted partitions.</p>
+<p>Let's start with the swap partition. Use the down arrow to select the line
+under <tt class="docutils literal"><span class="pre">RAID1</span> <span class="pre">device</span> <span class="pre">#1</span></tt> and press ENTER.</p>
+<img alt="install-debian-lenny/encryption-1.png" src="install-debian-lenny/encryption-1.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/encryption-2.png" src="install-debian-lenny/encryption-2.png" />
+<p>Choose <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span> <span class="pre">encryption</span></tt>.</p>
+<img alt="install-debian-lenny/encryption-3.png" src="install-debian-lenny/encryption-3.png" />
+<p>The encryption method used is the new device mapper dm-crypt.</p>
+<p>Select <tt class="docutils literal"><span class="pre">Encryption</span> <span class="pre">key</span></tt>:</p>
+<img alt="install-debian-lenny/encryption-4.png" src="install-debian-lenny/encryption-4.png" />
+<p>Because we are going to use this as a swap partition there is no need to set a
+passphrase because you will never want to be able to read the data back from
+the swap partition between boots. You therefore select <tt class="docutils literal"><span class="pre">Random</span> <span class="pre">Key</span></tt> to have a
+different encryption key automatically used on each boot.</p>
+<img alt="install-debian-lenny/encryption-5.png" src="install-debian-lenny/encryption-5.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Done</span></tt>:</p>
+<img alt="install-debian-lenny/encryption-6.png" src="install-debian-lenny/encryption-6.png" />
+<p>The RAID device is now listed as <tt class="docutils literal"><span class="pre">crypto</span></tt>:</p>
+<img alt="install-debian-lenny/encryption-7.png" src="install-debian-lenny/encryption-7.png" />
+<p>Now let's set up the encryption for the encrypted partition.</p>
+<p>Use the down arrow to select the line under <tt class="docutils literal"><span class="pre">RAID1</span> <span class="pre">device</span> <span class="pre">#1</span></tt> and press
+ENTER.</p>
+<img alt="install-debian-lenny/encryption-8.png" src="install-debian-lenny/encryption-8.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/encryption-9.png" src="install-debian-lenny/encryption-9.png" />
+<p>Choose <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span> <span class="pre">encryption</span></tt>.</p>
+<img alt="install-debian-lenny/encryption-10.png" src="install-debian-lenny/encryption-10.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Done</span></tt>:</p>
+<p>This time we do want to set a passphrase which will need to be entered each
+time the machine boots to allow access to the data on the encrypted drive. This
+is the default anyway so select <tt class="docutils literal"><span class="pre">Done</span></tt>:</p>
+<img alt="install-debian-lenny/encryption-11.png" src="install-debian-lenny/encryption-11.png" />
+<p>The RAID device is now listed as <tt class="docutils literal"><span class="pre">crypto</span></tt>:</p>
+<img alt="install-debian-lenny/encryption-12.png" src="install-debian-lenny/encryption-12.png" />
+</div>
+<div class="section" id="configuring-encrypted-volumes">
+<h2>Configuring Encrypted Volumes</h2>
+<p>At this point you will see a new option called <tt class="docutils literal"><span class="pre">Configure</span> <span class="pre">encrypted</span> <span class="pre">volumes</span></tt>. Select it:</p>
+<img alt="install-debian-lenny/encryption-13.png" src="install-debian-lenny/encryption-13.png" />
+<p>You get a warning, Select <tt class="docutils literal"><span class="pre">Yes</span></tt> if you want to write the parition table (Why
+are two devices listed?):</p>
+<img alt="install-debian-lenny/encryption-14.png" src="install-debian-lenny/encryption-14.png" />
+<p>You'll get a warning, you can just ignore it though:</p>
+<img alt="install-debian-lenny/encryption-15.png" src="install-debian-lenny/encryption-15.png" />
+<p>You'll get the same error for the second device (which doesn't exist yet anyway):</p>
+<img alt="install-debian-lenny/encryption-16.png" src="install-debian-lenny/encryption-16.png" />
+<p>Then you are asked to earse the device #1. Select <tt class="docutils literal"><span class="pre">Yes</span></tt> if you want to erase it:</p>
+<img alt="install-debian-lenny/encryption-17.png" src="install-debian-lenny/encryption-17.png" />
+<p>Erasing the swap drive begins and can take a few minutes, even with a small drive:</p>
+<img alt="install-debian-lenny/encryption-18.png" src="install-debian-lenny/encryption-18.png" />
+<p>Now you get a similar warning for the encrypted volume:</p>
+<img alt="install-debian-lenny/encryption-19.png" src="install-debian-lenny/encryption-19.png" />
+<img alt="install-debian-lenny/encryption-20.png" src="install-debian-lenny/encryption-20.png" />
+<p>The idea of writing random data over the drive is so that a potential hacker
+couldn't tell the difference between encrypted data and empty space, making the
+job of getting at the data even harder.</p>
+<p>Now that the devices are set up you are asked to enter the password for the encrypted device (you weren't asked for a password for the swap device because you chose <tt class="docutils literal"><span class="pre">Random</span> <span class="pre">Key</span></tt> earlier. If you enter a password which is too weak you will see a warning. Enter a suitable password:</p>
+<div class="caution">
+<p class="first admonition-title">Caution!</p>
+<p class="last">It is vitally important you don't forget your passphrase, if you do, you
+won't be able to access any of the data on the encrypted partitions.</p>
+</div>
+<img alt="install-debian-lenny/encryption-21.png" src="install-debian-lenny/encryption-21.png" />
+<p>Confirm the password:</p>
+<img alt="install-debian-lenny/086_Encrypted_Password2.png" src="install-debian-lenny/086_Encrypted_Password2.png" />
+<p>The partitioner starts:</p>
+<img alt="install-debian-lenny/encryption-23.png" src="install-debian-lenny/encryption-23.png" />
+<p>Then you are taken back to the main paritioning screen, which by now should seem fairly familiar:</p>
+<img alt="install-debian-lenny/encryption-24.png" src="install-debian-lenny/encryption-24.png" />
+<p>The RAID devices are still there, just listed lower down in the list:</p>
+<img alt="install-debian-lenny/encryption-25.png" src="install-debian-lenny/encryption-25.png" />
+<p>You'll also notice that the installer has defaulted the swap partition to be swap and the data partition to be ext3. We want the swap partition used as such, but we don't want the encrypted partition to use ext3, we want it to be managed by LVM so we'll change this later.</p>
+<p>Now that encryption is set send <tt class="docutils literal"><span class="pre">Ctrl+Alt+F2</span></tt> again and type the following command:</p>
+<pre class="literal-block">
+# ls /dev/mapper
+</pre>
+<p>You'll see that the mappers <tt class="docutils literal"><span class="pre">md1_crypt</span></tt> and <tt class="docutils literal"><span class="pre">md5_crypt</span></tt> have been setup. You can get informtion about them like this:</p>
+<pre class="literal-block">
+# cryptsetup status /dev/mapper/md1_crypt
+# cryptsetup status /dev/mapper/md5_crypt
+</pre>
+<p>Here's the output:</p>
+<img alt="install-debian-lenny/encryption-26.png" src="install-debian-lenny/encryption-26.png" />
+<p>Now send <tt class="docutils literal"><span class="pre">Ctrl+Alt+F1</span></tt> to go back to the installer.</p>
+</div>
+<div class="section" id="lvm-volumes">
+<h2>LVM Volumes</h2>
+<p>Now that the encrypted volumes are set up it is time to set up the LVM volumes.
+We are going to combine <tt class="docutils literal"><span class="pre">/dev/md3</span></tt> and <tt class="docutils literal"><span class="pre">/dev/md4</span></tt> (the two RAID 1 data
+partitions) into a single <em>logical volume</em> so that it can be treated as a
+single partition. We'll therefore need 3 <em>volume groups</em>, one for the root
+partition, one for the two data partitions and one for the encrypted partition. All four paritions will need to be set up for LVM.</p>
+<p>Let's start with the root partition. Select the line under <tt class="docutils literal"><span class="pre">RAID1</span> <span class="pre">device</span> <span class="pre">#2</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-1.png" src="install-debian-lenny/lvm-1.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-2.png" src="install-debian-lenny/lvm-2.png" />
+<p>Select <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span> <span class="pre">LVM</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-3.png" src="install-debian-lenny/lvm-3.png" />
+<p>You're done:</p>
+<img alt="install-debian-lenny/lvm-4.png" src="install-debian-lenny/lvm-4.png" />
+<img alt="install-debian-lenny/lvm-5.png" src="install-debian-lenny/lvm-5.png" />
+<p>Now do the same for the first data device by selecting the line under <tt class="docutils literal"><span class="pre">RAID1</span> <span class="pre">device</span> <span class="pre">#3</span></tt>:
+:</p>
+<img alt="install-debian-lenny/lvm-6.png" src="install-debian-lenny/lvm-6.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-7.png" src="install-debian-lenny/lvm-7.png" />
+<p>Select <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span> <span class="pre">LVM</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-8.png" src="install-debian-lenny/lvm-8.png" />
+<p>You're done:</p>
+<img alt="install-debian-lenny/lvm-9.png" src="install-debian-lenny/lvm-9.png" />
+<img alt="install-debian-lenny/lvm-10.png" src="install-debian-lenny/lvm-10.png" />
+<p>Now do the same for the second data device by selecting the line under <tt class="docutils literal"><span class="pre">RAID1</span> <span class="pre">device</span> <span class="pre">#4</span></tt>:
+:</p>
+<img alt="install-debian-lenny/lvm-11.png" src="install-debian-lenny/lvm-11.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-12.png" src="install-debian-lenny/lvm-12.png" />
+<p>Select <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span> <span class="pre">LVM</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-13.png" src="install-debian-lenny/lvm-13.png" />
+<p>You're done:</p>
+<img alt="install-debian-lenny/lvm-14.png" src="install-debian-lenny/lvm-14.png" />
+<img alt="install-debian-lenny/lvm-15.png" src="install-debian-lenny/lvm-15.png" />
+<p>We also want to use LVM on the encrypted partition, so let's set it up too: Select the line under <tt class="docutils literal"><span class="pre">Encrypted</span> <span class="pre">volume</span> <span class="pre">(md5_crypt)</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-16.png" src="install-debian-lenny/lvm-16.png" />
+<p>Take care not to select RAID1 device #5 by mistake or you will see this error:</p>
+<img alt="install-debian-lenny/lvm-17.png" src="install-debian-lenny/lvm-17.png" />
+<p>The encrypted partition was defaulted to ext3 when it was created. We'll change this to LVM now. Select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-18.png" src="install-debian-lenny/lvm-18.png" />
+<p>Select <tt class="docutils literal"><span class="pre">physical</span> <span class="pre">volume</span> <span class="pre">for</span> <span class="pre">LVM</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-19.png" src="install-debian-lenny/lvm-19.png" />
+<p>You're done:</p>
+<img alt="install-debian-lenny/lvm-20.png" src="install-debian-lenny/lvm-20.png" />
+<img alt="install-debian-lenny/lvm-21.png" src="install-debian-lenny/lvm-21.png" />
+<p>At this point you want to configure LVM but the option is off the top of the screen, use the up arrow to navigate to it and press ENTER:</p>
+<img alt="install-debian-lenny/lvm-22.png" src="install-debian-lenny/lvm-22.png" />
+<p>You'll see this screen. Since the only changes that need to be made after configuring LVM are to set the filesystems on primary partitions for the root and <tt class="docutils literal"><span class="pre">/boot</span></tt> mount points we can continue. If you want to continue, choose <tt class="docutils literal"><span class="pre">Yes</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-23.png" src="install-debian-lenny/lvm-23.png" />
+<p>You'll see this screen:</p>
+<img alt="install-debian-lenny/lvm-24.png" src="install-debian-lenny/lvm-24.png" />
+<p>Choose to <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">volume</span> <span class="pre">group</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-25.png" src="install-debian-lenny/lvm-25.png" />
+<p>We're going to name the data volume groups starting with <tt class="docutils literal"><span class="pre">vg_</span></tt>. Let's start with the root parition. We'll name it <tt class="docutils literal"><span class="pre">vg_root</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-26.png" src="install-debian-lenny/lvm-26.png" />
+<p>You can now select all the volumes that should make up this group. Notice that you can also add the encrypted volume into volume group but doing this would make very little sense. Just select the <tt class="docutils literal"><span class="pre">/dev/md2</span></tt> device and select <tt class="docutils literal"><span class="pre">Continue</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-27.png" src="install-debian-lenny/lvm-27.png" />
+<p>You are returned to this screen.</p>
+<img alt="install-debian-lenny/lvm-28.png" src="install-debian-lenny/lvm-28.png" />
+<p>Now let's create a volume group for all the data partitions. We can later
+create different <em>logical volumes</em> on top of the combined volume group is, for
+example we might want a different logical volume for each virtual machine to
+run on the system. Select <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">volume</span> <span class="pre">group</span></tt> again:</p>
+<img alt="install-debian-lenny/lvm-29.png" src="install-debian-lenny/lvm-29.png" />
+<p>Let's call this volume group <tt class="docutils literal"><span class="pre">vg_data</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-30.png" src="install-debian-lenny/lvm-30.png" />
+<p>Select all the data partitions available. In this case they are <tt class="docutils literal"><span class="pre">/dev/md3</span></tt> and <tt class="docutils literal"><span class="pre">/dev/md4</span></tt>.</p>
+<img alt="install-debian-lenny/lvm-31.png" src="install-debian-lenny/lvm-31.png" />
+<p>You are returned to this screen.</p>
+<img alt="install-debian-lenny/lvm-32.png" src="install-debian-lenny/lvm-32.png" />
+<p>Now create a volume group for the encrypted data. Select <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">volume</span> <span class="pre">group</span></tt> again:</p>
+<img alt="install-debian-lenny/lvm-33.png" src="install-debian-lenny/lvm-33.png" />
+<p>Let's call this volume group <tt class="docutils literal"><span class="pre">vg_encrypt</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-34.png" src="install-debian-lenny/lvm-34.png" />
+<p>Select the envrypted device:</p>
+<img alt="install-debian-lenny/lvm-35.png" src="install-debian-lenny/lvm-35.png" />
+<p>You are returned to this screen.</p>
+<img alt="install-debian-lenny/lvm-36.png" src="install-debian-lenny/lvm-36.png" />
+<div class="section" id="create-logical-volumes">
+<h3>Create Logical Volumes</h3>
+<p>Before the volume groups can be used you need to create logical volumes on top
+of them. You can split each volume group into as many logical volumes as you
+like. We're going to create one logic volume for the root partition named
+<tt class="docutils literal"><span class="pre">lv_root</span></tt>, one for the data names <tt class="docutils literal"><span class="pre">lv_data_01</span></tt> and one for the encrypted
+parition named <tt class="docutils literal"><span class="pre">lv_encrypt</span></tt>. The <tt class="docutils literal"><span class="pre">lv_root</span></tt> and <tt class="docutils literal"><span class="pre">lv_encrypt</span></tt> will fill
+their respective volume groups, but <tt class="docutils literal"><span class="pre">lv_data_01</span></tt> will only use 750Mb, we'll
+leave the rest of the space on that volume group free to be paritioned once you
+need it.</p>
+<p>Select <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">logical</span> <span class="pre">volume</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-37.png" src="install-debian-lenny/lvm-37.png" />
+<p>Let's start with <tt class="docutils literal"><span class="pre">lv_root</span></tt>. Select <tt class="docutils literal"><span class="pre">vg_root</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-38.png" src="install-debian-lenny/lvm-38.png" />
+<p>Enter the name <tt class="docutils literal"><span class="pre">lv_root</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-39.png" src="install-debian-lenny/lvm-39.png" />
+<p>We'll use the maximum size available:</p>
+<img alt="install-debian-lenny/lvm-40.png" src="install-debian-lenny/lvm-40.png" />
+<p>You are returned to this screen.</p>
+<img alt="install-debian-lenny/lvm-41.png" src="install-debian-lenny/lvm-41.png" />
+<p>Now do the same for the encrypted drive. Select <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">logical</span> <span class="pre">volume</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-42.png" src="install-debian-lenny/lvm-42.png" />
+<p>Let's start with <tt class="docutils literal"><span class="pre">lv_root</span></tt>. Select <tt class="docutils literal"><span class="pre">vg_root</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-43.png" src="install-debian-lenny/lvm-43.png" />
+<p>Enter the name <tt class="docutils literal"><span class="pre">lv_root</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-44.png" src="install-debian-lenny/lvm-44.png" />
+<p>We'll use the maximum size available:</p>
+<img alt="install-debian-lenny/lvm-45.png" src="install-debian-lenny/lvm-45.png" />
+<p>You are returned to this screen.</p>
+<img alt="install-debian-lenny/lvm-46.png" src="install-debian-lenny/lvm-46.png" />
+<p>Finally let's set up the data logical volume. Select <tt class="docutils literal"><span class="pre">Create</span> <span class="pre">logical</span> <span class="pre">volume</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-47.png" src="install-debian-lenny/lvm-47.png" />
+<p>Let's start with <tt class="docutils literal"><span class="pre">lv_root</span></tt>. Select <tt class="docutils literal"><span class="pre">vg_root</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-48.png" src="install-debian-lenny/lvm-48.png" />
+<p>Enter the name <tt class="docutils literal"><span class="pre">lv_root</span></tt>:</p>
+<img alt="install-debian-lenny/lvm-49.png" src="install-debian-lenny/lvm-49.png" />
+<p>This time change the size to 730MB:</p>
+<img alt="install-debian-lenny/lvm-50.png" src="install-debian-lenny/lvm-50.png" />
+<p>You are returned to this screen.</p>
+<img alt="install-debian-lenny/lvm-51.png" src="install-debian-lenny/lvm-51.png" />
+<p>Now, with the logical volumes set up, you can select <tt class="docutils literal"><span class="pre">Finish</span></tt>.</p>
+<img alt="install-debian-lenny/lvm-52.png" src="install-debian-lenny/lvm-52.png" />
+<p>Once again the paritioner starts:</p>
+<img alt="install-debian-lenny/lvm-53.png" src="install-debian-lenny/lvm-53.png" />
+<p>and you are taken back to the main paritioner screen:</p>
+<img alt="install-debian-lenny/lvm-54.png" src="install-debian-lenny/lvm-54.png" />
+</div>
+</div>
+<div class="section" id="filesystems-and-mount-points">
+<h2>Filesystems and Mount Points</h2>
+<p>Now we need to set up the filesystems and mount points. Let's take them in turn.</p>
+<div class="section" id="boot">
+<h3>/boot</h3>
+<p>The <tt class="docutils literal"><span class="pre">/boot</span></tt> filesystem is to be mounted directly on the <tt class="docutils literal"><span class="pre">/dev/md0</span></tt> RAID1 device. Scroll down and select the boot partition:</p>
+<img alt="install-debian-lenny/filesystem-1.png" src="install-debian-lenny/filesystem-1.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as:</span></tt>:</p>
+<img alt="install-debian-lenny/filesystem-2.png" src="install-debian-lenny/filesystem-2.png" />
+<p>Choose to use the <tt class="docutils literal"><span class="pre">Ext3</span> <span class="pre">journaling</span> <span class="pre">file</span> <span class="pre">system</span></tt>. Whilst it is technically
+possible to choose other filesystems for the <tt class="docutils literal"><span class="pre">/boot</span></tt> partition, I strongly
+recommend you use ext3 because support will already be built into standard
+kernels. If you use something like XFS you may find you need to recompile
+support into your kernels in order to get the system to boot. Using ext3 also
+makes any rescue you have to perform easier since the drivers are more likely
+to be available on a rescue disk:</p>
+<img alt="install-debian-lenny/filesystem-3.png" src="install-debian-lenny/filesystem-3.png" />
+<img alt="install-debian-lenny/filesystem-4.png" src="install-debian-lenny/filesystem-4.png" />
+<img alt="install-debian-lenny/filesystem-5.png" src="install-debian-lenny/filesystem-5.png" />
+<img alt="install-debian-lenny/filesystem-6.png" src="install-debian-lenny/filesystem-6.png" />
+<img alt="install-debian-lenny/filesystem-7.png" src="install-debian-lenny/filesystem-7.png" />
+<img alt="install-debian-lenny/filesystem-8.png" src="install-debian-lenny/filesystem-8.png" />
+</div>
+<div class="section" id="id1">
+<h3>/</h3>
+<p>Now let's set up the <tt class="docutils literal"><span class="pre">/</span></tt> mount point:</p>
+<img alt="install-debian-lenny/filesystem-9.png" src="install-debian-lenny/filesystem-9.png" />
+<p>Be sure to select rather than RAID Device #2 or you'll get this message:</p>
+<img alt="install-debian-lenny/filesystem-10.png" src="install-debian-lenny/filesystem-10.png" />
+<p>Now select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/filesystem-11.png" src="install-debian-lenny/filesystem-11.png" />
+<p>If you prefer to select a different filesystem such as Xfs for the root partition, feel free to do so. I'm using Ext3 here:</p>
+<img alt="install-debian-lenny/filesystem-12.png" src="install-debian-lenny/filesystem-12.png" />
+<img alt="install-debian-lenny/filesystem-13.png" src="install-debian-lenny/filesystem-13.png" />
+<img alt="install-debian-lenny/filesystem-14.png" src="install-debian-lenny/filesystem-14.png" />
+<img alt="install-debian-lenny/filesystem-15.png" src="install-debian-lenny/filesystem-15.png" />
+<img alt="install-debian-lenny/filesystem-16.png" src="install-debian-lenny/filesystem-16.png" />
+</div>
+<div class="section" id="data">
+<h3>/data</h3>
+<p>Now let's set up the <tt class="docutils literal"><span class="pre">/data</span></tt> mount point:</p>
+<img alt="install-debian-lenny/filesystem-17.png" src="install-debian-lenny/filesystem-17.png" />
+<p>Now select <tt class="docutils literal"><span class="pre">Use</span> <span class="pre">as</span></tt>:</p>
+<img alt="install-debian-lenny/filesystem-18.png" src="install-debian-lenny/filesystem-18.png" />
+<p>If you prefer to select a different filesystem such as Xfs for the root partition, feel free to do so. I'm using Ext3 here:</p>
+<img alt="install-debian-lenny/filesystem-19.png" src="install-debian-lenny/filesystem-19.png" />
+<img alt="install-debian-lenny/filesystem-20.png" src="install-debian-lenny/filesystem-20.png" />
+<img alt="install-debian-lenny/filesystem-21.png" src="install-debian-lenny/filesystem-21.png" />
+<img alt="install-debian-lenny/filesystem-22.png" src="install-debian-lenny/filesystem-22.png" />
+<img alt="install-debian-lenny/filesystem-23.png" src="install-debian-lenny/filesystem-23.png" />
+<img alt="install-debian-lenny/filesystem-24.png" src="install-debian-lenny/filesystem-24.png" />
+<p>Finally let's set up the <tt class="docutils literal"><span class="pre">/encrypt</span></tt> mount point.</p>
+<img alt="install-debian-lenny/filesystem-25.png" src="install-debian-lenny/filesystem-25.png" />
+<p>Make sure you select the <tt class="docutils literal"><span class="pre">vg_encrypt</span></tt> volume group, not Encrypted volume md5_crypt or you'll see this error:</p>
+<img alt="install-debian-lenny/filesystem-26.png" src="install-debian-lenny/filesystem-26.png" />
+<img alt="install-debian-lenny/filesystem-27.png" src="install-debian-lenny/filesystem-27.png" />
+<img alt="install-debian-lenny/filesystem-28.png" src="install-debian-lenny/filesystem-28.png" />
+<img alt="install-debian-lenny/filesystem-29.png" src="install-debian-lenny/filesystem-29.png" />
+<img alt="install-debian-lenny/filesystem-30.png" src="install-debian-lenny/filesystem-30.png" />
+<img alt="install-debian-lenny/filesystem-31.png" src="install-debian-lenny/filesystem-31.png" />
+<img alt="install-debian-lenny/filesystem-32.png" src="install-debian-lenny/filesystem-32.png" />
+<img alt="install-debian-lenny/filesystem-33.png" src="install-debian-lenny/filesystem-33.png" />
+</div>
+<div class="section" id="swap">
+<h3>swap</h3>
+<p>The swap partition is already set up so it needs no further attention:</p>
+<img alt="install-debian-lenny/filesystem-34.png" src="install-debian-lenny/filesystem-34.png" />
+</div>
+<div class="section" id="finsih-partitioning">
+<h3>Finsih Partitioning</h3>
+<p>You can now finsih the partitioning. Scroll all the way to the bottom:</p>
+<img alt="install-debian-lenny/filesystem-35.png" src="install-debian-lenny/filesystem-35.png" />
+<p>You are given a summary, if you want to proceed, choose <tt class="docutils literal"><span class="pre">Yes</span></tt>:</p>
+<img alt="install-debian-lenny/filesystem-36.png" src="install-debian-lenny/filesystem-36.png" />
+<p>You are shown a warning again, this can be safely ignored. You'll reboot shortly:</p>
+<img alt="install-debian-lenny/filesystem-37.png" src="install-debian-lenny/filesystem-37.png" />
+<p>The filesystems are created:</p>
+<img alt="install-debian-lenny/filesystem-38.png" src="install-debian-lenny/filesystem-38.png" />
+</div>
+</div>
+<div class="section" id="parition-summary">
+<h2>Parition Summary</h2>
+<p>With all the partitioning done, the set up is as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="10%" />
+<col width="18%" />
+<col width="12%" />
+<col width="14%" />
+<col width="5%" />
+<col width="6%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Mount Points</th>
+<th class="head"><tt class="docutils literal"><span class="pre">/boot</span></tt></th>
+<th class="head">&nbsp;</th>
+<th class="head"><tt class="docutils literal"><span class="pre">/</span></tt></th>
+<th class="head"><tt class="docutils literal"><span class="pre">/data</span></tt></th>
+<th class="head">FREE</th>
+<th class="head">FREE</th>
+<th class="head"><tt class="docutils literal"><span class="pre">/encrypt</span></tt></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Filesystems</td>
+<td>ext3</td>
+<td>swap</td>
+<td>ext3</td>
+<td>ext3</td>
+<td>None</td>
+<td>None</td>
+<td>ext3</td>
+</tr>
+<tr><td>LVM Volumes</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><tt class="docutils literal"><span class="pre">/dev/vg_root</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/lv_data_01</span></tt></td>
+<td>FREE</td>
+<td>FREE</td>
+<td><tt class="docutils literal"><span class="pre">/dev/lv_encrypt</span></tt></td>
+</tr>
+<tr><td>LVM Volume Groups</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><tt class="docutils literal"><span class="pre">/dev/vg_root</span></tt></td>
+<td colspan="3"><tt class="docutils literal"><span class="pre">/dev/vg_data</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/vg_encrypt</span></tt></td>
+</tr>
+<tr><td>Encrypted Volumes</td>
+<td>&nbsp;</td>
+<td><tt class="docutils literal"><span class="pre">/dev/mapper/md1_crypt</span></tt></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan="2">&nbsp;</td>
+<td><tt class="docutils literal"><span class="pre">/dev/mapper/md5_crypt</span></tt></td>
+</tr>
+<tr><td>RAID Devices</td>
+<td><tt class="docutils literal"><span class="pre">/dev/md0</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/md1</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/md2</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/md3</span></tt></td>
+<td colspan="2"><tt class="docutils literal"><span class="pre">/dev/md4</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/md5</span></tt></td>
+</tr>
+<tr><td>Drive Partitions</td>
+<td><tt class="docutils literal"><span class="pre">/dev/hda1</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/hda2</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/hda3</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/hda5</span></tt></td>
+<td colspan="2"><tt class="docutils literal"><span class="pre">/dev/hda6</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">/dev/hda7</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="base-install">
+<h2>Base Install</h2>
+<p>The base system now installs:</p>
+<img alt="install-debian-lenny/base.png" src="install-debian-lenny/base.png" />
+<div class="section" id="users">
+<h3>Users</h3>
+<p>Enter a root password:</p>
+<img alt="install-debian-lenny/base-1.png" src="install-debian-lenny/base-1.png" />
+<p>and confirm it:</p>
+<img alt="install-debian-lenny/base-2.png" src="install-debian-lenny/base-2.png" />
+<p>Now you need to set up a username and password for an ordinary user. First enter their name:</p>
+<img alt="install-debian-lenny/base-3.png" src="install-debian-lenny/base-3.png" />
+<p>Then choose a username:</p>
+<img alt="install-debian-lenny/base-4.png" src="install-debian-lenny/base-4.png" />
+<p>Next choose a password:</p>
+<img alt="install-debian-lenny/base-5.png" src="install-debian-lenny/base-5.png" />
+<p>and confirm it:</p>
+<img alt="install-debian-lenny/base-6.png" src="install-debian-lenny/base-6.png" />
+</div>
+<div class="section" id="mirrors">
+<h3>Mirrors</h3>
+<p>Let Debian know the country you are in so it can suggest a mirror nearby:</p>
+<img alt="install-debian-lenny/base-7.png" src="install-debian-lenny/base-7.png" />
+<p>Now select a mirror from one of the options:</p>
+<img alt="install-debian-lenny/base-8.png" src="install-debian-lenny/base-8.png" />
+</div>
+<div class="section" id="proxy">
+<h3>Proxy</h3>
+<p>If you access the internet through a proxy, enter the details now. I don't so I leave it blank:</p>
+<img alt="install-debian-lenny/base-9.png" src="install-debian-lenny/base-9.png" />
+<p>Apt is configured:</p>
+<img alt="install-debian-lenny/base-10.png" src="install-debian-lenny/base-10.png" />
+<p>Apt downloads and installs any updates you need. This can take a few minutes.</p>
+<img alt="install-debian-lenny/base-11.png" src="install-debian-lenny/base-11.png" />
+<p>The post install scripts run:</p>
+<img alt="install-debian-lenny/base-12.png" src="install-debian-lenny/base-12.png" />
+<p>You are given the choice of participating in the popularity contest.</p>
+<img alt="install-debian-lenny/base-13.png" src="install-debian-lenny/base-13.png" />
+</div>
+<div class="section" id="system-packages">
+<h3>System Packages</h3>
+<p>You are asked which packages to install but we don't want the default. Unselect Statndard System, we'll install everything we want ourselves.</p>
+<img alt="install-debian-lenny/base-15.png" src="install-debian-lenny/base-15.png" />
+<p>New packages are downloaded:</p>
+<img alt="install-debian-lenny/base-16.png" src="install-debian-lenny/base-16.png" />
+<p>You are asked if you want to install Grub:</p>
+<img alt="install-debian-lenny/base-17.png" src="install-debian-lenny/base-17.png" />
+<p>Grub is installed:</p>
+<img alt="install-debian-lenny/base-18.png" src="install-debian-lenny/base-18.png" />
+<p>Final changes are made:</p>
+<img alt="install-debian-lenny/base-19.png" src="install-debian-lenny/base-19.png" />
+<p>The installation is finished:</p>
+<img alt="install-debian-lenny/base-20.png" src="install-debian-lenny/base-20.png" />
+<p>information is gathered for the final report:</p>
+<img alt="install-debian-lenny/base-21.png" src="install-debian-lenny/base-21.png" />
+<p>The system reboots:</p>
+<img alt="install-debian-lenny/base-22.png" src="install-debian-lenny/base-22.png" />
+<p>Now add the second disk and reboot.</p>
+<img alt="install-debian-lenny/base-35.png" src="install-debian-lenny/base-35.png" />
+<img alt="install-debian-lenny/base-36.png" src="install-debian-lenny/base-36.png" />
+<img alt="install-debian-lenny/base-37.png" src="install-debian-lenny/base-37.png" />
+<img alt="install-debian-lenny/base-38.png" src="install-debian-lenny/base-38.png" />
+<p>Notice that the system recognises only one disk of the RAID array is present:</p>
+<img alt="install-debian-lenny/base-39.png" src="install-debian-lenny/base-39.png" />
+<p>On each boot you'll have to enter the passphrase you set up for the encrypted
+partition, this is why having a remote server with any encrypted partition
+using a passphrase can be problematic unless you have a serial console.</p>
+<p>Enter the password. If you make a mistake you'll see this:</p>
+<img alt="install-debian-lenny/base-40.png" src="install-debian-lenny/base-40.png" />
+<p>My password was <tt class="docutils literal"><span class="pre">password</span></tt>, so when I entere it I see this:</p>
+<img alt="install-debian-lenny/base-41.png" src="install-debian-lenny/base-41.png" />
+<p>Now login as <tt class="docutils literal"><span class="pre">root</span></tt> with the password you set up earlier:</p>
+<img alt="install-debian-lenny/base-42.png" src="install-debian-lenny/base-42.png" />
+<p>First of all it is far easier to install from an SSH console rather than in the
+Virtual Machine Manager because you can copy and paste commands.</p>
+<p>See the <a class="reference external" href="articles/set-up-openssh-server.html">Set up OpenSSH Server</a> article.</p>
+<p>Now continue the tutorial.</p>
+<p>Install <tt class="docutils literal"><span class="pre">openssh-server</span></tt>:</p>
+<pre class="literal-block">
+# apt-get install openssh-server
+</pre>
+<img alt="install-debian-lenny/ssh-1.png" src="install-debian-lenny/ssh-1.png" />
+<p>This uses 19Mb of space. Press ENTER to continue.</p>
+<p>You can find out the IP address with <tt class="docutils literal"><span class="pre">ifconfig</span></tt>. In my case with KVM it is
+192.168.122.82. From a console on your computer connect like this:</p>
+<pre class="literal-block">
+james&#64;dirac:~$ ssh root&#64;192.168.122.82
+The authenticity of host '192.168.122.82 (192.168.122.82)' can't be established.
+RSA key fingerprint is 85:2d:25:af:9c:af:27:6b:73:61:af:37:ce:d5:7f:25.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.122.82' (RSA) to the list of known hosts.
+root&#64;192.168.122.82's password:
+</pre>
+<p>Enter the root password and you'll see this:</p>
+<pre class="literal-block">
+Linux server1 2.6.26-2-amd64 #1 SMP Fri Mar 27 04:02:59 UTC 2009 x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Apr 20 00:19:22 2009
+server1:~#
+</pre>
+<p>Now you can copy and paste commands into the terminal, without having to type
+out each command in full.</p>
+<p>Before I start altering the partition table of the second drive I frist check that status of the array by issuing this command</p>
+<pre class="literal-block">
+watch -n 6 cat /proc/mdstat
+</pre>
+<p>The output looks like this and refreshes every 6 seconds:</p>
+<pre class="literal-block">
+Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:25:16 2009
+
+Personalities : [raid1]
+md5 : active raid1 hda7[0]
+      489856 blocks [2/1] [U_]
+
+md4 : active (auto-read-only) raid1 hda6[0]
+      979840 blocks [2/1] [U_]
+
+md3 : active raid1 hda5[0]
+      979840 blocks [2/1] [U_]
+
+md2 : active raid1 hda3[0]
+      979840 blocks [2/1] [U_]
+
+md1 : active raid1 hda2[0]
+      128448 blocks [2/1] [U_]
+
+md0 : active raid1 hda1[0]
+      64128 blocks [2/1] [U_]
+
+unused devices: &lt;none&gt;
+</pre>
+<p>As you can see, only one of the two active raid devices are currently used. This means I can (should) add another one to make sure that if one disk fails everything is still operational. Exit the montioring with &quot;ctrl-c&quot;.</p>
+<p>I have to find out which harddrive is which (what they are named). I issue:</p>
+<pre class="literal-block">
+server1:~# fdisk -l
+
+Disk /dev/hda: 4194 MB, 4194304000 bytes
+255 heads, 63 sectors/track, 509 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Disk identifier: 0x0002dc02
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hda1   *           1           8       64228+  fd  Linux raid autodetect
+/dev/hda2               9          24      128520   fd  Linux raid autodetect
+/dev/hda3              25         146      979965   fd  Linux raid autodetect
+/dev/hda4             147         451     2449912+   5  Extended
+/dev/hda5             147         268      979933+  fd  Linux raid autodetect
+/dev/hda6             269         390      979933+  fd  Linux raid autodetect
+/dev/hda7             391         451      489951   fd  Linux raid autodetect
+
+Disk /dev/hdb: 4194 MB, 4194304000 bytes
+255 heads, 63 sectors/track, 509 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/hdb doesn't contain a valid partition table
+
+Disk /dev/md0: 65 MB, 65667072 bytes
+2 heads, 4 sectors/track, 16032 cylinders
+Units = cylinders of 8 * 512 = 4096 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/md0 doesn't contain a valid partition table
+
+Disk /dev/md1: 131 MB, 131530752 bytes
+2 heads, 4 sectors/track, 32112 cylinders
+Units = cylinders of 8 * 512 = 4096 bytes
+Disk identifier: 0xa7838a99
+
+Disk /dev/md1 doesn't contain a valid partition table
+
+Disk /dev/md2: 1003 MB, 1003356160 bytes
+2 heads, 4 sectors/track, 244960 cylinders
+Units = cylinders of 8 * 512 = 4096 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/md2 doesn't contain a valid partition table
+
+Disk /dev/md3: 1003 MB, 1003356160 bytes
+2 heads, 4 sectors/track, 244960 cylinders
+Units = cylinders of 8 * 512 = 4096 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/md3 doesn't contain a valid partition table
+
+Disk /dev/md4: 1003 MB, 1003356160 bytes
+2 heads, 4 sectors/track, 244960 cylinders
+Units = cylinders of 8 * 512 = 4096 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/md4 doesn't contain a valid partition table
+
+Disk /dev/md5: 501 MB, 501612544 bytes
+2 heads, 4 sectors/track, 122464 cylinders
+Units = cylinders of 8 * 512 = 4096 bytes
+Disk identifier: 0x08040000
+
+Disk /dev/md5 doesn't contain a valid partition table
+
+Disk /dev/dm-0: 1002 MB, 1002438656 bytes
+255 heads, 63 sectors/track, 121 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/dm-0 doesn't contain a valid partition table
+
+Disk /dev/dm-1: 131 MB, 131530752 bytes
+255 heads, 63 sectors/track, 15 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Disk identifier: 0x5e1bbddf
+
+Disk /dev/dm-1 doesn't contain a valid partition table
+
+Disk /dev/dm-2: 500 MB, 500559872 bytes
+255 heads, 63 sectors/track, 60 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/dm-2 doesn't contain a valid partition table
+
+Disk /dev/dm-3: 729 MB, 729808896 bytes
+255 heads, 63 sectors/track, 88 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/dm-3 doesn't contain a valid partition table
+
+Disk /dev/dm-4: 499 MB, 499122176 bytes
+255 heads, 63 sectors/track, 60 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/dm-4 doesn't contain a valid partition table
+server1:~#
+</pre>
+<p>From this you can see that <tt class="docutils literal"><span class="pre">/dev/hda</span></tt> is the drive we setup and <tt class="docutils literal"><span class="pre">/dev/sdb</span></tt> is the new drive. View the parition table of <tt class="docutils literal"><span class="pre">/dev/hda</span></tt> like this:</p>
+<pre class="literal-block">
+server1:~# sfdisk -d /dev/hda
+# partition table of /dev/hda
+unit: sectors
+
+/dev/hda1 : start=       63, size=   128457, Id=fd, bootable
+/dev/hda2 : start=   128520, size=   257040, Id=fd
+/dev/hda3 : start=   385560, size=  1959930, Id=fd
+/dev/hda4 : start=  2345490, size=  4899825, Id= 5
+/dev/hda5 : start=  2345553, size=  1959867, Id=fd
+/dev/hda6 : start=  4305483, size=  1959867, Id=fd
+/dev/hda7 : start=  6265413, size=   979902, Id=fd
+
+For an idea about what is missing have a look at the tasksel wiki:
+http://wiki.debian.org/tasksel
+</pre>
+<p>Apply it to <tt class="docutils literal"><span class="pre">/dev/hdb</span></tt> like this:</p>
+<pre class="literal-block">
+server1:~# sfdisk -d /dev/hda | sfdisk /dev/hdb
+Checking that no-one is using this disk right now ...
+OK
+
+Disk /dev/hdb: 509 cylinders, 255 heads, 63 sectors/track
+
+sfdisk: ERROR: sector 0 does not have an msdos signature
+ /dev/hdb: unrecognized partition table type
+Old situation:
+No partitions found
+New situation:
+Units = sectors of 512 bytes, counting from 0
+
+   Device Boot    Start       End   #sectors  Id  System
+/dev/hdb1   *        63    128519     128457  fd  Linux raid autodetect
+/dev/hdb2        128520    385559     257040  fd  Linux raid autodetect
+/dev/hdb3        385560   2345489    1959930  fd  Linux raid autodetect
+/dev/hdb4       2345490   7245314    4899825   5  Extended
+/dev/hdb5       2345553   4305419    1959867  fd  Linux raid autodetect
+/dev/hdb6       4305483   6265349    1959867  fd  Linux raid autodetect
+/dev/hdb7       6265413   7245314     979902  fd  Linux raid autodetect
+Successfully wrote the new partition table
+
+Re-reading the partition table ...
+
+If you created or changed a DOS partition, /dev/foo7, say, then use dd(1)
+to zero the first 512 bytes:  dd if=/dev/zero of=/dev/foo7 bs=512 count=1
+(See fdisk(8).)
+</pre>
+</div>
+</div>
+<div class="section" id="zeroing-the-superblock">
+<h2>Zeroing the Superblock</h2>
+<p>Just to make sure we zero out the superblock on each partition on the new drive:</p>
+<pre class="literal-block">
+server1:~# mdadm --zero-superblock /dev/hdb1
+mdadm: Unrecognised md component device - /dev/hdb1
+server1:~# mdadm --zero-superblock /dev/hdb2
+mdadm: Unrecognised md component device - /dev/hdb2
+server1:~# mdadm --zero-superblock /dev/hdb3
+mdadm: Unrecognised md component device - /dev/hdb3
+server1:~# mdadm --zero-superblock /dev/hdb5
+mdadm: Unrecognised md component device - /dev/hdb5
+server1:~# mdadm --zero-superblock /dev/hdb6
+mdadm: Unrecognised md component device - /dev/hdb6
+server1:~# mdadm --zero-superblock /dev/hdb7
+mdadm: Unrecognised md component device - /dev/hdb7
+</pre>
+<p>You will get a lot of errors - which according to Howtoforge is good if it's a new drive that has not been used before.</p>
+</div>
+<div class="section" id="adding-the-new-partitions-to-the-raid-array">
+<h2>Adding the New Partitions to the RAID Array</h2>
+<p>Now run those commands:</p>
+<pre class="literal-block">
+server1:~# mdadm --add /dev/md0 /dev/hdb1
+mdadm: added /dev/hdb1
+server1:~# mdadm --add /dev/md1 /dev/hdb2
+mdadm: added /dev/hdb2
+server1:~# mdadm --add /dev/md2 /dev/hdb3
+mdadm: added /dev/hdb3
+server1:~# mdadm --add /dev/md3 /dev/hdb5
+mdadm: added /dev/hdb5
+server1:~# mdadm --add /dev/md4 /dev/hdb6
+mdadm: added /dev/hdb6
+server1:~# mdadm --add /dev/md5 /dev/hdb7
+mdadm: added /dev/hdb7
+</pre>
+</div>
+<div class="section" id="monitoring-the-raid-re-build">
+<h2>Monitoring the RAID Re-Build</h2>
+<pre class="literal-block">
+Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:35:56 2009
+
+Personalities : [raid1]
+md5 : active raid1 hdb7[2] hda7[0]
+      489856 blocks [2/1] [U_]
+        resync=DELAYED
+
+md4 : active raid1 hdb6[2] hda6[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md3 : active raid1 hdb5[2] hda5[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md2 : active raid1 hdb3[2] hda3[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md1 : active raid1 hdb2[2] hda2[0]
+      128448 blocks [2/1] [U_]
+      [============&gt;........]  recovery = 64.2% (83648/128448) finish=0.0min spe
+ed=11949K/sec
+</pre>
+<pre class="literal-block">
+Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:36:15 2009
+
+Personalities : [raid1]
+md5 : active raid1 hdb7[2] hda7[0]
+      489856 blocks [2/1] [U_]
+      [====&gt;................]  recovery = 20.0% (99264/489856) finish=1.0min spe
+ed=6204K/sec
+
+md4 : active raid1 hdb6[2] hda6[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md3 : active raid1 hdb5[2] hda5[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md2 : active raid1 hdb3[2] hda3[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md1 : active raid1 hdb2[1] hda2[0]
+      128448 blocks [2/2] [UU]
+
+md0 : active raid1 hdb1[1] hda1[0]
+      64128 blocks [2/2] [UU]
+
+unused devices: &lt;none&gt;
+</pre>
+<pre class="literal-block">
+Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:37:38 2009
+
+Personalities : [raid1]
+md5 : active raid1 hdb7[1] hda7[0]
+      489856 blocks [2/2] [UU]
+
+md4 : active raid1 hdb6[2] hda6[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md3 : active raid1 hdb5[2] hda5[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md2 : active raid1 hdb3[2] hda3[0]
+      979840 blocks [2/1] [U_]
+      [====&gt;................]  recovery = 22.5% (221184/979840) finish=1.1min sp
+eed=10532K/sec
+
+md1 : active raid1 hdb2[1] hda2[0]
+      128448 blocks [2/2] [UU]
+
+md0 : active raid1 hdb1[1] hda1[0]
+      64128 blocks [2/2] [UU]
+
+unused devices: &lt;none&gt;
+</pre>
+<pre class="literal-block">
+Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:39:02 2009
+
+Personalities : [raid1]
+md5 : active raid1 hdb7[1] hda7[0]
+      489856 blocks [2/2] [UU]
+
+md4 : active raid1 hdb6[2] hda6[0]
+      979840 blocks [2/1] [U_]
+        resync=DELAYED
+
+md3 : active raid1 hdb5[2] hda5[0]
+      979840 blocks [2/1] [U_]
+      [=&gt;...................]  recovery =  7.1% (70592/979840) finish=2.5min spe
+ed=5882K/sec
+
+md2 : active raid1 hdb3[1] hda3[0]
+      979840 blocks [2/2] [UU]
+
+md1 : active raid1 hdb2[1] hda2[0]
+      128448 blocks [2/2] [UU]
+
+md0 : active raid1 hdb1[1] hda1[0]
+      64128 blocks [2/2] [UU]
+
+unused devices: &lt;none&gt;
+</pre>
+<pre class="literal-block">
+Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:42:53 2009
+
+Personalities : [raid1]
+md5 : active raid1 hdb7[1] hda7[0]
+      489856 blocks [2/2] [UU]
+
+md4 : active raid1 hdb6[2] hda6[0]
+      979840 blocks [2/1] [U_]
+      [=======&gt;.............]  recovery = 35.4% (347136/979840) finish=1.5min sp
+eed=6720K/sec
+
+md3 : active raid1 hdb5[1] hda5[0]
+      979840 blocks [2/2] [UU]
+
+md2 : active raid1 hdb3[1] hda3[0]
+      979840 blocks [2/2] [UU]
+
+md1 : active raid1 hdb2[1] hda2[0]
+      128448 blocks [2/2] [UU]
+
+md0 : active raid1 hdb1[1] hda1[0]
+      64128 blocks [2/2] [UU]
+
+unused devices: &lt;none&gt;
+</pre>
+<p>Then eventually:</p>
+<pre class="literal-block">
+Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:44:48 2009
+
+Personalities : [raid1]
+md5 : active raid1 hdb7[1] hda7[0]
+      489856 blocks [2/2] [UU]
+
+md4 : active raid1 hdb6[1] hda6[0]
+      979840 blocks [2/2] [UU]
+
+md3 : active raid1 hdb5[1] hda5[0]
+      979840 blocks [2/2] [UU]
+
+md2 : active raid1 hdb3[1] hda3[0]
+      979840 blocks [2/2] [UU]
+
+md1 : active raid1 hdb2[1] hda2[0]
+      128448 blocks [2/2] [UU]
+
+md0 : active raid1 hdb1[1] hda1[0]
+      64128 blocks [2/2] [UU]
+
+unused devices: &lt;none&gt;
+</pre>
+<p>The RAID re-build is complete.</p>
+</div>
+<div class="section" id="add-grub-to-the-new-hard-drive">
+<h2>Add Grub to the New Hard Drive</h2>
+<p>Grub is not mirrored by onto the new hard drive apparantly so we have to manually add it. Run:</p>
+<pre class="literal-block">
+# grub
+</pre>
+<p>Then run in the grub prompt:</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>grub&gt; root (hd1,0)
+grub&gt; setup (hd1)</dd>
+</dl>
+<p>The first command means that grub shall use the partition /dev/hdb1 as /boot partition. The second command means that grub shall install itself into the boot sector of /dev/hdb. Grub start counting hard drives and partitions with &quot;0&quot;. So hda would be hd0 and hence hdb is hd1</p>
+<p>Here's the output:</p>
+<pre class="literal-block">
+server1:~# grub
+Probing devices to guess BIOS drives. This may take a long time.
+
+
+    GNU GRUB  version 0.97  (640K lower / 3072K upper memory)
+
+       [ Minimal BASH-like line editing is supported.   For
+         the   first   word,  TAB  lists  possible  command
+         completions.  Anywhere else TAB lists the possible
+         completions of a device/filename. ]
+grub&gt; root (hd1,0)
+root (hd1,0)
+ Filesystem type is ext2fs, partition type 0xfd
+grub&gt; setup (hd1)
+setup (hd1)
+ Checking if &quot;/boot/grub/stage1&quot; exists... no
+ Checking if &quot;/grub/stage1&quot; exists... yes
+ Checking if &quot;/grub/stage2&quot; exists... yes
+ Checking if &quot;/grub/e2fs_stage1_5&quot; exists... yes
+ Running &quot;embed /grub/e2fs_stage1_5 (hd1)&quot;...  17 sectors are embedded.
+succeeded
+ Running &quot;install /grub/stage1 d (hd1) (hd1)1+17 p (hd0,0)/grub/stage2 /grub/menu.lst&quot;... succeeded
+Done.
+grub&gt;
+</pre>
+<p>Don't worry that Grub thinks your filesystem is <tt class="docutils literal"><span class="pre">ext2fs</span></tt>.</p>
+<p>Exit grub by entering &quot;quit&quot;:</p>
+<pre class="literal-block">
+grub&gt; quit
+quit
+server1:~#
+</pre>
+<p>You have now an encrypted RAID1 setup with LVM. Each partition can be run alone.</p>
+<p>It worked! More resources:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://linux-raid.osdl.org/index.php/Growing">http://linux-raid.osdl.org/index.php/Growing</a></li>
+<li><a class="reference external" href="http://www.howtoforge.com/perfect-server-debian-lenny-ispconfig3">http://www.howtoforge.com/perfect-server-debian-lenny-ispconfig3</a></li>
+<li><a class="reference external" href="http://www.howtoforge.com/set-up-a-fully-encrypted-raid1-lvm-system-p6">http://www.howtoforge.com/set-up-a-fully-encrypted-raid1-lvm-system-p6</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Logical_disk">http://en.wikipedia.org/wiki/Logical_disk</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Standard_RAID_levels">http://en.wikipedia.org/wiki/Standard_RAID_levels</a></li>
+<li><a class="reference external" href="http://www.linuxdevcenter.com/pub/a/linux/2006/04/27/managing-disk-space-with-lvm.html">http://www.linuxdevcenter.com/pub/a/linux/2006/04/27/managing-disk-space-with-lvm.html</a></li>
+<li><a class="reference external" href="http://www.ducea.com/2009/03/08/mdadm-cheat-sheet/">http://www.ducea.com/2009/03/08/mdadm-cheat-sheet/</a></li>
+<li><a class="reference external" href="http://en.gentoo-wiki.com/wiki/DM-Crypt">http://en.gentoo-wiki.com/wiki/DM-Crypt</a></li>
+</ul>
+</div><p class="text-right">(<a href="production-debian-lenny-install.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

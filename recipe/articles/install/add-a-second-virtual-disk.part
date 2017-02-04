@@ -1,0 +1,25 @@
+Setting up the Second Disk
+==========================
+
+If you are running in a virtual machine you might get the following error:
+
+.. image :: install-debian-lenny/base-23.png
+
+Destroy the virtual machine if it won't shutdown:
+
+.. image :: install-debian-lenny/base-24.png
+
+Then in Virtual Machine Manager select the virtual machine and choose ``Details``:
+
+.. image :: install-debian-lenny/base-25.png
+
+
+.. image :: install-debian-lenny/base-26.png
+.. image :: install-debian-lenny/base-27.png
+.. image :: install-debian-lenny/base-28.png
+.. image :: install-debian-lenny/base-29.png
+.. image :: install-debian-lenny/base-30.png
+.. image :: install-debian-lenny/base-31.png
+.. image :: install-debian-lenny/base-32.png
+.. image :: install-debian-lenny/base-33.png
+.. image :: install-debian-lenny/base-34.png

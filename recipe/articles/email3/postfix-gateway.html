@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Postfix Gateway with PostgreSQL</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../../index.html">Home</a></li>
+          <li><a href="../../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="../index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Postfix Gateway with PostgreSQL<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../../Context/breadcrumbs.cti" -->
+<a href="../../index.html">Recipes</a> &gt;
+<a href="../index.html">Core Recipes</a> &gt;
+.. &gt;
+Postfix Gateway with PostgreSQL
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">Pre-Requisites:</th><td class="field-body">None</td>
+</tr>
+<tr class="field"><th class="docinfo-name">Required Reading:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#prepartaion" id="id2">Prepartaion</a></li>
+<li><a class="reference internal" href="#install-the-main-packages" id="id3">Install the Main Packages</a><ul>
+<li><a class="reference internal" href="#aliases" id="id4">Aliases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-the-postgresql-database-for-postfix-dovecot" id="id5">Create The PostgreSQL Database For Postfix/Dovecot</a><ul>
+<li><a class="reference internal" href="#the-domain-table" id="id6">The domain Table</a></li>
+<li><a class="reference internal" href="#the-forward-table" id="id7">The forward Table</a></li>
+<li><a class="reference internal" href="#the-mailbox-table" id="id8">The mailbox Table</a></li>
+<li><a class="reference internal" href="#the-relay-table" id="id9">The relay Table</a></li>
+<li><a class="reference internal" href="#the-transport-table" id="id10">The transport Table</a></li>
+<li><a class="reference internal" href="#relaying-vs-forwarding" id="id11">Relaying vs Forwarding</a></li>
+<li><a class="reference internal" href="#understanding-the-logic" id="id12">Understanding The Logic</a><ul>
+<li><a class="reference internal" href="#dealing-with-aliases-forwarding" id="id13">Dealing with Aliases (Forwarding)</a></li>
+<li><a class="reference internal" href="#normal-delivery" id="id14">Normal Delivery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-the-postfix-configuration" id="id15">Create the Postfix Configuration</a><ul>
+<li><a class="reference internal" href="#setting-up-relay-functionality" id="id16">Setting up Relay Functionality</a></li>
+<li><a class="reference internal" href="#adding-some-test-data" id="id17">Adding Some Test Data</a></li>
+<li><a class="reference internal" href="#test-like-this" id="id18">Test Like this</a></li>
+<li><a class="reference internal" href="#useful-commands" id="id19">Useful Commands</a></li>
+<li><a class="reference internal" href="#setting-up-virtual-aliases-for-forwarding" id="id20">Setting up Virtual Aliases for Forwarding</a></li>
+<li><a class="reference internal" href="#test-it" id="id21">Test It</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-transports" id="id22">Testing Transports</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id1">Introduction</a></h2>
+<p>This tutorial explains how to set up a server to act as a mail gateway,
+obtaining its configuration from a PostgreSQL database and forwarding mail on to the
+appropriate SMTP server. The set up will not include any sort of mail virus
+scan or spam filter and will not allow users to use the gateway to send emails.
+These features are intended to be implemented on another server to which this
+gateway forwards emails.</p>
+</div>
+<div class="section" id="prepartaion">
+<h2><a class="toc-backref" href="#id2">Prepartaion</a></h2>
+<p>Ensure you have set up a machine where each of the tutorials below has been followed:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="../configure/update-and-upgrade.html">Update and Upgrade</a></li>
+<li><a class="reference external" href="../configure/add-a-user-and-configure-sudo.html">Add a User and Configure sudo</a></li>
+<li><a class="reference external" href="../configure/basic-ssh-security.html">Basic SSH Security</a></li>
+<li><a class="reference external" href="../configure/locales.html">Locales</a></li>
+<li><a class="reference external" href="../configure/time-and-date.html">Times and Dates</a></li>
+<li><a class="reference external" href="../configure/firewall.html">Firewall</a></li>
+</ol>
+<p>If you are following the Protocol Level Proxies tutorial this machine will be
+PLP A the first time you follow this tutorial and PLP B when you set up a
+second server for extra resilience. The hostname we'll use is plpa.example.com.</p>
+</div>
+<div class="section" id="install-the-main-packages">
+<h2><a class="toc-backref" href="#id3">Install the Main Packages</a></h2>
+<p>Because this server is not designed to serve as a mail rely for users we don't
+need to install any of the SASL modules (we don't need TLS either but this
+seems to come as standard anyway). We just have a simple Postfix and PostgreSQL set
+up so these are the only packages which need to be installed:</p>
+<pre class="literal-block">
+$ sudo apt-get install postgresql postfix-pgsql
+</pre>
+<p>During the install you'll be asked some questions. Answer as follows:</p>
+<img alt="postfix-gateway/1.png" src="postfix-gateway/1.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Ok</span></tt></p>
+<img alt="postfix-gateway/2.png" src="postfix-gateway/2.png" />
+<p>Select <tt class="docutils literal"><span class="pre">Internet</span> <span class="pre">Site</span></tt></p>
+<img alt="postfix-gateway/3.png" src="postfix-gateway/3.png" />
+<p>Enter the full hostname of the system. We'll set up the virtual domains (such
+as example.com) later on.</p>
+<div class="section" id="aliases">
+<h3><a class="toc-backref" href="#id4">Aliases</a></h3>
+<p>The install will continue and during the output you'll see this warning:</p>
+<pre class="literal-block">
+WARNING: /etc/aliases exists, but does not have a root alias.
+</pre>
+<p>When mail is to be delivered locally, the local delivery agent runs each local recipient name through the  aliases database. The mapping does not affect addresses in message headers. Local aliases are typically used to implement distribution lists, or to direct mail for standard aliases such as postmaster to real people.</p>
+<p>If you run the command below you'll see that <tt class="docutils literal"><span class="pre">/etc/aliases</span></tt> is being used for local aliases:</p>
+<pre class="literal-block">
+$ sudo postconf alias_maps
+alias_maps = hash:/etc/aliases
+</pre>
+<p>It is important that the postmaster email address works so make sure that postmaster points to root and root to your own username or your email address, e.g. like this:</p>
+<pre class="literal-block">
+...
+postmaster: root
+root: postmaster&#64;yourdomain.tld
+...
+</pre>
+<p>or like this (if <tt class="docutils literal"><span class="pre">owner</span></tt> is your own username):</p>
+<pre class="literal-block">
+...
+postmaster: root
+root:   owner
+...
+</pre>
+<p>Edit <tt class="docutils literal"><span class="pre">/etc/aliases</span></tt> with one of these changes.</p>
+<p>Whenever you modify <tt class="docutils literal"><span class="pre">/etc/aliases</span></tt>, you must run this afterwards:</p>
+<pre class="literal-block">
+$ sudo newaliases
+</pre>
+<p>Then restart Postfix:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/postfix restart
+</pre>
+</div>
+</div>
+<div class="section" id="create-the-postgresql-database-for-postfix-dovecot">
+<h2><a class="toc-backref" href="#id5">Create The PostgreSQL Database For Postfix/Dovecot</a></h2>
+<p>PostgreSQL is installed with the configuration in <tt class="docutils literal"><span class="pre">/etc/postgresql/8.3/main</span></tt>
+and the data in <tt class="docutils literal"><span class="pre">/var/lib/postgresql/8.3/main</span></tt>.</p>
+<p>If you run <tt class="docutils literal"><span class="pre">netstat</span></tt> you'll see that PostgreSQL is only listening on the localhost.localdomain interface:</p>
+<pre class="literal-block">
+$ sudo netstat -tap | grep postgresql
+tcp        0      0 localhost.lo:postgresql *:*                     LISTEN      17856/postgres
+</pre>
+<p>We are going to need users from different servers to be able to connect to
+PostgreSQL so we need to change the settings.</p>
+<p>Edit the <tt class="docutils literal"><span class="pre">/etc/postgresql/8.3/main/postgresql.conf</span></tt> file:</p>
+<pre class="literal-block">
+sudo -u postgres vim /etc/postgresql/8.3/main/postgresql.conf
+</pre>
+<p>Change:</p>
+<pre class="literal-block">
+#listen_addresses = 'localhost'
+</pre>
+<p>to:</p>
+<pre class="literal-block">
+listen_addresses = '*'
+</pre>
+<p>Now is you run <tt class="docutils literal"><span class="pre">netstat</span></tt> again you'll see it is listening on all interfaces:</p>
+<pre class="literal-block">
+$ sudo netstat -tap | grep postgresql
+tcp        0      0 *:postgresql            *:*                     LISTEN      18270/postgres
+</pre>
+<p>To create PostgreSQL users and databases you have to be the <tt class="docutils literal"><span class="pre">postgres</span></tt> user.
+Let's create a new database called <tt class="docutils literal"><span class="pre">mail</span></tt>:</p>
+<pre class="literal-block">
+sudo -u postgres createdb mail --encoding=UTF8
+</pre>
+<p>Now let's create the user <tt class="docutils literal"><span class="pre">mail_admin</span></tt> with the password <tt class="docutils literal"><span class="pre">mail_admin_pass</span></tt>:</p>
+<pre class="literal-block">
+$ sudo -u postgres createuser -SRDP mail_admin
+Enter password for new role:
+Enter it again:
+</pre>
+<p>You'll need to enter the password twice.</p>
+<p>The default PostgreSQL set-up is to allow local access for all users to all
+databases when connecting with a hostname. This means you can now connect like
+this:</p>
+<pre class="literal-block">
+$ psql -W -U mail_admin mail -h localhost
+Password for user mail_admin:
+Welcome to psql 8.3.7, the PostgreSQL interactive terminal.
+
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help with psql commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+
+SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)
+
+mail=&gt;
+</pre>
+<p>We also want users to be able to connect from other machines though. If you try
+the same from a different machine you'll get this (here 188.40.40.171 is the
+server PostgreSQL is running on):</p>
+<pre class="literal-block">
+$ psql -W -U mail_admin mail -h 188.40.40.171
+Password for user mail_admin:
+psql: FATAL:  no pg_hba.conf entry for host &quot;188.40.40.173&quot;, user &quot;mail_admin&quot;, database &quot;mail&quot;, SSL off
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>You can install the <tt class="docutils literal"><span class="pre">psql</span></tt> utility on the remote server like this:</p>
+<pre class="last literal-block">
+sudo apt-get install postgresql-client
+</pre>
+</div>
+<p>To allow access, edit the <tt class="docutils literal"><span class="pre">/etc/postgresql/8.3/main/pg_hba.conf</span></tt> file and add these lines at the end:</p>
+<pre class="literal-block">
+# Allow mail_admin to connect to the mail database from 188.40.40.*
+hostssl    mail        mail_admin  188.40.40.0/24   md5
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">188.40.40.0/24</span></tt> says that any computer in the 188.40.40.* subnet can
+connect; you'll need to alter this for the range of machines you want to grant
+access to.</p>
+<p>Now restart PostgreSQL:</p>
+<pre class="literal-block">
+sudo /etc/init.d/postgresql-8.3 restart
+</pre>
+<p>If you try to connect from the remote server now you'll see that it works successfully.</p>
+<p>For more information see the PostgreSQL manual:
+<a class="reference external" href="http://www.postgresql.org/docs/8.3/static/client-authentication.html">http://www.postgresql.org/docs/8.3/static/client-authentication.html</a></p>
+<p>Next, we go to the PostgreSQL shell. You'll need to enter the password you just set
+up for the PostgreSQL root user:</p>
+<p>Create the tables we need:</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">These tables will be used by both Postfix on the PLPs, Postfix on the
+individual user servers <em>and</em> Dovecot on the user servers. This means there is
+a lot of detail involved in the way they are set up so do take care to read and
+understand the descriptions which follow later in this recipe.</p>
+</div>
+<pre class="literal-block">
+CREATE TABLE domain (
+    domain varchar(50) NOT NULL,
+    node varchar(50),
+    comment varchar(500),
+    PRIMARY KEY (domain)
+);
+
+CREATE TABLE forward (
+    source varchar(80) NOT NULL,
+    destination TEXT NOT NULL,
+    comment varchar(500),
+    PRIMARY KEY (source)
+);
+
+CREATE TABLE relay (
+    source varchar(80) NOT NULL,
+    node varchar(50) NOT NULL,
+    comment varchar(500),
+    PRIMARY KEY (source)
+);
+
+CREATE TABLE mailbox (
+    email varchar(80) NOT NULL,
+    password varchar(20) NOT NULL,
+    quota bigint DEFAULT 10485760,
+    node varchar(50) NOT NULL,
+    comment varchar(500),
+    PRIMARY KEY (email)
+);
+
+CREATE TABLE transport (
+    domain varchar(128) NOT NULL default '',
+    transport varchar(128) NOT NULL default '',
+    node varchar(50) NOT NULL,
+    comment varchar(500),
+    UNIQUE (domain)
+);
+</pre>
+<p>When you are done type <tt class="docutils literal"><span class="pre">\q</span></tt> to return to the command line.</p>
+<p>Let's talk through what each of the tables is for in this setup.</p>
+<div class="section" id="the-domain-table">
+<h3><a class="toc-backref" href="#id6">The domain Table</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">domain</span></tt> table stores all the domain names which Postfix should recieve
+emails for. Postfix won't forward or relay domains which aren't in this table
+so it is important that every domain which has this gateway in its MX records
+is added to this table.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="40%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><strong>domain</strong></th>
+<th class="head"><strong>node</strong></th>
+<th class="head"><strong>comment</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>example.com</td>
+<td>maila</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">domain</span></tt></dt>
+<dd>The domain name for the domain to forward or rely emails for</dd>
+<dt><tt class="docutils literal"><span class="pre">node</span></tt></dt>
+<dd>The user server which will handle mailboxes for this domain or nothing if
+the domain only has email addresses which are forwarded elsewhere or have a
+relay transport set up for them.</dd>
+<dt><tt class="docutils literal"><span class="pre">comment</span></tt></dt>
+<dd>An optional text string describing the particular entry in the table. This
+is not used by Postfix or Dovecot but is useful to remind you what a particular
+entry is for.</dd>
+</dl>
+</div>
+<div class="section" id="the-forward-table">
+<h3><a class="toc-backref" href="#id7">The forward Table</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">forward</span></tt> table is for forwarding from one email address to another. The email
+addresses can be in the same domain or different domains. The <tt class="docutils literal"><span class="pre">source</span></tt> email
+must be a domain listed in the <tt class="docutils literal"><span class="pre">domain</span></tt> table but the destination doesn't
+have to be.</p>
+<p>If <tt class="docutils literal"><span class="pre">source</span></tt> is simply an <tt class="docutils literal"><span class="pre">&#64;</span></tt> character followed by a domain (eg
+<tt class="docutils literal"><span class="pre">&#64;example.com</span></tt>), Postfix will intercept all emails for that domain and
+forward them to the destination address. This is a so-called <em>catch all</em> email
+address. You should usually avoid catch all email addresses because they
+typically pick up a lot of spam.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="39%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><strong>source</strong></th>
+<th class="head"><strong>destination</strong></th>
+<th class="head"><strong>comment</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><a class="reference external" href="mailto:info&#64;example.com">info&#64;example.com</a></td>
+<td><a class="reference external" href="mailto:james&#64;example.com">james&#64;example.com</a></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">source</span></tt></dt>
+<dd>The source email address or catch all string (must be a domain in the <tt class="docutils literal"><span class="pre">domain</span></tt> table)</dd>
+<dt><tt class="docutils literal"><span class="pre">destination</span></tt></dt>
+<dd>The destination email address (can be any valid email address)</dd>
+<dt><tt class="docutils literal"><span class="pre">comment</span></tt></dt>
+<dd>An optional text string describing the particular entry in the table. This
+is not used by Postfix or Dovecot but is useful to remind you what a particular
+entry is for.</dd>
+</dl>
+<p>All forwarding is done by the PLPs, the individual user servers don't forward emails.</p>
+<p>You can forward one email to multiple destinations by adding multiple rows to the <tt class="docutils literal"><span class="pre">forward</span></tt> table.</p>
+</div>
+<div class="section" id="the-mailbox-table">
+<h3><a class="toc-backref" href="#id8">The mailbox Table</a></h3>
+<p>In our set up, a  user's email address will also be their username so the
+<tt class="docutils literal"><span class="pre">mailbox</span></tt> table stores information about both email addresses and mailboxes.
+The same email address and password is used for sending mail via SMTP and
+accessing email vie POP or IMAP. This table is mainly used by the individual
+user mail servers but the PLPs use is to work out which email addresses they
+should relay mail for.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="14%" />
+<col width="39%" />
+<col width="18%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><strong>email</strong></th>
+<th class="head"><strong>password</strong></th>
+<th class="head"><strong>quota</strong></th>
+<th class="head"><strong>node</strong></th>
+<th class="head"><strong>comment</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><a class="reference external" href="mailto:test&#64;example.com">test&#64;example.com</a></td>
+<td>adJOa09aYud8.</td>
+<td>10485760</td>
+<td>maila</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">email</span></tt></dt>
+<dd>The email address this mailbox can be accessed with</dd>
+<dt><tt class="docutils literal"><span class="pre">password</span></tt></dt>
+<dd>An encrypted version of the password</dd>
+<dt><tt class="docutils literal"><span class="pre">quota</span></tt></dt>
+<dd>The maximum size of files in the mailbox (in bytes). The default value
+is 10485760 bytes which is 10MB.</dd>
+<dt><tt class="docutils literal"><span class="pre">node</span></tt></dt>
+<dd>The name of the user mail server which will handle this mailbox.</dd>
+<dt><tt class="docutils literal"><span class="pre">comment</span></tt></dt>
+<dd>An optional text string describing the particular entry in the table. This
+is not used by Postfix or Dovecot but is useful to remind you what a particular
+entry is for.</dd>
+</dl>
+</div>
+<div class="section" id="the-relay-table">
+<h3><a class="toc-backref" href="#id9">The relay Table</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">relay</span></tt> table tells Postfix which email addresses it can relay mails for
+<em>in addition</em> to the email addresses in the <tt class="docutils literal"><span class="pre">mailbox</span></tt> table.  The domain part
+of each entry must be listed in the <tt class="docutils literal"><span class="pre">domain</span></tt> table.</p>
+<p>If <tt class="docutils literal"><span class="pre">source</span></tt> is simply an <tt class="docutils literal"><span class="pre">&#64;</span></tt> character followed by a domain (eg
+<tt class="docutils literal"><span class="pre">&#64;example.com</span></tt>), Postfix will relay all emails for that domain. This is a
+so-called <em>catch all</em> email address. You should usually avoid catch all email
+addresses because they typically pick up a lot of spam. Instead, add an entry
+for each individual email address which needs to be relayed.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="27%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><strong>source</strong></th>
+<th class="head"><strong>node</strong></th>
+<th class="head"><strong>comment</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><a class="reference external" href="mailto:info&#64;example.com">info&#64;example.com</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="caution">
+<p class="first admonition-title">Caution!</p>
+<p class="last">You would only ever want to use the relay table if you were setting up your
+own transport. For example to relay emails to a server running the Mailman
+mailing list software. Ordinarily, relaying is done automatically based on the
+emails in the <tt class="docutils literal"><span class="pre">mailbox</span></tt> table.</p>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">source</span></tt></dt>
+<dd>The source email address or catch all string (must be a domain in the
+<tt class="docutils literal"><span class="pre">domain</span></tt> table, the domain must be listed in the <tt class="docutils literal"><span class="pre">transport</span></tt> table)</dd>
+<dt><tt class="docutils literal"><span class="pre">node</span></tt></dt>
+<dd>If one of the user servers also wants to be able to relay domains, it can
+add an entry to this table too, specifying its node name in this column. In
+order for the email to reach the user server, it would already have had to have
+been relayed by the PLP so the PLPs ignore the <tt class="docutils literal"><span class="pre">node</span></tt> column and relay
+everything in the table anyway.</dd>
+<dt><tt class="docutils literal"><span class="pre">comment</span></tt></dt>
+<dd>An optional text string describing the particular entry in the table. This
+is not used by Postfix or Dovecot but is useful to remind you what a particular
+entry is for.</dd>
+</dl>
+</div>
+<div class="section" id="the-transport-table">
+<h3><a class="toc-backref" href="#id10">The transport Table</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">transport</span></tt> table tells postfix how to relay emails for the domains it
+can relay for. If you think about it, the domains which we are handling will be
+set up so that their MX records point to the PLPs (which is why the PLPs
+recieve the emails rather than the user servers). That means that Postfix
+doesn't know where to relay the emails to unless you tell it which is why we
+need the transport table.</p>
+<p>The individual user servers may also want to relay certain domains so they'll
+need to set up their own transports. They can reuse the <tt class="docutils literal"><span class="pre">transport</span></tt> table but
+put their node name in the <tt class="docutils literal"><span class="pre">node</span></tt> column. The PLPs will only look at rows
+without a <tt class="docutils literal"><span class="pre">node</span></tt> value specified.</p>
+<p>is optional, it is for advanced users. It allows to
+forward mails for single users, whole domains or all mails to another server.
+For example the table below would result in all emails for example.com being
+forwarded via the</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="26%" />
+<col width="32%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><strong>domain</strong></th>
+<th class="head"><strong>transport</strong></th>
+<th class="head"><strong>node</strong></th>
+<th class="head"><strong>comment</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>example.com</td>
+<td>smtp:[1.2.3.4]</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">domain</span></tt></dt>
+<dd>The domain for which this transport applies</dd>
+<dt><tt class="docutils literal"><span class="pre">transport</span></tt></dt>
+<dd>How the mail should be relayed. In the example the mail is handled using
+the SMTP protocol to the server with the IP address 1.2.3.4. You can also
+specify a domain name (if you miss out the square brackets) but that would
+require a DNS lookup of the MX record each time. For example:
+<tt class="docutils literal"><span class="pre">smtp:mail.example.com</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">node</span></tt></dt>
+<dd>The node for which this transport should apply. The PLPs will only lookup
+entires without a <tt class="docutils literal"><span class="pre">node</span></tt>. The individual user servers will only lookup
+entires with a their node name in the <tt class="docutils literal"><span class="pre">node</span></tt> column.</dd>
+<dt><tt class="docutils literal"><span class="pre">comment</span></tt></dt>
+<dd>An optional text string describing the particular entry in the table. This
+is not used by Postfix or Dovecot but is useful to remind you what a particular
+entry is for.</dd>
+</dl>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>The PLP A and B servers will actually ignore the node column on the
+<tt class="docutils literal"><span class="pre">domain</span></tt>, <tt class="docutils literal"><span class="pre">relay</span></tt> and <tt class="docutils literal"><span class="pre">mailbox</span></tt> tables becuase they need to handle all
+domains and email addresses to be able to forward them correctly.</p>
+<p class="last">They do respect the node column on the <tt class="docutils literal"><span class="pre">transport</span></tt> table though so that
+you can set the PLPs to relay mail elsewhere.</p>
+</div>
+</div>
+<div class="section" id="relaying-vs-forwarding">
+<h3><a class="toc-backref" href="#id11">Relaying vs Forwarding</a></h3>
+<p>In order to understand the mail setup properly you need to know the difference
+between <em>relaying</em> and <em>forwarding</em>. The best way to think of it is that
+forwarding is like re-addressing a letter and putting back in the postbox
+whereas relaying is like the postman taking the letter to the correct sorting
+office so that someone else can deliver it.</p>
+<p>In terms of our setup, adding an entry to the <tt class="docutils literal"><span class="pre">forward</span></tt> table just
+re-addresses the email and sends it on its way again, adding an entry to the
+<tt class="docutils literal"><span class="pre">relay</span></tt> table tells Postfix that it can pass the email on to the correct
+server via the transport listed for that domain in the <tt class="docutils literal"><span class="pre">transport</span></tt> table.</p>
+<p>When deciding what to forward, Postfix looks for email addresses or catchalls
+in the <tt class="docutils literal"><span class="pre">forward</span></tt> table. When deciding what to relay, Postfix looks for email
+addresses or catchalls in the <tt class="docutils literal"><span class="pre">relay</span></tt> table <em>and</em> for email addresses in the
+<tt class="docutils literal"><span class="pre">mailbox</span></tt> table. This means that any email address which has a mailbox gets
+relayed.</p>
+<p>Postfix always tries to forward emails before it relays them. This means that
+if any entries exist in the forward table they will be used first. Only then
+will the email be relayed if it wasn't matched. This means that if you use a
+catch all email address Postfix won't ever check that the email address
+actually exists as a mailbox.</p>
+</div>
+<div class="section" id="understanding-the-logic">
+<h3><a class="toc-backref" href="#id12">Understanding The Logic</a></h3>
+<p>In this section we'll go through what happens when an email arrives. Bear in
+mind that the PLPs are supposed to do <em>all</em> forwarding and relaying. By the
+time an email arrives at one of the user servers it should be guaranteed to be
+for a user mailbox, otherwise the PLPs should have forwarded or relayed it
+elsewhere.</p>
+<div class="section" id="dealing-with-aliases-forwarding">
+<h4><a class="toc-backref" href="#id13">Dealing with Aliases (Forwarding)</a></h4>
+<p>When a mail arrives at the PLP the first thing that happens is a check to see
+whether it needs to be forwarded elsewhere. Here's what happens:</p>
+<img alt="postfix-gateway.png" src="postfix-gateway.png" />
+<p>An email is matched in the <tt class="docutils literal"><span class="pre">forward</span></tt> table if it is listed in the <tt class="docutils literal"><span class="pre">source</span></tt>
+field or if the domain part is listed in the <tt class="docutils literal"><span class="pre">source</span></tt> field as a catch all
+forward, (ie it looks like <tt class="docutils literal"><span class="pre">&#64;example.com</span></tt>).</p>
+<p>To check whether an email is one of ours, the relay recipients are checked. This is done as follows:</p>
+<img alt="relay-recipients.png" src="relay-recipients.png" />
+<p>Only emails which are matched in the <tt class="docutils literal"><span class="pre">forward</span></tt> table but not matched by the
+relay recipient check are directly forwarded on. The other's are delivered
+normally.</p>
+</div>
+<div class="section" id="normal-delivery">
+<h4><a class="toc-backref" href="#id14">Normal Delivery</a></h4>
+<p>If an email is not matched in the forward table or is matched but is found to
+be one of the email addresses we wish to handle, the following process occurs:</p>
+<ul class="simple">
+<li>First the email is checked to see if it is one of ours (this is the same
+process as described above for checking the relay recipients and only
+occurs of the check hasn't already been done)</li>
+<li>If there is a match the domain is looked up in the <tt class="docutils literal"><span class="pre">transport</span></tt> table
+to determine where to send it to</li>
+<li>Otherwise the email is rejected and the person sending it gets a &quot;Relay
+Access Denied&quot; message.</li>
+</ul>
+<img alt="transport-map.png" src="transport-map.png" />
+</div>
+</div>
+</div>
+<div class="section" id="create-the-postfix-configuration">
+<h2><a class="toc-backref" href="#id15">Create the Postfix Configuration</a></h2>
+<p>Now that we've explained the tables, let's create the Postfix configuration
+which will use the tables on the PLPs.</p>
+<p>Make a <tt class="docutils literal"><span class="pre">/etc/postfix/postgresql</span></tt> directory to keep the PostgreSQL configuration in:</p>
+<pre class="literal-block">
+$ sudo mkdir /etc/postfix/postgresql
+</pre>
+<p>Now make sure you are in a directory you have write access to such as your home
+directory:</p>
+<pre class="literal-block">
+$ cd
+</pre>
+<div class="section" id="setting-up-relay-functionality">
+<h3><a class="toc-backref" href="#id16">Setting up Relay Functionality</a></h3>
+<p>Now run these commands to create text files with the required postfix
+configuration in your home directory and move them to the
+<tt class="docutils literal"><span class="pre">/etc/postfix/postgresql</span></tt> directory. The beauty of this approach is that you can
+copy and paste everything below onto the command line rather than having to
+manually create and populate the 6 files.</p>
+<p>You'll need to change the password in each example from <tt class="docutils literal"><span class="pre">mail_admin_pass</span></tt>
+to whatever you used for the <tt class="docutils literal"><span class="pre">mail_admin</span></tt> PostgreSQL user earlier in the tutorial.</p>
+<pre class="literal-block">
+cat &lt;&lt;EOF&gt; transport_maps.cf
+user = mail_admin
+password = mail_admin_pass
+dbname = mail
+query = SELECT transport FROM transport WHERE domain='%s' AND (node='' or node is NULL)
+hosts = 127.0.0.1
+EOF
+sudo mv transport_maps.cf /etc/postfix/postgresql
+
+cat &lt;&lt;EOF&gt; relay_domains.cf
+user = mail_admin
+password = mail_admin_pass
+dbname = mail
+query = SELECT domain AS virtual FROM domain;
+hosts = 127.0.0.1
+EOF
+sudo mv relay_domains.cf /etc/postfix/postgresql
+
+cat &lt;&lt;EOF&gt; relay_recipient_maps.cf
+user = mail_admin
+password = mail_admin_pass
+dbname = mail
+# This is a bit complex but it needs to lookup the email address in three places
+query = SELECT 1 FROM mailbox WHERE email='%s' OR EXISTS (SELECT source FROM relay WHERE source='%s') OR EXISTS (SELECT source FROM relay WHERE source='&#64;'||'%d')
+hosts = 127.0.0.1
+EOF
+sudo mv relay_recipient_maps.cf /etc/postfix/postgresql
+</pre>
+<p>Let's discuss these.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">transport_maps.cf</span></tt></dt>
+<dd>This specifies where mail for a particular domain should be sent. The
+server will only transport mails for entries where the node isn't explictly specified</dd>
+<dt><tt class="docutils literal"><span class="pre">relay_domains</span></tt></dt>
+<dd>These are the domains for which the mail gateway will relay mails to the
+destinations specified in the <tt class="docutils literal"><span class="pre">transport</span></tt> table. If a domain is not used on
+your system then Postfix will reject emails.</dd>
+<dt><tt class="docutils literal"><span class="pre">relay_recipient_maps</span></tt></dt>
+<dd>Postfix will only relay email address for which the query returns a value.
+These are emails in the mailbox or relay tables. If the email address isn't
+matched, Postfix will reject the email before the it is even delivered. This
+quickly cuts down spam.</dd>
+</dl>
+<p>Now set all the permissions:</p>
+<pre class="literal-block">
+sudo chmod -R o= /etc/postfix/postgresql
+sudo chown -R root:postfix /etc/postfix/postgresql
+</pre>
+<p>Now configure postfix. Replace <tt class="docutils literal"><span class="pre">plpa.example.com</span></tt> with the correct fully qualified domain name.</p>
+<pre class="literal-block">
+sudo postconf -e 'myhostname = plpa.example.com'
+</pre>
+<p>Send mail from this machine as &quot;<a class="reference external" href="mailto:someone&#64;example.com">someone&#64;example.com</a>&quot;, so that no reason exists to ever send mail to &quot;<a class="reference external" href="mailto:someone&#64;plpa.example.com">someone&#64;plpa.example.com</a>&quot;.</p>
+<pre class="literal-block">
+sudo postconf -e 'mydestination ='
+sudo postconf -e 'myorigin = example.com'
+</pre>
+<p>Disable local delivery:</p>
+<pre class="literal-block">
+sudo postconf -e 'local_recipient_maps ='
+sudo postconf -e 'local_transport = error:local mail delivery is disabled'
+</pre>
+<p>Also comment out the local delivery agent in <tt class="docutils literal"><span class="pre">etc/postfix/master.cf</span></tt>.</p>
+<p>Set some standard options:</p>
+<pre class="literal-block">
+sudo postconf -e 'message_size_limit = 30720000'
+sudo postconf -e 'mynetworks = 127.0.0.0/8'
+sudo postconf -e 'smtpd_recipient_restrictions = permit_mynetworks, reject_unauth_destination'
+</pre>
+<p>Set up the relay configurations we just created:</p>
+<pre class="literal-block">
+sudo postconf -e 'relay_domains = proxy:pgsql:/etc/postfix/postgresql/relay_domains.cf'
+sudo postconf -e 'relay_recipient_maps = proxy:pgsql:/etc/postfix/postgresql/relay_recipient_maps.cf'
+sudo postconf -e 'transport_maps = proxy:pgsql:/etc/postfix/postgresql/transport_maps.cf'
+</pre>
+<p>Enable all the appropriate proxies:</p>
+<pre class="literal-block">
+sudo postconf -e 'proxy_read_maps = $relay_domains $relay_recipient_maps $transport_maps'
+</pre>
+</div>
+<div class="section" id="adding-some-test-data">
+<h3><a class="toc-backref" href="#id17">Adding Some Test Data</a></h3>
+<p>To check the Postfix configuration you'll need to add some test data to PostgreSQL.</p>
+<pre class="literal-block">
+$ psql -W -U mail_admin mail -h 188.40.40.171
+Password for user mail_admin:
+</pre>
+<p>Now enter some commands:</p>
+<pre class="literal-block">
+mail=&gt; INSERT INTO transport (domain, transport, node) VALUES ('server1.example.com', 'smtp:[188.40.40.173]', '');
+</pre>
+<p>Notice that we use the IP address of a domain name in the <tt class="docutils literal"><span class="pre">transport</span></tt> column
+to avoid a DNS lookup and that we've specified the node <tt class="docutils literal"><span class="pre">''</span></tt> so that the
+maila.example.com doesn't also apply the rule.</p>
+<p>Next we need to add some rules for maila. First we need to tell it that it should handle the <tt class="docutils literal"><span class="pre">server1.example.com</span></tt> domain:</p>
+<pre class="literal-block">
+mail=&gt; INSERT INTO domain (domain, node) VALUES ('server1.example.com', 'maila');
+mail=&gt; INSERT INTO domain (domain, node) VALUES ('other.example.com', 'maila');
+</pre>
+<p>Finally we create a user for the <tt class="docutils literal"><span class="pre">james</span></tt> account. To do this you need access to the <tt class="docutils literal"><span class="pre">crypt()</span></tt> and <tt class="docutils literal"><span class="pre">gen_salt()</span></tt> functions in PostgreSQL. You can add them by pasting these two commands into the PostgreSQL shell:</p>
+<pre class="literal-block">
+CREATE OR REPLACE FUNCTION crypt(text, text)
+RETURNS text
+AS '$libdir/pgcrypto', 'pg_crypt'
+LANGUAGE C IMMUTABLE STRICT;
+
+CREATE OR REPLACE FUNCTION gen_salt(text)
+RETURNS text
+AS '$libdir/pgcrypto', 'pg_gen_salt'
+LANGUAGE C VOLATILE STRICT;
+</pre>
+<p>You can now create a user for the <tt class="docutils literal"><span class="pre">james</span></tt> account:</p>
+<pre class="literal-block">
+mail=&gt; INSERT INTO mailbox (email, password, quota, node) VALUES ('james&#64;server1.example.com', crypt('yourpassword', gen_salt('md5')), 10485760, 'maila');
+</pre>
+<p>Let's also set up some relay information:</p>
+<pre class="literal-block">
+mail=&gt; INSERT INTO relay (source, node) VALUES ('david&#64;server1.example.com', 'maila');
+mail=&gt; INSERT INTO relay (source, node) VALUES ('&#64;other.example.com', 'maila');
+</pre>
+<p>Now we can run some Postfix tests.</p>
+<pre class="literal-block">
+mail=&gt; \q
+</pre>
+</div>
+<div class="section" id="test-like-this">
+<h3><a class="toc-backref" href="#id18">Test Like this</a></h3>
+<pre class="literal-block">
+$ sudo postmap -q &quot;server1.example.com&quot; pgsql:/etc/postfix/postgresql/transport_maps.cf
+smtp:[192.168.100.4]
+$ sudo postmap -q &quot;james&#64;server1.example.com&quot; pgsql:/etc/postfix/postgresql/relay_domains.cf
+server1.example.com
+$ sudo postmap -q &quot;james&#64;other.example.com&quot; pgsql:/etc/postfix/postgresql/relay_domains.cf
+server1.example.com,other.example.com
+$ sudo postmap -q &quot;james&#64;server1.example.com&quot; pgsql:/etc/postfix/postgresql/relay_recipient_maps.cf
+1
+$ sudo postmap -q &quot;david&#64;server1.example.com&quot; pgsql:/etc/postfix/postgresql/relay_recipient_maps.cf
+1
+$ sudo postmap -q &quot;unknown&#64;other.example.com&quot; pgsql:/etc/postfix/postgresql/relay_recipient_maps.cf
+1
+</pre>
+<p>It doesn't matter what <tt class="docutils literal"><span class="pre">relay_recipient_maps</span></tt> returns, as long as it returns something for valid email addresses, in our setup it returns 1.</p>
+<p>If you get this error:</p>
+<pre class="literal-block">
+postmap: warning: connect to pgsql server 127.0.0.1: FATAL:  password authentication failed for user &quot;mail_admin&quot;?
+</pre>
+<p>It is because you forgot set the correct password in either PostgreSQL itself or the
+<tt class="docutils literal"><span class="pre">.cf</span></tt> files you just created. Go back, correct the problem and try again.</p>
+</div>
+<div class="section" id="useful-commands">
+<h3><a class="toc-backref" href="#id19">Useful Commands</a></h3>
+<p>List the default Postfix settings:</p>
+<pre class="literal-block">
+$ sudo postconf -d
+</pre>
+<p>List the non-defaults (ones you've changed):</p>
+<pre class="literal-block">
+$ sudo postconf -n
+</pre>
+<p>Now restart</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/postfix restart
+</pre>
+</div>
+<div class="section" id="setting-up-virtual-aliases-for-forwarding">
+<h3><a class="toc-backref" href="#id20">Setting up Virtual Aliases for Forwarding</a></h3>
+<p>Now that the relay part of the configuration is set up, let's set up the
+forwarding part. Once again, change directory to one your user has write access
+to:</p>
+<pre class="literal-block">
+$ cd ~
+</pre>
+<p>Now create the configuration files which tell Postfix how to get the data it needs:</p>
+<pre class="literal-block">
+cat &lt;&lt;EOF&gt; virtual_forward.cf
+user = mail_admin
+password = mail_admin_pass
+dbname = mail
+query = SELECT destination FROM forward WHERE source='&#64;'||'%d' OR source='%s'
+
+hosts = 127.0.0.1
+EOF
+sudo mv virtual_forward.cf /etc/postfix/postgresql
+
+cat &lt;&lt;EOF&gt; virtual_email2email.cf
+user = mail_admin
+password = mail_admin_pass
+dbname = mail
+query = SELECT email FROM mailbox WHERE email='%s'
+hosts = 127.0.0.1
+EOF
+sudo mv virtual_email2email.cf /etc/postfix/postgresql
+</pre>
+<p><tt class="docutils literal"><span class="pre">virtual_forward.cf</span></tt> and <tt class="docutils literal"><span class="pre">virtual_email2email.cf</span></tt></p>
+<blockquote>
+These two files together are used to configure Postfix's
+<tt class="docutils literal"><span class="pre">virtual_alias_maps</span></tt>. They enable catchall email address to work. The reason
+they are both needed is to ensure that if you have a catchall address and a
+specific user as well using the same domain, that the user's email gets
+forwarded to them and not to the catchall address which should be used for all
+<em>other</em> email at that domain. Catchall email addresses catch a lot of spam as you can imagine!</blockquote>
+<p>Here are the postfix settings you need to apply:</p>
+<pre class="literal-block">
+$ sudo postconf -e 'virtual_alias_maps = proxy:pgsql:/etc/postfix/postgresql/virtual_email2email.cf, proxy:pgsql:/etc/postfix/postgresql/virtual_forward.cf'
+</pre>
+<p>The reason there are two configurations is that we don't want any of the
+forward addresses which could be set up in the <tt class="docutils literal"><span class="pre">forward</span></tt> table from
+overriding the existing mailboxes (paticularly if it is a catch all address
+which has been set up). If you do want a forward to override a mailbox, remove
+the row from the <tt class="docutils literal"><span class="pre">mailbox</span></tt> table.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The use of <tt class="docutils literal"><span class="pre">proxy:</span></tt> here should mean Postfix has <em>read only</em> access to
+PostgreSQL but I haven't tested that.</p>
+</div>
+<p>Enable all the appropriate proxies:</p>
+<pre class="literal-block">
+$ sudo postconf -e 'proxy_read_maps = $relay_domains $relay_recipient_maps $transport_maps $virtual_alias_domains $virtual_alias_maps'
+</pre>
+<p>Once again restart:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/postfix restart
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can forward one email to multiple destinations by adding multiple rows to the <tt class="docutils literal"><span class="pre">forward</span></tt> table.</p>
+</div>
+</div>
+<div class="section" id="test-it">
+<h3><a class="toc-backref" href="#id21">Test It</a></h3>
+<p>Once again let's test it. We already have a mailbox set up so let's create a catchall email forward:</p>
+<pre class="literal-block">
+mail=&gt; INSERT INTO forward (source, destination) VALUES ('&#64;server1.example.com', 'james&#64;example.com');
+</pre>
+<p>Now let's check our setup is clever enough to ignore existing mailboxes but to forward unknown addresses:</p>
+<pre class="literal-block">
+$ sudo postmap -q &quot;james&#64;server1.example.com&quot; pgsql:/etc/postfix/postgresql/virtual_forward.cf
+james&#64;example.com
+$ sudo postmap -q &quot;unknown&#64;server1.example.com&quot; pgsql:/etc/postfix/postgresql/virtual_forward.cf
+james&#64;example.com
+$ sudo postmap -q &quot;james&#64;server1.example.com&quot; pgsql:/etc/postfix/postgresql/virtual_email2email.cf
+james&#64;server1.example.com
+$ sudo postmap -q &quot;unknown&#64;server1.example.com&quot; pgsql:/etc/postfix/postgresql/virtual_email2email.cf
+</pre>
+<p>Notice that the last test didn't return a value. When both of these tests are run together we'll get the behaviour we expect.</p>
+<p>At this point the PLP should be working.</p>
+</div>
+</div>
+<div class="section" id="testing-transports">
+<h2><a class="toc-backref" href="#id22">Testing Transports</a></h2>
+<p>This is how you send an email via SMTP:</p>
+<pre class="literal-block">
+james&#64;dirac:~$ telnet 188.40.40.171 smtp
+Trying 188.40.40.171...
+Connected to 188.40.40.171.
+Escape character is '^]'.
+ehlo plpa.example.com
+220 plpa.example.com ESMTP Postfix (Debian/GNU)
+250-plpa.example.com
+250-PIPELINING
+250-SIZE 30720000
+250-VRFY
+250-ETRN
+250-STARTTLS
+250-AUTH PLAIN LOGIN
+250-AUTH=PLAIN LOGIN
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250 DSN
+mail from:&lt;james&#64;example.org&gt;
+250 2.1.0 Ok
+rcpt to:&lt;james&#64;server1.example.com&gt;
+250 2.1.5 Ok
+data
+354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+It finally works!
+.
+250 2.0.0 Ok: queued as E2FA8E043
+mail from:&lt;james&#64;example.org&gt;
+250 2.1.0 Ok
+rcpt to:&lt;james&#64;example.com&gt;
+554 5.7.1 &lt;james&#64;example.com&gt;: Recipient address rejected: User unknown in relay recipient table
+</pre>
+<p>Notice that only domains we are using can be relayed. This is good because you
+don't want to rely mail for any spammer, only for domains you know or directly
+from your local machine.</p>
+<p>Once sent these logs will appear is the server specified in the transport table
+actually exists and is configured to accept mail:</p>
+<pre class="literal-block">
+May 17 16:49:29 plpa postfix/qmgr[3120]: D50FE2FA1E: from=&lt;&gt;, size=2261, nrcpt=1 (queue active)
+May 17 16:49:29 plpa postfix/smtp[3198]: D50FE2FA1E: to=&lt;james&#64;example.com&gt;, relay=78.47.146.250[78.47.146.250]:25, delay=573, delays=572/0.07/0.1/0.15, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as B50637C7D5)
+May 17 16:49:29 plpa postfix/qmgr[3120]: D50FE2FA1E: removed
+</pre>
+<p>More likely at this stage you'll just get an error and the mail will be bounced
+back to the person you entered in the <tt class="docutils literal"><span class="pre">mail</span> <span class="pre">from:</span></tt> line. This is fine too,
+you'll set up the required server next.</p>
+<p>You might see this in the logs:</p>
+<pre class="literal-block">
+May 17 16:09:07 plpa postfix/proxymap[2725]: warning: connect to pgsql server 127.0.0.1: Access denied for user 'postfix'&#64;'localhost' (using password: YES)
+May 17 16:09:07 plpa postfix/trivial-rewrite[2727]: fatal: proxy:pgsql:/etc/postfix/pgsql/virtual_domain.cf(0,lock|fold_fix): table lookup problem
+May 17 16:09:08 plpa postfix/master[2455]: warning: process /usr/lib/postfix/trivial-rewrite pid 2727 exit status 1
+</pre>
+<p>You've mis-configured either PostgreSQL or the <tt class="docutils literal"><span class="pre">/etc/postfix/pgsql/virtual_domain.cf</span></tt> settings in some way, most likely missing off the username since postfix is trying to connect as the <tt class="docutils literal"><span class="pre">postfix</span></tt> user.</p>
+<p>It all works. Now you can set up a user server.</p>
+</div><p class="text-right">(<a href="postfix-gateway.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

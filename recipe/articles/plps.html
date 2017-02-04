@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Protocol-Level Proxies</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../index.html">Home</a></li>
+          <li><a href="../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Protocol-Level Proxies<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../Context/breadcrumbs.cti" -->
+<a href="../index.html">Recipes</a> &gt;
+<a href="index.html">Core Recipes</a> &gt;
+Protocol-Level Proxies
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#removing-unnecessary-ves" id="id2">Removing Unnecessary VEs</a></li>
+<li><a class="reference internal" href="#setting-the-mountpoint" id="id3">Setting the Mountpoint</a></li>
+<li><a class="reference internal" href="#creating-the-ves" id="id4">Creating the VEs</a></li>
+<li><a class="reference internal" href="#configuring-the-ves" id="id5">Configuring the VEs</a></li>
+<li><a class="reference internal" href="#setting-a-root-password" id="id6">Setting a root Password</a></li>
+<li><a class="reference internal" href="#setting-up-nginx" id="id7">Setting up Nginx</a></li>
+<li><a class="reference internal" href="#configuration" id="id8">Configuration</a></li>
+<li><a class="reference internal" href="#installing-apache" id="id9">Installing Apache</a></li>
+<li><a class="reference internal" href="#setting-up-email" id="id10">Setting up Email</a><ul>
+<li><a class="reference internal" href="#install-the-first-mail-gateway" id="id11">Install the First Mail Gateway</a></li>
+<li><a class="reference internal" href="#create-a-user-server" id="id12">Create a User Server</a></li>
+<li><a class="reference internal" href="#set-up-spam-and-virus-filtering" id="id13">Set up Spam and Virus Filtering</a></li>
+<li><a class="reference internal" href="#postfix-on-plp-b" id="id14">Postfix on PLP B</a></li>
+<li><a class="reference internal" href="#checking-etc-hosts" id="id15">Checking /etc/hosts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#setting-up-nameservers" id="id16">Setting up Nameservers</a><ul>
+<li><a class="reference internal" href="#primary-nameserver" id="id17">Primary Nameserver</a></li>
+<li><a class="reference internal" href="#caching-nameserver" id="id18">Caching Nameserver</a></li>
+<li><a class="reference internal" href="#secondary-nameserver" id="id19">Secondary Nameserver</a></li>
+<li><a class="reference internal" href="#upading-etc-resolv-conf-again" id="id20">Upading <tt class="docutils literal"><span class="pre">/etc/resolv.conf</span></tt> Again</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Now that OpenVZ is running we can begin work on the protocol level proxies. For
+background information on what the PLPs are and why they are useful read the
+<a class="reference external" href="architecture.html">Architecture</a> document.</p>
+<div class="section" id="removing-unnecessary-ves">
+<h2><a class="toc-backref" href="#id2">Removing Unnecessary VEs</a></h2>
+<p>If you followed the <a class="reference external" href="set-up-openvz.html">OpenVZ tutorial</a> you have already
+set up a VE named <tt class="docutils literal"><span class="pre">2</span></tt> which you can use as a Protocol-Level Proxy (PLP). If
+you want to start again though you can delete  VE <tt class="docutils literal"><span class="pre">2</span></tt> like this:</p>
+<pre class="literal-block">
+james&#64;mail:~$ sudo vzctl stop 2
+Stopping VE ...
+VE was stopped
+VE is unmounted
+james&#64;mail:~$ sudo vzctl destroy 2
+Destroying VE private area: /var/lib/vz/private/2
+VE private area was destroyed
+</pre>
+</div>
+<div class="section" id="setting-the-mountpoint">
+<h2><a class="toc-backref" href="#id3">Setting the Mountpoint</a></h2>
+<p>The configuration files for the VEs are stored in <tt class="docutils literal"><span class="pre">/etc/vz/conf/2.conf</span></tt> and
+<tt class="docutils literal"><span class="pre">/etc/vz/conf/3.conf</span></tt>. The VEs themselves are stored in
+<tt class="docutils literal"><span class="pre">/var/lib/vz/private/</span></tt>:</p>
+<pre class="literal-block">
+$ ls -l /var/lib/vz/private/
+total 8
+drwxr-xr-x 20 root root 4096 2008-12-24 17:09 2
+drwxr-xr-x 20 root root 4096 2008-12-24 17:09 3
+</pre>
+<p>They take about 160Mb each:</p>
+<pre class="literal-block">
+$ sudo du -hs /var/lib/vz/private/
+314M        /var/lib/vz/private/
+</pre>
+<p>Over time though this could grow significantly so if you are using the
+<a class="reference external" href="production-debian-lenny-install.rst">Production Setup</a> or the <a class="reference external" href="kvm-virtual-production-installation.rst">KVM Virtual
+Production Installation</a> for the HE,
+it is worth having them on their own logical volume.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">It is a good idea to name the virtual machines according to the last
+numbers in their IP addresses so you don't get confused. In this recipe the
+virtual machines are names 2 and 3 but you will need to use your own numbers if
+they are different.</p>
+</div>
+<p>Since the PLPs won't have any user data on them they can actually be quite
+small. To be on the safe side though we'll give the 10Gb space each. We can
+always increase this later using LVM.</p>
+<p>Let's create a logical volume for each of the servers:</p>
+<pre class="literal-block">
+$ sudo lvcreate -L 10G -nve2 vg_data
+  Logical volume &quot;ve2&quot; created
+$ sudo lvcreate -L 10G -nve3 vg_data
+  Logical volume &quot;ve3&quot; created
+</pre>
+<p>Here <tt class="docutils literal"><span class="pre">ve2</span></tt> and <tt class="docutils literal"><span class="pre">ve3</span></tt> are the names of the two logical volumes, 10G is the
+size of each and <tt class="docutils literal"><span class="pre">vg_data</span></tt> is the name of the volume group to create them in.
+The logical volume size can be bigger than the size of the underlying
+partitions (LVM works out how to store the data correctly) but it can't be
+bigger than the size of the free space in the volume group.</p>
+<p>You'll see the two new devices have been created:</p>
+<pre class="literal-block">
+$ ls /dev/vg_data/
+ve2  ve3
+$ sudo lvscan
+  ACTIVE            '/dev/vg_data/ve2' [10.00 GB] inherit
+  ACTIVE            '/dev/vg_data/ve3' [10.00 GB] inherit
+  ACTIVE            '/dev/vg_root/root' [20.00 GB] inherit
+  ACTIVE            '/dev/vg_root/swap' [8.00 GB] inherit
+  ACTIVE            '/dev/vg_root/tmp' [2.00 GB] inherit
+</pre>
+<p>Now we need to create the filesystems:</p>
+<pre class="literal-block">
+$ sudo mkfs -t ext3 /dev/vg_data/ve2
+$ sudo mkfs -t ext3 /dev/vg_data/ve3
+</pre>
+<p>At this point we are going to do something a bit clever. We'd like to use a
+different logical volume for each VE but OpenVZ won't create the VE in a folder
+that already exists and if we don't mount the logical volumes we've just
+created we won't be able to put anything in them.</p>
+<p>Instead create a directory <tt class="docutils literal"><span class="pre">/var/lib/vz/lv</span></tt> for the logical volumes and mount them there:</p>
+<pre class="literal-block">
+$ sudo mkdir /var/lib/vz/lv
+</pre>
+<p>Now we'll create another config for our logical volume setup:</p>
+<pre class="literal-block">
+$ sudo cp /etc/vz/conf/ve-vps.basic.conf-sample /etc/vz/conf/ve-vps.lv.conf-sample
+</pre>
+<p>Edit the new file <tt class="docutils literal"><span class="pre">/etc/vz/conf/ve-vps.lv.conf-sample</span></tt> and add this line to the end:</p>
+<pre class="literal-block">
+VE_PRIVATE=&quot;/var/lib/vz/lv/$VEID/ve&quot;
+</pre>
+<p>Now we can use the <tt class="docutils literal"><span class="pre">vps.lv</span></tt> config to create VEs which automatically use a mountpoint in <tt class="docutils literal"><span class="pre">/var/lib/vz/lv</span></tt>.</p>
+<p>Set the mountpoint of <tt class="docutils literal"><span class="pre">/var/lib/vz/lv/2</span></tt> to <tt class="docutils literal"><span class="pre">/dev/vg_data/ve2</span></tt> and
+that of <tt class="docutils literal"><span class="pre">/var/lib/vz/lv/3</span></tt> to <tt class="docutils literal"><span class="pre">/dev/vg_data/ve3</span></tt>. Add the following to
+the end of <tt class="docutils literal"><span class="pre">/etc/fstab</span></tt>:</p>
+<pre class="literal-block">
+/dev/vg_data/ve2  /var/lib/vz/lv/2  ext3  defaults 0 0
+/dev/vg_data/ve3  /var/lib/vz/lv/3  ext3  defaults 0 0
+</pre>
+<p>Then create the directories we need:</p>
+<pre class="literal-block">
+$ sudo mkdir /var/lib/vz/lv/2
+$ sudo mkdir /var/lib/vz/lv/3
+</pre>
+<p>Now you can mount the directories:</p>
+<pre class="literal-block">
+$ sudo mount /var/lib/vz/lv/2
+$ sudo mount /var/lib/vz/lv/3
+</pre>
+<p>and you are ready to go!</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>If you make a mistake creating a logical volume you can remove it with this
+command but make sure you specify the correct logical volume or you could lose
+all the data on a logical volume you wanted to keep!</p>
+<pre class="last literal-block">
+$ sudo lvremove /dev/vg_data/ve3
+</pre>
+</div>
+<p>At this point it is worth rebooting to check that the directories are correctly
+mounted from the data in <tt class="docutils literal"><span class="pre">/etc/fstab</span></tt>.</p>
+</div>
+<div class="section" id="creating-the-ves">
+<h2><a class="toc-backref" href="#id4">Creating the VEs</a></h2>
+<p>Now create the two virtual machines, each must have a unique IP address. The
+first will have the hostname <tt class="docutils literal"><span class="pre">plpa.example.com</span></tt> and IP address
+<tt class="docutils literal"><span class="pre">192.168.100.2</span></tt> and the second will use <tt class="docutils literal"><span class="pre">plpb.example.com</span></tt> and have the IP
+address <tt class="docutils literal"><span class="pre">192.168.100.3</span></tt>. You should replace <tt class="docutils literal"><span class="pre">example.com</span></tt> with your own
+domain and use your own IP addresses. Also you'll need to replace the
+nameserver values uses with your own. You can use multiple <tt class="docutils literal"><span class="pre">--nameserver</span></tt>
+options to set more than one nameserver. If you don't know what your
+nameservers are you can look in <tt class="docutils literal"><span class="pre">/etc/resolv.conf</span></tt> on the HE. We want them
+both to start when the HE starts so we also set <tt class="docutils literal"><span class="pre">--onboot</span> <span class="pre">yes</span></tt>.</p>
+<p>Here are the commands to run on the HE (they are explained in the OpenVZ guide):</p>
+<pre class="literal-block">
+$ sudo vzctl create 2 --ostemplate debian-5.0-amd64-minimal --config vps.lv
+$ sudo vzctl set 2 --hostname plpa.example.com --diskspace 8G:9G --ipadd 192.168.100.2 --nameserver 213.133.98.98 --nameserver 213.133.98.99 --nameserver 213.133.100.100 --numothersock 250 --privvmpages=256000 --onboot yes --save
+$ sudo vzctl create 3 --ostemplate debian-5.0-amd64-minimal --config vps.lv
+$ sudo vzctl set 3 --hostname plpb.example.com --diskspace 8G:9G --ipadd 192.168.100.3 --nameserver 213.133.98.98 --nameserver 213.133.98.99 --nameserver 213.133.100.100 --numothersock 250 --privvmpages=256000 --onboot yes --save
+</pre>
+<p>Notice that we are using the <tt class="docutils literal"><span class="pre">vps.lv</span></tt> config we just created so that the data for the virtual machines is stored on a LVM2 logical volume.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>Sometimes you might want to have the VEs in a private network without
+externally-accessible IP addresses. For example, you might like to have a
+private network 192.168.100.xxx and give one of the VEs the IP address
+192.168.100.2. In which case you'll need to run this on the HE to allow that VE
+to access the internet. The <tt class="docutils literal"><span class="pre">188.40.40.131</span></tt> needs to be replaced with the
+external IP address of the HE:</p>
+<pre class="last literal-block">
+$ sudo iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o eth0 -j SNAT --to 188.40.40.131
+</pre>
+</div>
+<p>Just for compatibility with any other software which might be expecting the
+data to be in the <tt class="docutils literal"><span class="pre">/var/lib/vz/private</span></tt> directory it is best to create some
+symlinks:</p>
+<pre class="literal-block">
+$ sudo ln -s /var/lib/vz/lv/2/ve /var/lib/vz/private/2
+$ sudo ln -s /var/lib/vz/lv/3/ve /var/lib/vz/private/3
+</pre>
+<p>So that the VE is easy to identify in backups I also create a file in the directory of each one (of course you can find out from looking <tt class="docutils literal"><span class="pre">/etc/network/interfaces</span></tt> to see which IP address it is using but this seems nicer to me:</p>
+<pre class="literal-block">
+$ sudo touch /var/lib/vz/lv/2/2
+$ sudo touch /var/lib/vz/lv/3/3
+</pre>
+<p>Now start both VEs:</p>
+<pre class="literal-block">
+$ sudo vzctl start 2
+$ sudo vzctl start 3
+</pre>
+<p>You can now enter the PLP as root with this command:</p>
+<pre class="literal-block">
+$ sudo vzctl enter 2
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>There are a few things in this setup worth explaining for the interested reader:</p>
+<ol class="last arabic simple">
+<li>The reason for having the VE in a <tt class="docutils literal"><span class="pre">ve</span></tt> directory within the logical
+volume is that the filesystem wants to maintain a <tt class="docutils literal"><span class="pre">lost+found</span></tt> directory
+which should be owned by the HE, not the VE.</li>
+<li>Because the VE data can't go directly in the root of a logical volume we
+can't store the data in the <tt class="docutils literal"><span class="pre">private</span></tt> directory. If we did it would actually
+be in <tt class="docutils literal"><span class="pre">2/ve</span></tt>, <tt class="docutils literal"><span class="pre">3/ve</span></tt> etc because of point 1 above that would make it
+impossible to maintain an appropriate symlink becuase the directory name would
+be the same as the symlink.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="configuring-the-ves">
+<h2><a class="toc-backref" href="#id5">Configuring the VEs</a></h2>
+<p>Once you have root access you should now follow each of the configuration
+tutorials to configure each VE:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="configure/update-and-upgrade.html">Update and Upgrade</a></li>
+<li><a class="reference external" href="configure/add-a-user-and-configure-sudo.html">Add a User and Configure sudo</a></li>
+<li><a class="reference external" href="configure/basic-ssh-security.html">Basic SSH Security</a></li>
+<li><a class="reference external" href="configure/locales.html">Locales</a></li>
+<li><a class="reference external" href="configure/time-and-date.html">Times and Dates</a></li>
+<li><a class="reference external" href="configure/firewall.html">Firewall</a></li>
+</ol>
+<p>Once these steps are completed you can sign in directly via SSH to the PLP
+using the username of the user you created in step 2 to continue the article.
+For example:</p>
+<pre class="literal-block">
+$ ssh owner&#64;plpa.example.com
+</pre>
+</div>
+<div class="section" id="setting-a-root-password">
+<h2><a class="toc-backref" href="#id6">Setting a root Password</a></h2>
+<p>On each machine, set a root password:</p>
+<pre class="literal-block">
+james&#64;plpa:~ sudo -i
+root&#64;plpa:~# passwd
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+root&#64;plpa:~# exit
+logout
+james&#64;plpa:~$
+</pre>
+</div>
+<div class="section" id="setting-up-nginx">
+<h2><a class="toc-backref" href="#id7">Setting up Nginx</a></h2>
+<p>Nginx is a slightly awkward piece of software in that it is designed to be
+extremely fast so modules it uses have to be statically compiled into it. Since
+we want SSL support as well as other modules we need to install it from source
+code. Here's how.</p>
+<p>Install the <tt class="docutils literal"><span class="pre">dpkg-dev</span></tt> package:</p>
+<pre class="literal-block">
+$ sudo apt-get install build-essential dpkg-dev
+</pre>
+<p>Now get the latest debian package</p>
+<pre class="literal-block">
+$ sudo apt-get source nginx
+</pre>
+<p>Now you can edit <tt class="docutils literal"><span class="pre">nginx-0.6.32/debian/rules</span></tt> to change how the package should
+be compiled. Add any extra options after the existing configure options such as
+<tt class="docutils literal"><span class="pre">--with-http_flv_module</span> <span class="pre">--with-http_ssl_module</span> <span class="pre">--with-http_dav_module</span></tt>.</p>
+<p>When you have made your changes, update the <tt class="docutils literal"><span class="pre">nginx-0.6.32/debian/changelog</span></tt> file:</p>
+<pre class="literal-block">
+nginx (0.6.32-3) unstable; urgency=low
+
+  * debian/control: added some custom flags for my own use
+
+ -- James Gardner &lt;james&#64;example.com&gt;  Thu, 11 June 2009 17:14:27 +0200
+</pre>
+<p>You have to stick to exactly this format for the changelog otherwise the
+package builder will complain.</p>
+<p>Get the build dependencies you need:</p>
+<pre class="literal-block">
+$ sudo apt-get build-dep nginx
+</pre>
+<p>Now you can build the modified package:</p>
+<pre class="literal-block">
+$ cd nginx-0.6.32/
+$ sudo dpkg-buildpackage -b -uc
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">-uc</span></tt> in the above command means &quot;unsigned changes&quot;. If you exclude it
+you will probably get an error about signing:</p>
+<pre class="literal-block">
+$ sudo dpkg-buildpackage: warning: Failed to sign .changes file
+</pre>
+<p>The final <tt class="docutils literal"><span class="pre">nginx_0.6.32-3_amd64.deb</span></tt> file will be in the directory above. You
+can then install Nginx like this:</p>
+<pre class="literal-block">
+$ sudo dpkg -i ../nginx_0.6.32-3_amd64.deb
+</pre>
+<p>If you use the same <tt class="docutils literal"><span class="pre">.deb</span></tt> on another machine you'll need to do this:</p>
+<pre class="literal-block">
+$ sudo apt-get install libpcre3
+$ dpkg -i nginx_0.6.32-3_amd64.deb
+</pre>
+<p>WARNING: I don't know what will happen if there is a security update. Will this
+package be overwritten with a standard one?</p>
+</div>
+<div class="section" id="configuration">
+<h2><a class="toc-backref" href="#id8">Configuration</a></h2>
+<p>We want Nginx to proxy requests to another server running Apache. Let's assume
+that server is on 192.168.100.2. Replace the file
+<tt class="docutils literal"><span class="pre">/etc/nginx/sites-enabled/default</span></tt> with this:</p>
+<pre class="literal-block">
+server {
+    listen   80;
+
+    access_log  /var/log/nginx/localhost.access.log;
+
+    location / {
+        access_log off;
+        proxy_pass http://192.168.100.2:80;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</pre>
+<p>Then restart Nginx:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/nginx restart
+</pre>
+<p>Check Nginx is running:</p>
+<pre class="literal-block">
+$ sudo netstat -tap
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 *:www                   *:*                     LISTEN      14091/nginx
+tcp        0      0 *:ssh                   *:*                     LISTEN      2759/sshd
+tcp6       0      0 [::]:ssh                [::]:*                  LISTEN      2759/sshd
+</pre>
+<p>As you can see, Nginx is listening on the <tt class="docutils literal"><span class="pre">www</span></tt> port.</p>
+</div>
+<div class="section" id="installing-apache">
+<h2><a class="toc-backref" href="#id9">Installing Apache</a></h2>
+<p>We'll install Apache into a separate OpenVZ container using a private network
+so that the running server can only be accessed via Nginx. First create the new
+VE:</p>
+<pre class="literal-block">
+$ sudo vzctl create 2 --ostemplate debian-5.0-amd64-minimal --config vps.lv
+$ sudo vzctl set 2 --hostname server1.example.com --ipadd 192.168.100.2 --numothersock 250 --privvmpages=128536 --onboot yes --save --nameserver 213.133.98.98 --nameserver 213.133.99.99 --nameserver 213.133.100.100
+</pre>
+<p>Then start it and enter it:</p>
+<pre class="literal-block">
+$ sudo vzctl start 2
+$ sudo vzctl enter 2
+</pre>
+<p>Then confgigure it as you have done with the other servers.</p>
+<p>Now you can install Apache:</p>
+<pre class="literal-block">
+$ sudo apt-get install libapache2-mod-wsgi
+</pre>
+<p>If you visit the external IP of the server running Nginx, you should see the
+default &quot;It works!&quot; message from Apache.</p>
+<p>You can now go into more detail and set up various types of Apache sites:</p>
+<ul class="simple">
+<li><a class="reference external" href="mercurial.html">Set up Mercurial</a></li>
+<li><a class="reference external" href="apache.html">Set up Apache Sites</a></li>
+<li><a class="reference external" href="contact_form.html">Set up a Contact Form</a></li>
+</ul>
+</div>
+<div class="section" id="setting-up-email">
+<h2><a class="toc-backref" href="#id10">Setting up Email</a></h2>
+<p>We're going to set up this system:</p>
+<pre class="literal-block">
+Mail Gateways           User Servers
+
+ +--------+
+ | SMTP A | --&gt;   +------------------------+
+ +--------+       |     User group 1:      |
+                  |  Spam and Virus Filter |
+                  |    SMTP Relay Mail     |
+ +--------+       | Dovecot IMAP and POP3  |
+ | SMTP B | --&gt;   +------------------------+
+ +--------+
+</pre>
+<p>There are going to be two mail gateways installed, one on PLP A and one on PLP
+B. These servers do nothing except accept mail from the internet and forward it
+on to the correct <em>user server</em> or redirect it elsewhere (to another email
+address or to a different SMTP server). One mail gateway can serve as the MX
+backup for the other so that mail can be delivered as long as one of the
+servers is up.</p>
+<p>The setup also requires a set of <em>user servers</em>, each of which contains an
+authenticated SMTP relay, spam and virus filters and IMAP and POP3 servers.
+Effectively a user interacts only with the user server their mailbox is on but
+email is delivered via the two mail gateways (although it doesn't matter if
+mail is delivered directly to a user server either).</p>
+<p>The idea is that if we get too much mail for one user server to handle we can just
+set up another user server and configure the mail gateways to send the mail to
+the correct server internally. If we get too much mail for the mail gateways to
+handle we simply add more of them and use DNS to load balance requests amongst
+them. This way we should have a fairly scalable and resilient mail architecture.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Of course, there is no resilience on the individual user servers. If one of
+those goes down, the users it serves won't be able to access their mail. If
+this is a big problem you could investigate DRBD as a way to duplicate user
+data across two servers but this is quite complicated. No mail is lost even
+if a user server goes down, the mail gateways should just hold onto it until
+it is back up.</p>
+</div>
+<p>You might be wondering why the spam and virus checking is done on the user
+servers and not on the mail gateway. The reasons are:</p>
+<ul class="simple">
+<li>Different user groups might want different spam settings</li>
+<li>Spam and virus checking is farily CPU intensive and since the easiest bit
+of the architecture to scale is the user servers, it makes sense to handle
+the CPU intensive parts there</li>
+<li>I've had problems with the code which updates the spam and virus database
+using up the entire CPU power for hours at a time. Although this was a bug I'd
+rather have it occur on the user servers than the gateways.</li>
+</ul>
+<p>You could configure spam and virus checking on the mail gateways though if you
+prefer. The instructions are the same.</p>
+<div class="section" id="install-the-first-mail-gateway">
+<h3><a class="toc-backref" href="#id11">Install the First Mail Gateway</a></h3>
+<p>To get started set up the first of the two mail gateways by following this tutorial:</p>
+<ul class="simple">
+<li><a class="reference external" href="email3/postfix-gateway.html">Postfix Gateway</a></li>
+</ul>
+</div>
+<div class="section" id="create-a-user-server">
+<h3><a class="toc-backref" href="#id12">Create a User Server</a></h3>
+<p>Now that the gateway is set up, let's set up a user server.</p>
+<ul class="simple">
+<li><a class="reference external" href="email3/postfix-with-dovecot.html">Postfix and Dovecot</a></li>
+</ul>
+<p>After the set up, users's will be able to login to the user server via IMAP,
+IMAPS, POP3 or POP3S to retrieve their mail. They will also be able to send
+mail via the same server's authenticated SMTP relay.</p>
+</div>
+<div class="section" id="set-up-spam-and-virus-filtering">
+<h3><a class="toc-backref" href="#id13">Set up Spam and Virus Filtering</a></h3>
+<p>Once Dovecot is working you might like to set up spam and virus protection. You
+can do so by following this tutorial:</p>
+<ul class="simple">
+<li><a class="reference external" href="email3/spam-and-virus-protection.html">Spam and Virus Protection</a></li>
+</ul>
+</div>
+<div class="section" id="postfix-on-plp-b">
+<h3><a class="toc-backref" href="#id14">Postfix on PLP B</a></h3>
+<p>If you were using a single server set up you might add resilience by setting up
+an MX backup on a separate server to store all emails for the domains you
+handle, and forwarding them on once the main server is back online. There is an
+article describing how to do this at <a class="reference external" href="http://www.howtoforge.com/postfix_backup_mx">http://www.howtoforge.com/postfix_backup_mx</a>.</p>
+<p>We can do one better though. Our MX Backup can be identical to the main plpa
+server and can forward mail straight onto the user server, Mail A. That
+way, even if PLPA goes down, the users will still receive mail. In our setup
+the database is running on PLPA so if it goes down, access to the database goes
+too. This means we also need a copy of the database on PLPB and we need to tell
+all three servers that they can access the copy in the event of a failure. Our
+new server will be called PLPB.</p>
+<p>Of course, if the maila server goes down the users won't be able to access
+their email but both PLPA and PLPB will store it for them until they can.</p>
+<p>Now repeat the work of creating a posfix relay by following this guide again
+for PLP B with a few changes...</p>
+<ul class="simple">
+<li><a class="reference external" href="email3/postfix-gateway.html">Postfix Gateway</a></li>
+</ul>
+<p>Then simply take a dump of the data on PLPA and put it on PLPB so that both have copies.</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Be careful to ensure both servers alwyas have <em>exactly</em> the same data and that changes you make to one are duplicated on the other, otherwise you might find hard to debug intermittant problems.</p>
+</div>
+</div>
+<div class="section" id="checking-etc-hosts">
+<h3><a class="toc-backref" href="#id15">Checking /etc/hosts</a></h3>
+<p>In order for everything to work smoothly and to avoid slow DNS lookups it is a
+good idea to explicitly put the hostnames and IP address of all the servers in
+the <tt class="docutils literal"><span class="pre">/etc/hosts</span></tt> file on each of the three machines.</p>
+<p>Ensure they have the following entires:</p>
+<pre class="literal-block">
+192.168.100.2 plpa.example.com
+192.168.100.3 plpb.example.com
+192.168.100.4 maila.example.com
+</pre>
+</div>
+</div>
+<div class="section" id="setting-up-nameservers">
+<h2><a class="toc-backref" href="#id16">Setting up Nameservers</a></h2>
+<p>In order to be in control of your own DNS settings you need to set up a nameserver.</p>
+<div class="section" id="primary-nameserver">
+<h3><a class="toc-backref" href="#id17">Primary Nameserver</a></h3>
+<p>Follow the article below to set up a primary nameserver on PLP A:</p>
+<ul class="simple">
+<li><a class="reference external" href="bind-primary-nameserver.html">Bind Primary Nameserver</a></li>
+</ul>
+</div>
+<div class="section" id="caching-nameserver">
+<h3><a class="toc-backref" href="#id18">Caching Nameserver</a></h3>
+<p>Once the primary nameserver is set up you might decide to use it as the main
+nameserver for your internal network. This is particularly useful if you want
+to prototype a complex network of servers on a virtual machine.</p>
+<div class="caution">
+<p class="first admonition-title">Caution!</p>
+<p>You wouldn't want to do this is your nameservers were live on the internet for two reasons:</p>
+<ol class="arabic simple">
+<li>You wouldn't be using internal network IP addresses so every IP would resolve correctly anyway</li>
+<li>You wouldn't want to respond to DNS entries that weren't for your domains which is what this configuration lets you do</li>
+</ol>
+<p class="last">It useful for testing purposes on an internal network though.</p>
+</div>
+<p>To set up BIND as a caching nameserver too you just need to specify the real
+nameservers in a <tt class="docutils literal"><span class="pre">forwarders</span></tt> section in <tt class="docutils literal"><span class="pre">/etc/bind/named.conf.options</span></tt>.
+Add this with your ISP's nameserver. You can add multiple IPs each with a <tt class="docutils literal"><span class="pre">;</span></tt>
+after them too:</p>
+<pre class="literal-block">
+options {
+    ...
+    forwarders {
+        192.168.100.1;
+    };
+};
+</pre>
+<p>Now external lookups work too:</p>
+<pre class="literal-block">
+$ ping google.com
+PING google.com (74.125.45.100) 56(84) bytes of data.
+64 bytes from google.com (74.125.45.100): icmp_seq=1 ttl=44 time=115 ms
+64 bytes from google.com (74.125.45.100): icmp_seq=2 ttl=44 time=117 ms
+64 bytes from google.com (74.125.45.100): icmp_seq=3 ttl=44 time=116 ms
+^C
+--- google.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+rtt min/avg/max/mdev = 115.541/116.459/117.654/0.968 ms
+</pre>
+<p>Now it's working you can set the plpa and maila to use the same nameserver. You
+can also remove the manual entries you added to <tt class="docutils literal"><span class="pre">/etc/hosts</span></tt> referencing the
+other machines because they aren't needed after you've set up everything to use
+the new nameserver.</p>
+</div>
+<div class="section" id="secondary-nameserver">
+<h3><a class="toc-backref" href="#id19">Secondary Nameserver</a></h3>
+<p>To provide some resilience in case the primary nameserver fails you can set up
+a secondary nameserver. Set up a secondary nameserver on PLP B and have it
+transfer the zones from PLP A by following this tutorial:</p>
+<ul class="simple">
+<li><a class="reference external" href="bind-secondary-nameserver.html">Bind Secondary Nameserver</a></li>
+</ul>
+</div>
+<div class="section" id="upading-etc-resolv-conf-again">
+<h3><a class="toc-backref" href="#id20">Upading <tt class="docutils literal"><span class="pre">/etc/resolv.conf</span></tt> Again</a></h3>
+<p>If you are already using the primary nameserver in <tt class="docutils literal"><span class="pre">/etc/resolv.conf</span></tt> it
+makes sense to also use the secondary. Modify the secondary to add the
+<tt class="docutils literal"><span class="pre">forwarders</span></tt> option to <tt class="docutils literal"><span class="pre">/etc/bind/named.conf.options</span></tt> just like you did for
+the primary and then restart the seconday.</p>
+<p>Now for every server which is using the primary in <tt class="docutils literal"><span class="pre">/etc/resolv.conf</span></tt>, edit
+it to add the secondary:</p>
+<pre class="literal-block">
+nameserver 192.168.100.2
+nameserver 192.168.100.3
+</pre>
+<p>Now if either nameserver should fail, DNS resolution will still be possible via
+the other nameserver.</p>
+</div>
+</div><p class="text-right">(<a href="plps.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Setting up Mercurial</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../index.html">Home</a></li>
+          <li><a href="../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Setting up Mercurial<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../Context/breadcrumbs.cti" -->
+<a href="../index.html">Recipes</a> &gt;
+<a href="index.html">Core Recipes</a> &gt;
+Setting up Mercurial
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><p>We're going to have multiple copies of the Mercurial server running so that we
+can easily group related repositories. This will allow us to keep private
+repositories from appearing alongside public ones.</p>
+<p>Since we are using Nginx, we'll have it decode the SSL and proxy to Apache over
+HTTP. This means that we don't need to set up Apache with an SSL certificate.</p>
+<div class="section" id="configuring-apache">
+<h2>Configuring Apache</h2>
+<p>Install some required software:</p>
+<pre class="literal-block">
+$ sudo apt-get install libapache2-mod-wsgi mercurial libapache2-mod-
+$ sudo a2enmod auth_digest
+$ sudo /etc/init.d/apache2 start
+</pre>
+<p>Start by creating the virtual host. Save this as <tt class="docutils literal"><span class="pre">/etc/apache2/hg.example.com</span></tt>:</p>
+<pre class="literal-block">
+# Redirect virtual hosts
+&lt;VirtualHost *:80&gt;
+    ServerName hg.example.com
+    DocumentRoot /var/www/vhost/hg.example.com/htdocs
+    ErrorLog /var/log/apache2/hg.example.com-error_log
+    CustomLog /var/log/apache2/hg.example.com-access_log common
+
+    WSGIScriptAlias /public /var/www/vhost/hg.example.com/cgi-bin/hgwebdir_public.wsgi
+    WSGIScriptAlias /private /var/www/vhost/hg.example.com/cgi-bin/hgwebdir_private.wsgi
+
+    &lt;Directory /var/www/vhost/hg.example.com/htdocs&gt;
+        Options FollowSymlinks
+        DirectoryIndex index.html
+
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    &lt;/Directory&gt;
+
+    # Require permission for writing to any repository
+    &lt;Location / &gt;
+        Order allow,deny
+        Allow from all
+
+        AuthType Digest
+        AuthName &quot;Private Repositories&quot;
+        AuthDigestDomain /
+        AuthDigestProvider file
+        AuthUserFile /var/www/vhost/hg.example.com/user/hg.digest.passwd
+
+        &lt;LimitExcept GET&gt;
+             Require valid-user
+        &lt;/LimitExcept&gt;
+    &lt;/Location&gt;
+
+    # Don't allow reads unless someone is signed in
+    &lt;Location /private&gt;
+        Order allow,deny
+        Allow from all
+
+        AuthType Digest
+        AuthName &quot;Private Repositories&quot;
+        AuthDigestDomain /
+        AuthDigestProvider file
+        AuthUserFile /var/www/vhost/hg.example.com/user/hg.digest.passwd
+
+        &lt;Limit GET POST DELETE PUT&gt;
+           Require valid-user
+        &lt;/Limit&gt;
+    &lt;/Location&gt;
+
+    &lt;Directory /var/www/vhost/hg.example.com/htdocs/errordocs&gt;
+     AllowOverride none
+     Options MultiViews IncludesNoExec FollowSymLinks
+     AddType text/html .shtml
+     AddHandler server-parsed .shtml
+    &lt;/Directory&gt;
+    ErrorDocument  400  /errordocs/400.html
+    ErrorDocument  401  /errordocs/401.html
+    ErrorDocument  403  /errordocs/403.html
+    ErrorDocument  404  /errordocs/404.html
+    ErrorDocument  500  /errordocs/500.html
+&lt;/VirtualHost&gt;
+</pre>
+<p>Now disable the default site:</p>
+<pre class="literal-block">
+sudo a2dissite default
+</pre>
+<p>Now create the required directories:</p>
+<pre class="literal-block">
+sudo mkdir /var/www/vhost
+sudo mkdir /var/www/vhost/hg.example.com
+cd /var/www/vhost/hg.example.com
+sudo mkdir cgi-bin htdocs conf user repo
+sudo mkdir htdocs/errordocs
+sudo mkdir repo/public
+sudo mkdir repo/private
+</pre>
+<p>Now create the two WSGI scripts. The public one looks like this and should be
+saved as <tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/cgi-bin/hgwebdir_public.wsgi</span></tt>:</p>
+<pre class="literal-block">
+from mercurial import demandimport; demandimport.enable()
+from mercurial.hgweb.hgwebdir_mod import hgwebdir
+app = hgwebdir('/var/www/vhost/hg.example.com/conf/public.config')
+
+def application(environ, start_response):
+    # Trick mercurial into thinking we are using https so that it
+    # doesn't complain about 'ssl required' when you push
+    environ['wsgi.url_scheme'] = 'https'
+    return app(environ, start_response)
+</pre>
+<p>The private one looks like this and should be saved as
+<tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/cgi-bin/hgwebdir_private.wsgi</span></tt>:</p>
+<pre class="literal-block">
+from mercurial import demandimport; demandimport.enable()
+from mercurial.hgweb.hgwebdir_mod import hgwebdir
+app = hgwebdir('/var/www/vhost/hg.example.com/conf/private.config')
+
+def application(environ, start_response):
+    # Trick mercurial into thinking we are using https so that it
+    # doesn't complain about 'ssl required' when you push
+    environ['wsgi.url_scheme'] = 'https'
+    return app(environ, start_response)
+</pre>
+<p>Now create <tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/conf/public.config</span></tt> like this:</p>
+<pre class="literal-block">
+[web]
+allow_push = *
+push_ssl = false
+style = gitweb
+allow_archive = bz2 gz zip
+contact = James Gardner, james at example.com
+
+[collections]
+/var/www/vhost/hg.example.com/repo/public = /var/www/vhost/hg.example.com/repo/public
+
+[hooks]
+changegroup =
+# reload wsgi application
+changegroup.mod_wsgi = touch /var/www/vhost/hg.example.com/cgi-bin/hgwebdir_public.wsgi
+</pre>
+<p>Create <tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/conf/private.config</span></tt> like this:</p>
+<pre class="literal-block">
+[web]
+allow_push = *
+push_ssl = false
+style = gitweb
+allow_archive = bz2 gz zip
+contact = James Gardner, james at example.com
+
+[collections]
+/var/www/vhost/hg.example.com/repo/private = /var/www/vhost/hg.example.com/repo/private
+
+[hooks]
+changegroup =
+# reload wsgi application
+changegroup.mod_wsgi = touch /var/www/vhost/hg.example.com/cgi-bin/hgwebdir_private.wsgi
+</pre>
+<p>Now create a user by creating <tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/user/hg.digest.passwd</span></tt> like this:</p>
+<pre class="literal-block">
+sudo htdigest -c /var/www/vhost/hg.example.com/user/hg.digest.passwd &quot;Private Repositories&quot; username
+</pre>
+<p>Finally add an index page. Here's a very simple example you can save as <tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/htdocs/index.html</span></tt>:</p>
+<pre class="literal-block">
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Mercurial Repositories&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Mercurial Repositories&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/public/&quot;&gt;Public Repositories&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/private/&quot;&gt;Private Repositories&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Now you can enable the virtual host:</p>
+<pre class="literal-block">
+sudo a2ensite hg.example.com
+</pre>
+<p>Then reload Apache:</p>
+<pre class="literal-block">
+sudo /etc/init.d/apache2 reload
+</pre>
+</div>
+<div class="section" id="create-the-error-documents">
+<h2>Create the Error Documents</h2>
+<p>You need to create the 5 error documents: <tt class="docutils literal"><span class="pre">400.html</span></tt>,
+<tt class="docutils literal"><span class="pre">401.html</span></tt>, <tt class="docutils literal"><span class="pre">403.html</span></tt>, <tt class="docutils literal"><span class="pre">404.html</span></tt>,
+<tt class="docutils literal"><span class="pre">500.html</span></tt> in the <tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/htdocs/errordocs</span></tt>
+directory. Here's an example for the 401 error:</p>
+<pre class="literal-block">
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Mercurial Repositories&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Authentication Required/h1&gt;
+
+&lt;p&gt;This server could not verify that you are authorized to access the
+document requested. Either you supplied the wrong credentials (e.g., bad
+password), or your browser doesn't understand how to supply the credentials
+required.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div class="section" id="testing">
+<h2>Testing</h2>
+<p>You can't test it directly yet because we haven't set up Nginx to proxy to it but you can use a command line browser like <tt class="docutils literal"><span class="pre">elinks</span></tt> to check it is working. First add the hostname to <tt class="docutils literal"><span class="pre">/etc/hosts</span></tt> by chaning this line:</p>
+<pre class="literal-block">
+127.0.0.1 localhost.localdomain localhost
+</pre>
+<p>to</p>
+<pre class="literal-block">
+127.0.0.1 localhost.localdomain localhost hg.example.com
+</pre>
+<p>Then start elinks:</p>
+<pre class="literal-block">
+elinks hg.example.com
+</pre>
+<p>See also: <a class="reference external" href="http://www.selenic.com/mercurial/wiki/modwsgi">http://www.selenic.com/mercurial/wiki/modwsgi</a></p>
+</div>
+<div class="section" id="set-up-nginx">
+<h2>Set up Nginx</h2>
+<p>Finally you need to setup Nginx on the other machine so that <a class="reference external" href="https://hg.example.com">https://hg.example.com</a> is proxied to the
+Apache server and so that http is redirected to https.</p>
+<p>We need to install some SSL tools:</p>
+<pre class="literal-block">
+sudo apt-get install openssl
+</pre>
+<p>First create the directories:</p>
+<pre class="literal-block">
+sudo mkdir /etc/nginx/ssl
+sudo mkdir /etc/nginx/ssl/hg.example.com
+</pre>
+<p>Then create the certificate ensuring that the common name you enter matches the domain name, eg hg.example.com.</p>
+</div>
+<div class="section" id="create-ssl-certificates">
+<h2>Create SSL Certificates</h2>
+<p>To generate the Certificate Signing Request you should create your own key. You
+can run the following command from a terminal prompt to create the key:</p>
+<pre class="literal-block">
+openssl genrsa -des3 -out server.key 1024
+</pre>
+<p>You will need to install the packages for <tt class="docutils literal"><span class="pre">openssl</span></tt> if they are not already
+installed. Using the command above will create a key which uses a password. The
+minimum length when specifying <tt class="docutils literal"><span class="pre">-des3</span></tt> is four characters. It should include
+numbers and/or punctuation and not be a word in a dictionary. Also remember
+that your passphrase is case-sensitive.</p>
+<p>Re-type the passphrase to verify. Once you have re-typed it correctly, the
+server key is generated and stored in <tt class="docutils literal"><span class="pre">server.key</span></tt> file. Using a key with a
+passphrase like this can be inconvenient because every time you restart Nginx
+the passphrase has to be manually entered so if you server were to be rebooted,
+Nginx would not start without manual intervention.</p>
+<p>You can also run your secure web server without a passphrase but it is highly
+insecure and a compromise of the key means a compromise of the server as well.
+You can generate a key without a passphrease by leaving out the <tt class="docutils literal"><span class="pre">-des3</span></tt> switch in
+the generation phase or by issuing the following command at a terminal prompt
+to convert your existing key.</p>
+<pre class="literal-block">
+openssl rsa -in server.key -out server.key.insecure
+</pre>
+<p>Once you have the key (with the passphrase or without) you need to generate the
+certificate signing request.</p>
+<pre class="literal-block">
+openssl req -new -key server.key -out server.csr
+</pre>
+<p>You will be prompted for Company Name, Site Name, Email ID, etc The details you
+enter here will form part of the certificate. It is important that the Common
+Name you enter (CN) matches the domain name the secure certificate is for
+otherwise the certificate won't work.</p>
+<p>Now you have your certificate signing request you can either generate a
+self-signed certificate or purchase a signed certificate from a Certificate
+Authority. If you choose to sign the certificate yourself your users will be
+prompted by their web browser each time they visit the site because the browser
+will not recognise the certificate. As a rule production sites should not use
+self-signed certificates.</p>
+<p>To sign the certificate yourself issue this command:</p>
+<pre class="literal-block">
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+</pre>
+<p>We will use the key and certificate when setting up Apache.</p>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging</h2>
+<p>If you are using Firefox and simply get an Error message alert when you try to
+use the HTTPS version of your site it is likely you have made an error in
+creating your certificate. Check that the Common Name you specified when
+creating the certificate signing request matches the domain name you are using.</p>
+<p>If you need to perform further debugging these commands might be useful:</p>
+<pre class="literal-block">
+netstat -ta
+openssl s_client -connect localhost:443 -state -debug
+</pre>
+<p>You should also check the main Apache error logs for clues as well as your
+virtual host's error log:</p>
+<pre class="literal-block">
+tail /var/log/apache2/error.log
+</pre>
+</div>
+<div class="section" id="configuring">
+<h2>Configuring</h2>
+<p>Now add this configuration to <tt class="docutils literal"><span class="pre">/etc/nginx/sites-available/hg.example.com</span></tt>:</p>
+<pre class="literal-block">
+server {
+    listen   80;
+    server_name  hg.example.com;
+    rewrite ^/(.*) https://hg.example.com/$1 permanent;
+}
+
+server {
+    # Important to have the public IP in the listen directive so that
+    # you can host multiple https domains, one per public IP.
+    listen               188.40.40.171:443;
+    ssl                  on;
+    ssl_certificate      /etc/nginx/ssl/hg.example.com/host.pem;
+    ssl_certificate_key  /etc/nginx/ssl/hg.example.com/host.key;
+    keepalive_timeout    70;
+    # Change this to be the maximum size of changeset you want to allow to be pushed.
+    client_max_body_size 300m;
+    access_log  /var/log/nginx/localhost.access.log;
+
+    location / {
+        access_log off;
+        proxy_pass http://192.168.100.2:80;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>You may find you need to change the size of the <tt class="docutils literal"><span class="pre">client_max_body_size</span></tt>
+depending on the maximum size you expect an <tt class="docutils literal"><span class="pre">hg</span> <span class="pre">push</span></tt> command will send.</p>
+<p>If you set this too low you'll see the error <tt class="docutils literal"><span class="pre">abort:</span> <span class="pre">error:</span> <span class="pre">Broken</span> <span class="pre">pipe</span></tt>.
+You can re-run the <tt class="docutils literal"><span class="pre">hg</span> <span class="pre">push</span></tt> with the <tt class="docutils literal"><span class="pre">-v</span></tt> and <tt class="docutils literal"><span class="pre">--debug</span></tt> options to debug
+the error:</p>
+<pre class="literal-block">
+hg push -v --debug
+using https://hg.example.com/private/JimmygSite
+pushing to https://hg.example.com/private/JimmygSite
+sending capabilities command
+http authorization required
+realm: Private Repositories
+user: james
+password:
+capabilities: unbundle=HG10GZ,HG10BZ,HG10UN lookup changegroupsubset
+sending heads command
+searching for changes
+common changesets up to e3adeb1c87e8
+1 changesets found
+List of changesets:
+fc10366d7f2b8bbf9ec092282df2590a396f0701
+sending unbundle command
+sending 33583845 bytes
+abort: error: Broken pipe
+</pre>
+<p>As you can see, the amount sent is 33583845 bytes, which was over the 30MB
+limit this particular server was configured for (which is why the example
+configuration uses 300MB). In the Nginx logs you'd see something like this:</p>
+<pre class="last literal-block">
+2009/06/13 22:05:36 [error] 1246#0: *354 client intended to send too large body: 33583845 bytes, client: 84.9.40.119, server: plpa.example.com, request: &quot;POST /private/JimmygSite?cmd=unbundle&amp;heads=e3adeb1c87e8965906b64b2c909870d5894b6efb HTTP/1.1&quot;, host: &quot;hg.example.com&quot;
+</pre>
+</div>
+<p>Now enable the site:</p>
+<pre class="literal-block">
+sudo ln -s /etc/nginx/sites-available/hg.example.com /etc/nginx/sites-enabled/hg.example.com
+</pre>
+<p>Disable the existing configuration which we no longer need:</p>
+<pre class="literal-block">
+sudo rm /etc/nginx/sites-available/default
+</pre>
+<p>Test the configuration:</p>
+<pre class="literal-block">
+sudo nginx -t -c /etc/nginx/nginx.conf
+2009/06/12 13:40:20 [info] 894#0: the configuration file /etc/nginx/nginx.conf syntax is ok
+2009/06/12 13:40:20 [info] 894#0: the configuration file /etc/nginx/nginx.conf was tested successfully
+</pre>
+<p>Reload Nginx by obtaining its PID and sending it an HUP signal:</p>
+<pre class="literal-block">
+ps aux | grep nginx
+root       301  0.0  0.1  27624   896 ?        Ss   Jun10   0:00 nginx: master process /usr/sbin/nginx
+
+sudo kill -HUP 27624
+</pre>
+</div>
+<div class="section" id="using-a-godaddy-certificate">
+<h2>Using a GoDaddy Certificate</h2>
+<p>Create the certificate signing request:</p>
+<pre class="literal-block">
+openssl genrsa -out godaddy.key 1024
+openssl req -new -key godaddy.key -out godaddy.csr
+</pre>
+<p>The process of buying SSL is quite involved:</p>
+<ol class="arabic simple">
+<li>You pay for the SSL order first, and you get 1 ssl credit in Godaddy account.</li>
+<li>You configure the credit, and submit the whole body text from mysite.csr, making sure you choose Apache as the web server.</li>
+<li>Godaddy send you an approval email request for domain owner (should be you). (very fast).</li>
+<li>you click email link and approve, then Godaddy email you the actual ssl certificate files. (takes 5 mins)</li>
+</ol>
+<p>Make sure the email address you give in the csr upload page actually works.
+Also, if you don't get the email you can click the &quot;Re-issue&quot; button which
+allows you to download it directly.</p>
+<pre class="literal-block">
+sudo apt-get install unzip
+$ sudo unzip ~/certbundle.zip
+</pre>
+<p>Then you need to combine the certificate with the intermediate file:</p>
+<pre class="literal-block">
+cat hg.example.com.crt gd_bundle.crt &gt; combined.crt
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">combined.crt</span></tt> file can then be used in place of the <tt class="docutils literal"><span class="pre">host.pem</span></tt>
+certificate you generated yourself earlier.</p>
+<p>See also: <a class="reference external" href="http://nginx.groups.wuyasea.com/articles/how-to-setup-godaddy-ssl-certificate-on-nginx/2">http://nginx.groups.wuyasea.com/articles/how-to-setup-godaddy-ssl-certificate-on-nginx/2</a></p>
+</div>
+<div class="section" id="adding-a-repository">
+<h2>Adding a Repository</h2>
+<p>Adding a new repository is easy, you simply create a normal Mercurial
+repository in either the public or the private directory, depending on which
+you prefer.</p>
+<p>For example to create a public directory:</p>
+<pre class="literal-block">
+cd /var/www/vhost/hg.example.com/repo/public
+sudo mkdir new_repo
+cd new_repo
+sudo hg init
+touch README.txt
+hg add README.txt
+hg ci -m &quot;First commit&quot;
+cd ../
+chown -R www-data:www-data /var/www/vhost/hg.example.com/repo
+sudo /etc/init.d/apache2 restart
+</pre>
+<p>You can then use it like this:</p>
+<pre class="literal-block">
+$ hg clone https://hg.example.com/public/new_repo
+</pre>
+<p>Before you can check in changes remotely though you need to add the user to the <tt class="docutils literal"><span class="pre">.hg/hgrc</span></tt> file. As shown in the next section.</p>
+</div>
+<div class="section" id="adding-extra-users">
+<h2>Adding extra Users</h2>
+<p>If you have already created
+<tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/user/hg.digest.passwd</span></tt> you can add a new user
+like this:</p>
+<pre class="literal-block">
+htdigest /var/www/vhost/hg.example.com/user/hg.digest.passwd &quot;Private Repositories&quot; username
+</pre>
+<p>Either way you will be asked for a password for the user <tt class="docutils literal"><span class="pre">username</span></tt>.</p>
+<p>Once the user has been created you need to edit the <tt class="docutils literal"><span class="pre">.hg/hgrc</span></tt> file in each
+repository you want that user to have access to. For example in the file below,
+users with the usernames <tt class="docutils literal"><span class="pre">james</span></tt> and <tt class="docutils literal"><span class="pre">stephen</span></tt> are allowed to push
+changes to the repository. We've also set some other information.</p>
+<pre class="literal-block">
+[web]
+allow_push = james, stephen
+style = gitweb
+allow_archive = bz2 gz zip
+description = Build forms quickly and easily using groups of simple helper functions.
+contact = James Gardner
+push_ssl = False
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you are using this recipe as a basis for creating lots of private
+repositories, it is a good idea to use the same realm so that users with the
+same usrename who sign into one part of the site they have access to don't have
+to sign in again when they access a different private repository they have
+access to where their username and password are the same.</p>
+</div>
+</div>
+<div class="section" id="moving-repositories">
+<h2>Moving Repositories</h2>
+<p>If you are moving a repositry from a different location you can simply move the
+folder. Just update the <tt class="docutils literal"><span class="pre">.hg/hgrc</span></tt> file so that it has the correct default
+path for the new location. eg:</p>
+<pre class="literal-block">
+[paths]
+default = https://hg.example.com/public/FormBuild
+</pre>
+</div>
+<div class="section" id="converting-from-subversion">
+<h2>Converting From Subversion</h2>
+<p>If you have an old subversion repository and you want to convert it to
+mercurial you need to install the Python SWIG bindings for subversion:</p>
+<pre class="literal-block">
+sudo apt-get install python-subversion
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The mercurial instructions suggest you also explicitly need to enable the <tt class="docutils literal"><span class="pre">hg</span>
+<span class="pre">convert</span></tt> extensions but actually you don't.</p>
+</div>
+<p>You can then convert the repository from SVN like this:</p>
+<pre class="literal-block">
+hg convert http://code.sixapart.com/svn/memcached/trunk
+</pre>
+<p>This approach takes ages though so you are much better of copying the SVN
+repository data to your machine and converting it directly. Here's how I
+converted the code for <a class="reference external" href="http://authkit.org">AuthKit</a>:</p>
+<pre class="literal-block">
+cd ~
+mkdir svn hg
+scp -r root&#64;authkit.org:/var/svn/AuthKit svn/AuthKit
+hg convert svn/AuthKit hg/AuthKit
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">hg/AuthKit</span></tt> directory is now a mercurial repository.</p>
+<p>Create the file <tt class="docutils literal"><span class="pre">hg/AuthKit/.hg/hgrc</span></tt> file so it looks something like this:</p>
+<pre class="literal-block">
+[web]
+allow_push = james
+style = gitweb
+allow_archive = bz2 gz zip
+description = Python toolkit for web-based authentication, authorisation and permissions (beta).
+contact = James Gardner
+push_ssl = False
+</pre>
+<p>Now you can make it public by moving it to
+<tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/repo/public</span></tt> and setting the correct
+permissions:</p>
+<pre class="literal-block">
+sudo mv hg/AuthKit /var/www/vhost/hg.example.com/repo/public/
+sudo chown -R www-data:www-data /var/www/vhost/hg.example.com/repo/public/AuthKit
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If your browser gives you an error about invalid content encodings, it could
+be indicative of a file permission problem. Check the <tt class="docutils literal"><span class="pre">repo</span></tt> directory and
+everything under it has <tt class="docutils literal"><span class="pre">www-data</span></tt> owner and group.</p>
+</div>
+<p>You'll need to reload Apache before the new repository is noticed:</p>
+<pre class="literal-block">
+sudo /etc/init.d/apache2 reload
+</pre>
+<p>See also: <a class="reference external" href="http://www.selenic.com/mercurial/wiki/ConvertExtension">http://www.selenic.com/mercurial/wiki/ConvertExtension</a></p>
+</div>
+<div class="section" id="changing-the-theme">
+<h2>Changing the Theme</h2>
+<p>The themes are all in
+<tt class="docutils literal"><span class="pre">/var/lib/python-support/python2.5/mercurial/templates/</span></tt>. To create a new
+one, copy an existing one and add a symlink:</p>
+<pre class="literal-block">
+sudo mkdir /var/www/vhost/hg.example.com/theme
+sudo cp -pr /var/lib/python-support/python2.5/mercurial/templates/gitweb /var/www/vhost/hg.example.com/theme/custom
+sudo ln -s /var/www/vhost/hg.example.com/theme/custom /var/lib/python-support/python2.5/mercurial/templates/custom
+</pre>
+<p>Now edit the templates in <tt class="docutils literal"><span class="pre">/var/www/vhost/hg.example.com/custom</span></tt>.</p>
+<p>Then in the <tt class="docutils literal"><span class="pre">.hg/hgrc</span></tt> file for the repository you want to theme set:</p>
+<pre class="literal-block">
+[web]
+style = custom
+</pre>
+<p>You can also change the icon and the stylesheets by changing the files in
+<tt class="docutils literal"><span class="pre">/var/lib/python-support/python2.5/mercurial/templates/static</span></tt>.</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p>The official Mercurial theming documentation suggests you can simply add a
+new variable to your <tt class="docutils literal"><span class="pre">map</span></tt> file to create a new template which can be used in
+other templates. This doesn't currently work. Instead you can edit
+<tt class="docutils literal"><span class="pre">/var/lib/python-support/python2.5/mercurial/templater.py</span></tt> and define new
+variables in <tt class="docutils literal"><span class="pre">__init__.py</span></tt> as keys of the <tt class="docutils literal"><span class="pre">self.default</span></tt> object. For
+example to create a variable called <tt class="docutils literal"><span class="pre">commonbar_top</span></tt> you could do this:</p>
+<pre class="literal-block">
+self.defaults['commonbar_top'] = '''
+    &lt;p&gt;Top navigation goes here&lt;/p&gt;
+'''
+</pre>
+<p class="last">You can then use this in any of the templates by adding the string
+<tt class="docutils literal"><span class="pre">#commonbar_top#</span></tt> to them.</p>
+</div>
+<p>See also: <a class="reference external" href="http://www.selenic.com/mercurial/wiki/Theming">http://www.selenic.com/mercurial/wiki/Theming</a></p>
+</div>
+<div class="section" id="extra-mercurial-thoughts">
+<h2>Extra Mercurial Thoughts</h2>
+<p>To avoid the this error:</p>
+<pre class="literal-block">
+IOError: sys.stdout access restricted by mod_wsgi
+</pre>
+<p>You'll need to make another change. If you just change these lines in
+<tt class="docutils literal"><span class="pre">/var/lib/python-support/python2.5/mercurial/ui.py</span></tt> around 386 from this:</p>
+<pre class="literal-block">
+def write_err(self, *args):
+    try:
+        if not sys.stdout.closed: sys.stdout.flush()
+        for a in args:
+            sys.stderr.write(str(a))
+        # stderr may be buffered under win32 when redirected to files,
+        # including stdout.
+        if not sys.stderr.closed: sys.stderr.flush()
+    except IOError, inst:
+        if inst.errno != errno.EPIPE:
+            raise
+</pre>
+<p>So that the Except clause at the end looks like this:</p>
+<pre class="literal-block">
+except IOError, inst:
+    if not (inst.errno == errno.EPIPE or &quot;access restricted by mod_wsgi&quot; in str(inst)):
+        raise
+</pre>
+<p>Then everything seems to work nicely.</p>
+<p>This is because mod_wsgi restricts access to stdout so you will frequently get errors otherwise.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>If you get this error:</p>
+<pre class="literal-block">
+Invalid command 'AuthDigestDomain', perhaps misspelled or defined by a module not included in the server configuration
+</pre>
+<p class="last">You have forgotten to enable <tt class="docutils literal"><span class="pre">mod_auth_digest</span></tt> or you are using the obsolete <tt class="docutils literal"><span class="pre">mod_digest</span></tt>.</p>
+</div>
+<p>You now have a local Mercurial repository. Touch the <tt class="docutils literal"><span class="pre">.wsgi</span></tt> file to force a reload:</p>
+<pre class="literal-block">
+touch /var/www/vhosts/hg.example.com/cgi-bin/hgwebdir.wsgi
+</pre>
+</div><p class="text-right">(<a href="mercurial.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

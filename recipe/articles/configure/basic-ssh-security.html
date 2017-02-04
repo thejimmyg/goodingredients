@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Basic SSH Security</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../../index.html">Home</a></li>
+          <li><a href="../../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="../index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Basic SSH Security<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../../Context/breadcrumbs.cti" -->
+<a href="../../index.html">Recipes</a> &gt;
+<a href="../index.html">Core Recipes</a> &gt;
+.. &gt;
+Basic SSH Security
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><p>Since the server is going to be on the internet anyone else on the internet can
+access it so it is important it is as secure as possible. To try to prevent a
+malicious user gaining root access to the system by guessing the root password
+we will do a couple of things:</p>
+<ul class="simple">
+<li>Disable the root login (instead you can login as <tt class="docutils literal"><span class="pre">owner</span></tt> or whichever user
+you gave sudo access to in <a class="reference external" href="add-a-user-and-configure-sudo.html">Add a User and Configure sudo</a> and then use the <tt class="docutils literal"><span class="pre">sudo</span></tt> command)</li>
+<li>Put the SSH server on a non-standard port so it is slightly harder to find</li>
+<li>Define which users can log in</li>
+</ul>
+<p>Make a backup of <tt class="docutils literal"><span class="pre">/etc/ssh/sshd_config</span></tt> and then check or change the following:</p>
+<p>The main things to change (or check) are below. Note that if you get them wrong
+you might not be able to login to the machine remotely so be careful.</p>
+<pre class="literal-block">
+Port 28500
+PermitRootLogin no
+UsePAM no
+X11Forwarding no
+UseDNS no
+AllowUsers owner
+</pre>
+<p>Above we've used port 28500 but you should change this to another port with a
+large number. Write down the port you've chosen because it can be easy to
+forget.</p>
+<p>The <tt class="docutils literal"><span class="pre">AllowUsers</span></tt> line should list whichever user you set up when configuring
+sudo. In the example the user was called <tt class="docutils literal"><span class="pre">owner</span></tt> which is what is used here.
+If you later create another account and want to let someone else sign in as
+well as <tt class="docutils literal"><span class="pre">owner</span></tt> you'll need to update the <tt class="docutils literal"><span class="pre">AllowUsers</span></tt> option. Multiple
+users can be specified, separated by spaces. Here we allow both the users
+<tt class="docutils literal"><span class="pre">owner</span></tt> and <tt class="docutils literal"><span class="pre">dev</span></tt> to sign in over SSH:</p>
+<pre class="literal-block">
+AllowUsers owner dev
+</pre>
+<p>Once you happy with the settings restart:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/ssh restart
+Restarting OpenBSD Secure Shell server: sshd.
+</pre>
+<p>Don't exit that shell though before you've loaded up another terminal and
+checked you can connect again. This time you'll need to use this:</p>
+<pre class="literal-block">
+ssh owner&#64;server1.example.com -p 28500
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>If you do make a mistake and can't reconnect and are fortunate enough to be
+using a host with a rescue system, boot into the rescue system and mount the
+drive containing the <tt class="docutils literal"><span class="pre">/etc/</span></tt> directory, in this example it is on
+<tt class="docutils literal"><span class="pre">/dev/sda2</span></tt>:</p>
+<pre class="literal-block">
+# mount /dev/sda2 /mnt -t ext3
+</pre>
+<p>You will then be able to edit the file as <tt class="docutils literal"><span class="pre">/mnt/etc/ssh/sshd_config</span></tt> and then
+reboot back into your normal setup.</p>
+<p>If you are using LVM it is a little more complex, you must do this to mount the drive:</p>
+<pre class="literal-block">
+# lvdisplay | grep &quot;LV Name&quot;
+  LV Name                /dev/vg_root/root
+  LV Name                /dev/vg_root/swap
+  LV Name                /dev/vg_root/tmp
+</pre>
+<p>Use the volume group name, in this case <tt class="docutils literal"><span class="pre">vg_root</span></tt> in the next command:</p>
+<pre class="literal-block">
+# vgchange -a y vg_root
+  3 logical volume(s) in volume group &quot;vg_root&quot; now active
+</pre>
+<p>Now mount the logical volume:</p>
+<pre class="last literal-block">
+# mount /dev/vg_root/root /mnt
+</pre>
+</div>
+<p>See also:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.ssh.com/support/documentation/online/ssh/adminguide/32/Restricting_User_Logins.html">http://www.ssh.com/support/documentation/online/ssh/adminguide/32/Restricting_User_Logins.html</a></li>
+</ul>
+<div class="section" id="port-forwarding">
+<h2>Port Forwarding</h2>
+<p>If you are setting up SSH on a private VE which isn't on a publically
+accessible IP address you will need to set up port forwarding on the HE. In
+this case there isn't much point in changing the default port because it can't
+be accessed anyway. Instead you should change the firewall on the HE to forward
+a spare port to the VE on port 22. For example, to forward port 30004 on the HE
+to port 22 on a VE with IP address 192.168.100.4 you would run this on the HE:</p>
+<pre class="literal-block">
+sudo iptables -t nat -A PREROUTING -p tcp -d 188.40.40.131 --dport 30004 -i eth0 -j DNAT --to-destination 192.168.100.4:22
+</pre>
+<p>If you have <a class="reference external" href="firewall.html">set up your firewall</a> you can make this change
+permanant by editing the <tt class="docutils literal"><span class="pre">/etc/iptables.rules</span></tt> file and change these lines in the <tt class="docutils literal"><span class="pre">*nat</span></tt> section:</p>
+<pre class="literal-block">
+:OUTPUT ACCEPT [26:1976]
+-A POSTROUTING -s 192.168.100.0/24 -o eth0 -j SNAT --to-source 188.40.40.131
+COMMIT
+</pre>
+<p>to this:</p>
+<pre class="literal-block">
+:OUTPUT ACCEPT [26:1976]
+-A PREROUTING -d 188.40.40.131/32 -i eth0 -p tcp -m tcp --dport 30004 -j DNAT --to-destination 192.168.100.4:22
+-A POSTROUTING -s 192.168.100.0/24 -o eth0 -j SNAT --to-source 188.40.40.131
+COMMIT
+</pre>
+</div><p class="text-right">(<a href="basic-ssh-security.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

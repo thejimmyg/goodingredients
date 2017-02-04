@@ -1,0 +1,968 @@
+Next we have to parition disks. We need at least four partitions:
+
+``/boot``
+   It is always wise to have ``/boot`` as a straightforward ext3 primary 
+   partition so that you can be confident all kernels will be able to load 
+   data from them when the machine boots needing to be compiled with special
+   drivers.
+
+swap
+    Swap space should be 1-2x the amount of memory your server has. If the
+    server has over 2G RAM you can usually get away with chosing a value equal to
+    the RAM.
+
+``/``
+    The root partition generally shouldn't be under LVM either so needs its 
+    own partition.
+
+``/data``
+    All data will go in a LVM partition
+
+In a production setup it is often a good idea to have lots of small partitions
+for the data rather than one large one. This is because using LVM you can
+easily create one logical volume group for them all anyway and by having lots
+of small partitions you have more flexibility if you ever want to change the
+structure of your disks.
+
+You have a choice of which of these should be primary partitions and which
+should be logical partitions. From the Linux Partition HOWTO:
+
+    3.3. Primary Partitions
+    
+    The number of partitions on an Intel-based system was limited from the very
+    beginning: The original partition table was installed as part of the boot
+    sector and held space for only four partition entries. These partitions are 
+    now called primary partitions.  
+
+    3.4. Logical Partitions
+    
+    One primary partition of a hard drive may be subpartitioned. These are
+    logical partitions. This effectively allows us to skirt the historical four
+    partition limitation.
+    
+    The primary partition used to house the logical partitions is called an
+    extended partition and it has its own file system type (0x05). Unlike primary
+    partitions, logical partitions must be contiguous. Each logical partition
+    contains a pointer to the next logical partition, which implies that the number
+    of logical partitions is unlimited. However, linux imposes limits on the total
+    number of any type of prtition on a drive, so this effectively limits the
+    number of logical partitions. This is at most 15 partitions total on an SCSI
+    disk and 63 total on an IDE disk.
+    
+If you do add 4 primary partitions the remaining space becomes unusable:
+
+.. image :: install-debian-lenny/partition-disks-0-unusable.png
+
+Because of this keep the total number of partitions below 15. For safety, the
+``/boot`` partition should be within the first 1023 cylinders or 8GBytes of
+your hard drive. It does not matter whether ``/boot`` is a primary or logical
+partition. This partition will contain your bootloader and your kernel(s). A
+64MB partition should be well enough for quite a few kernel generations but
+I've had a problem where I ran out of boot space before so to be on the safe
+side I'd make a production system 500MB or more. The more kernels you wish to
+run on it the larger you make it.
+
+.. note::
+
+   As an example, a clean debain install with 2 standard Debian kernels and an
+   OpenVZ kernel uses 35MB in the ``/boot`` directory:
+
+   ::
+
+       # ls -lah /boot/
+       total 35M
+       drwxr-xr-x  3 root root 4.0K 2009-04-18 23:18 .
+       drwxr-xr-x 21 root root 4.0K 2009-04-18 23:19 ..
+       -rw-r--r--  1 root root  84K 2009-03-13 21:55 config-2.6.26-1-amd64
+       -rw-r--r--  1 root root  84K 2009-03-27 07:18 config-2.6.26-2-amd64
+       -rw-r--r--  1 root root  84K 2009-03-27 07:21 config-2.6.26-2-openvz-amd64
+       drwxr-xr-x  2 root root 4.0K 2009-04-18 23:18 grub
+       -rw-r--r--  1 root root 6.4M 2009-04-18 22:35 initrd.img-2.6.26-1-amd64
+       -rw-r--r--  1 root root 6.4M 2009-04-18 22:36 initrd.img-2.6.26-2-amd64
+       -rw-r--r--  1 root root 6.4M 2009-04-18 22:35 initrd.img-2.6.26-2-amd64.bak
+       -rw-r--r--  1 root root 6.4M 2009-04-18 23:18 initrd.img-2.6.26-2-openvz-amd64
+       -rw-r--r--  1 root root 1.2M 2009-03-13 21:55 System.map-2.6.26-1-amd64
+       -rw-r--r--  1 root root 1.2M 2009-03-27 07:18 System.map-2.6.26-2-amd64
+       -rw-r--r--  1 root root 1.2M 2009-03-27 07:21 System.map-2.6.26-2-openvz-amd64
+       -rw-r--r--  1 root root 1.7M 2009-03-13 21:52 vmlinuz-2.6.26-1-amd64
+       -rw-r--r--  1 root root 1.7M 2009-03-27 07:18 vmlinuz-2.6.26-2-amd64
+       -rw-r--r--  1 root root 1.7M 2009-03-27 07:21 vmlinuz-2.6.26-2-openvz-amd64
+
+Since we only have 4GB of space let's partition like this. On a real server you
+would make larger data partitions and have more of them. 
+
+.. note :: 
+
+    At the time of writing a minimum install of Debian Lenny from the
+    netinstall CD and with all package sets unselected (with no ``Standard System``
+    options either) comes in at 512Mb after first boot.
+
+Again, I'm creating a tiny swap parititon for this example.
+
+Traditionally, a file server uses SCSI disks, but today SATA disks offer an
+attractive combination of speed and low cost. At the time of this writing, 250
+GB SATA drives are commonly available for around $100; for a terabyte, the cost
+is around $400.
+
+SATA drives are not named like ATA drives (hda, hdb), but like SCSI (sda, sdb). 
+
+For our test we will use the following setup:
+
+Partition ID     Name     Mount point/Use Size for 4GB test       
+========= ====== ======== =============== =================
+Primary   ``fd`` ``hda1`` ``/boot``       64Mb              
+Primary   ``fd`` ``hda2`` Swap            128MB
+Primary   ``fd`` ``hda3`` ``/``           1GB
+Extended  ``5``  ``hda4`` 
+Logical   ``fd`` ``hda5`` Data A          1GB
+Logical   ``fd`` ``hda6`` Data B          1GB
+Logical   ``fd`` ``hda7`` Encrypted       500MB
+FREE                                      Remaining Space
+
+The example uses an encrypted parition so I can demonstrate how to use
+encrypted and unencrypted paritions. In a production setup it is unlikely you
+would need a mixture of encrypted and unencrypted volumes you could make all
+your data partitions encrypted or all unencrypted as you wish.
+
+.. note ::
+
+   Bear in mind that having an encrypted volume will mean that you need to
+   enter your passphrase every time you reboot the machine before the SSH server
+   is loaded. This may not be practical on a remote machine. XXX Is this true?
+
+For a production setup you would use a partitioning scheme like this:
+
+Partition type Name      Mount point/Use Recommended for 400GB disk 
+============== ========= =============== ========================== 
+Primary ``fd`` ``hda1``  ``/boot``       500MB                      
+Primary ``fd`` ``hda2``  Swap            1-2x size of RAM eg 3GB    
+Primary ``fd`` ``hda3``  ``/``           10GB                       
+Logical ``fd`` ``hda4``  Data A          50GB                       
+Logical ``fd`` ``hda5``  Data B          50GB                       
+Logical ``fd`` ``hda6``  Data C          50GB
+...            ...       ...             ...
+Logical ``fd`` ``hda13`` Data J          50GB
+FREE                                     Remaining space
+
+
+
+
+http://www.win.tue.nl/~aeb/partitions/partition_types-1.html
+
+8e Linux Logical Volume Manager partition
+fd Linux raid partition with autodetect using persistent superblock
+
+# fdisk -l /dev/sdd
+
+
+
+::
+
+    /boot    128Mb  primary
+    swap     128Mb  primary
+    /        1000Mb primary 
+    /data_01 1000Mb logical +
+    /data_02 1000Mb logical +-- these are in an *extended* partition
+    /enc     *Mb    logical +
+
+I also want to set up an encrypted volume so I'll do that with whatever space
+is available at the end.
+
+.. note ::
+
+   The Virtual Machine Manger installation wizard treats a KB as 1024B whereas the Debian installer treats it as 1000B so you actually have 4.2GB of space available in the Debian installer if you created a 4000Mb partition in the Virtual Machine Manger installation wizard.
+
+
+http://www.linfo.org/logical_partition.html
+http://www.gentoo.org/doc/en/lvm2.xml
+
+Let's get started. Here's what the screen currently looks like. We want
+``Manual`` partitioning.
+
+.. image :: install-debian-lenny/partition-disks.png
+
+Select the hard drive to parition. 
+
+.. note ::
+
+    On your server it is likely the disk will be named ``sda`` rather than
+    ``hda`` as it is in this example.
+
+.. image :: install-debian-lenny/partition-disks-2.png
+
+You want to create a partition table so choose ``Yes``:
+
+.. image :: install-debian-lenny/partition-disks-3.png
+
+You return to the previous screen but this time there is an empty partition
+list. Select the ``FREE SPACE`` and press Enter.
+
+.. image :: install-debian-lenny/partition-disks-4.png
+
+Select ``Create a new partition``:
+
+.. image :: install-debian-lenny/partition-disks-5.png
+
+The first partition we are making is the ``/boot`` partition so enter ``500 MB``:
+
+.. image :: install-debian-lenny/partition-disks-6.png
+
+Choose to make it a ``Primary`` partition (although you could choose logical):
+
+.. image :: install-debian-lenny/partition-disks-7.png
+
+Choose to have it at the ``Beginning`` of the drive, although you could have it
+at the end too.
+
+.. image :: install-debian-lenny/partition-disks-8.png
+
+You will arrive at the screen below. Even though this parition will eventually
+be mounted as ``/boot`` you do not need to change the mountpoint. 
+
+.. image :: install-debian-lenny/partition-disks-9.png
+
+Now set the partition to be bootable by highlighting ``Bootable flag`` and
+pressing Enter:
+
+.. image :: install-debian-lenny/partition-disks-10.png
+
+You are returned to the same screen but the bootable flag has been updated:
+
+.. image :: install-debian-lenny/partition-disks-11.png
+
+You want to change how this partition is used so press Enter with ``User as:``
+still selected. You will see the screen below. Select ``physical volume for
+RAID``:
+
+.. image :: install-debian-lenny/partition-disks-12.png
+
+Once again you are taken back to the previous screen. This time you are
+finished so select ``Done setting up the partition``:
+
+.. image :: install-debian-lenny/partition-disks-13.png
+
+You are taken back to the parition table screen. The first partition is now set
+up.
+
+.. image :: install-debian-lenny/partition-disks-14.png
+
+Repeating the Process
+=====================
+
+You should now set up the root and swap partitions in the free space in exactly
+the same way.
+
+The only differences for the root partition are that it will use a 1000 ``MB``
+space, and not have the bootable flag set to ``on``. The swap parition is set
+up in exaclty the same way as the boot parition. Again you don't need to worry
+about mount points or filesystems yet.
+
+Here are the screens, setting up the swap partition:
+
+.. image :: install-debian-lenny/partition-disks-15.png
+.. image :: install-debian-lenny/partition-disks-16.png
+.. image :: install-debian-lenny/partition-disks-17.png
+.. image :: install-debian-lenny/partition-disks-18.png
+.. image :: install-debian-lenny/partition-disks-19.png
+
+There is no need to set the bootable flag this time so start by setting the partition type to RAID:
+
+.. image :: install-debian-lenny/partition-disks-20.png
+.. image :: install-debian-lenny/partition-disks-21.png
+.. image :: install-debian-lenny/partition-disks-22.png
+.. image :: install-debian-lenny/partition-disks-23.png
+
+Here are the screens for setting up the root partition
+
+.. image :: install-debian-lenny/partition-disks-24.png
+.. image :: install-debian-lenny/partition-disks-25.png
+.. image :: install-debian-lenny/partition-disks-26.png
+.. image :: install-debian-lenny/partition-disks-27.png
+.. image :: install-debian-lenny/partition-disks-28.png
+
+Again, no need to set the bootable flag so start by setting the partition type to RAID:
+
+.. image :: install-debian-lenny/partition-disks-29.png
+.. image :: install-debian-lenny/partition-disks-30.png
+.. image :: install-debian-lenny/partition-disks-31.png
+.. image :: install-debian-lenny/partition-disks-32.png
+
+Now let's set up the two data partitions. The procedure for both these is
+identical and you would repeat it for as many data partitions as you wanted.
+I'm only going to show you how to set up the first one:
+
+.. image :: install-debian-lenny/partition-disks-33.png
+.. image :: install-debian-lenny/partition-disks-34.png
+.. image :: install-debian-lenny/partition-disks-35.png
+
+This time, because the you already have 3 primary partitions, you need to make
+the next one a logical parition. If you don't the remaining free space on the
+drive will become unusable.
+
+Notice this time you are not asked whether you want a primary or logical parition.
+
+.. image :: install-debian-lenny/partition-disks-36.png
+.. image :: install-debian-lenny/partition-disks-37.png
+.. image :: install-debian-lenny/partition-disks-38.png
+.. image :: install-debian-lenny/partition-disks-39.png
+.. image :: install-debian-lenny/partition-disks-40.png
+.. image :: install-debian-lenny/partition-disks-41.png
+
+And the second data partition:
+
+.. image :: install-debian-lenny/partition-disks-42.png
+
+Now let's set up the partition for the encrypted data:
+
+.. image :: install-debian-lenny/computing-partition-table.png
+
+Once again you choose ``physical volume for RAID``, not ``physical volume for
+encryption``. We'll set up encryption in a minute.
+
+.. image :: install-debian-lenny/partition-disks-41.png
+.. image :: install-debian-lenny/partition-disks-42.png
+.. image :: install-debian-lenny/partition-disks-43.png
+.. image :: install-debian-lenny/partition-disks-44.png
+.. image :: install-debian-lenny/partition-disks-45.png
+.. image :: install-debian-lenny/partition-disks-46.png
+.. image :: install-debian-lenny/partition-disks-47.png
+.. image :: install-debian-lenny/partition-disks-48.png
+.. image :: install-debian-lenny/partition-disks-49.png
+.. image :: install-debian-lenny/partition-disks-50.png
+
+Now the disks are set up. Let's configure RAID:
+
+.. image :: install-debian-lenny/raid-1.png
+
+You are asked if you want to write your changes to disk. If you do, choose ``Yes``:
+
+.. image :: install-debian-lenny/raid-2.png
+
+Once the partition table is written to disk, let's take a detour and see how
+the structure actually exists on the disk. 
+
+Inspecting the Setup
+====================
+
+Send the virtual machine a Ctrl+Alt+2 key (or press that combination if you are
+doing it for real):
+
+.. image :: install-debian-lenny/vm-fdisk-1.png
+
+You are asked to activate the console. Press ENTER:
+
+.. image :: install-debian-lenny/vm-fdisk-2.png
+
+You get access to a cut down shell with access to the BusyBox set of tools:
+
+.. image :: install-debian-lenny/vm-fdisk-3.png
+
+At the prompt run:
+
+::
+
+    # fdisk -l /dev/hda
+
+You'll see that all the paritions are set up with an ID of ``fd`` meaning
+``linux raid autodetect`` apart from the extended partition which contains all
+the logical partitions after it.
+
+.. image :: install-debian-lenny/vm-fdisk-4.png
+
+Now send a Ctrl+Alt+F1 key to go back to the installer to configure RAID.
+
+Configuring RAID
+================
+
+The RAID devices you create will end up as devices named ``/dev/md0``, ``/dev/md1`` etc.
+Select ``Create MD Device``:
+
+.. image :: install-debian-lenny/raid-3.png
+
+Now choose the RAID scheme you wish to use. There is a good article on
+WikiPedia explaining the different schemes and their pros and cons:
+http://en.wikipedia.org/wiki/Standard_RAID_levels
+
+We are going to choose RAID 1 so that all data on the first disk is mirrored on
+the second. This means that if either disk fails, all the data will still be
+available on the other.
+
+.. image :: install-debian-lenny/raid-4.png
+.. image :: install-debian-lenny/raid-5.png
+.. image :: install-debian-lenny/raid-6.png
+
+Such an array can only be as big as the smallest member disk.
+
+You are asked to select the two active partitions which will be used as the
+RAID devices but because the second hard disk isn't added yet the second
+partition isn't available. Just select ``/dev/hda1`` by pressing space and then
+continue:
+
+.. image :: install-debian-lenny/raid-7.png
+
+You are returned to the main RAID menu. Repeat the process for paritions
+``/dev/hda2``, ``/dev/hda3``, ``/dev/hda5``, ``/dev/hda6``, ``/dev/hda7``,
+choosing : ``Create MD Device``, ``RAID1``, ``2`` active devices and ``0``
+spares each time:
+
+.. image :: install-debian-lenny/raid-8.png
+.. image :: install-debian-lenny/raid-9.png
+.. image :: install-debian-lenny/raid-10.png
+.. image :: install-debian-lenny/raid-11.png
+.. image :: install-debian-lenny/raid-12.png
+.. image :: install-debian-lenny/raid-13.png
+.. image :: install-debian-lenny/raid-14.png
+.. image :: install-debian-lenny/raid-15.png
+.. image :: install-debian-lenny/raid-16.png
+
+If you go back to the other console and run ``fdisk -l`` and ``mdadm --detail
+--scan`` you'll see that the partition table hasn't changed but that the RAID
+devices have been created:
+
+.. image :: install-debian-lenny/raid-17.png
+
+Setting up Encryption
+=====================
+
+You've now set up the physical partitions and the RAID layer, now you need to
+set up the encryption layer.
+
+At this point you have to decide which paritions you want to be encrypted. If
+you don't need encryption, I'd highly recommend not encrypting anything. It
+makes life much simpler and makes it easier to recover in the event of
+problems, after all the whole point of encryption is to make it difficult to
+get at your data and in a recovery situation this may not be what you want. It
+is possible to have encrypted root filesystem ``/`` and swap partitions in
+addition to encrypted data partitions. In short you can encrypt everything
+except ``/boot`` if you want. 
+
+.. tip ::
+
+    If you do have an encrypted data partition it is likely that some of that data
+    will be used in memory from time to time and could therefore be swapped to
+    disk. If you are using an encrypted data or root parition you should therefore 
+    also encrypt your swap partition. 
+
+For our example let's set up the swap partition and ``/dev/hda7`` as encrypted partitions.
+
+
+Let's start with the swap partition. Use the down arrow to select the line
+under ``RAID1 device #1`` and press ENTER.
+
+.. image :: install-debian-lenny/encryption-1.png
+
+Select ``Use as``:
+
+.. image :: install-debian-lenny/encryption-2.png
+
+Choose ``physical volume for encryption``.
+
+.. image :: install-debian-lenny/encryption-3.png
+
+The encryption method used is the new device mapper dm-crypt.
+
+Select ``Encryption key``:
+
+.. image :: install-debian-lenny/encryption-4.png
+
+Because we are going to use this as a swap partition there is no need to set a
+passphrase because you will never want to be able to read the data back from
+the swap partition between boots. You therefore select ``Random Key`` to have a
+different encryption key automatically used on each boot.
+
+.. image :: install-debian-lenny/encryption-5.png
+
+Select ``Done``:
+
+.. image :: install-debian-lenny/encryption-6.png
+
+The RAID device is now listed as ``crypto``:
+
+.. image :: install-debian-lenny/encryption-7.png
+
+Now let's set up the encryption for the encrypted partition.
+
+Use the down arrow to select the line under ``RAID1 device #1`` and press
+ENTER.
+
+.. image :: install-debian-lenny/encryption-8.png
+
+Select ``Use as``:
+
+.. image :: install-debian-lenny/encryption-9.png
+
+Choose ``physical volume for encryption``.
+
+.. image :: install-debian-lenny/encryption-10.png
+
+Select ``Done``:
+
+This time we do want to set a passphrase which will need to be entered each
+time the machine boots to allow access to the data on the encrypted drive. This
+is the default anyway so select ``Done``:
+
+.. image :: install-debian-lenny/encryption-11.png
+
+The RAID device is now listed as ``crypto``:
+
+.. image :: install-debian-lenny/encryption-12.png
+
+
+Configuring Encrypted Volumes
+=============================
+
+At this point you will see a new option called ``Configure encrypted volumes``. Select it:
+
+.. image :: install-debian-lenny/encryption-13.png
+
+You get a warning, Select ``Yes`` if you want to write the parition table (Why
+are two devices listed?):
+
+.. image :: install-debian-lenny/encryption-14.png
+
+You'll get a warning, you can just ignore it though:
+
+.. image :: install-debian-lenny/encryption-15.png
+
+You'll get the same error for the second device (which doesn't exist yet anyway):
+
+.. image :: install-debian-lenny/encryption-16.png
+
+Then you are asked to earse the device #1. Select ``Yes`` if you want to erase it:
+
+.. image :: install-debian-lenny/encryption-17.png
+
+Erasing the swap drive begins and can take a few minutes, even with a small drive:
+
+.. image :: install-debian-lenny/encryption-18.png
+
+Now you get a similar warning for the encrypted volume:
+
+.. image :: install-debian-lenny/encryption-19.png
+.. image :: install-debian-lenny/encryption-20.png
+
+The idea of writing random data over the drive is so that a potential hacker
+couldn't tell the difference between encrypted data and empty space, making the
+job of getting at the data even harder.
+
+Now that the devices are set up you are asked to enter the password for the encrypted device (you weren't asked for a password for the swap device because you chose ``Random Key`` earlier. If you enter a password which is too weak you will see a warning. Enter a suitable password:
+
+.. caution ::
+
+   It is vitally important you don't forget your passphrase, if you do, you
+   won't be able to access any of the data on the encrypted partitions.
+
+.. image :: install-debian-lenny/encryption-21.png
+
+Confirm the password:
+
+.. image :: install-debian-lenny/086_Encrypted_Password2.png
+
+The partitioner starts:
+
+.. image :: install-debian-lenny/encryption-23.png
+
+Then you are taken back to the main paritioning screen, which by now should seem fairly familiar:
+
+.. image :: install-debian-lenny/encryption-24.png
+
+The RAID devices are still there, just listed lower down in the list:
+
+.. image :: install-debian-lenny/encryption-25.png
+
+You'll also notice that the installer has defaulted the swap partition to be swap and the data partition to be ext3. We want the swap partition used as such, but we don't want the encrypted partition to use ext3, we want it to be managed by LVM so we'll change this later.
+
+Now that encryption is set send ``Ctrl+Alt+F2`` again and type the following command:
+
+::
+
+    # ls /dev/mapper
+
+You'll see that the mappers ``md1_crypt`` and ``md5_crypt`` have been setup. You can get informtion about them like this:
+
+::
+
+    # cryptsetup status /dev/mapper/md1_crypt
+    # cryptsetup status /dev/mapper/md5_crypt
+
+Here's the output:
+
+.. image :: install-debian-lenny/encryption-26.png
+
+Now send ``Ctrl+Alt+F1`` to go back to the installer.
+
+LVM Volumes
+===========
+
+Now that the encrypted volumes are set up it is time to set up the LVM volumes.
+We are going to combine ``/dev/md3`` and ``/dev/md4`` (the two RAID 1 data
+partitions) into a single *logical volume* so that it can be treated as a
+single partition. We'll therefore need 3 *volume groups*, one for the root
+partition, one for the two data partitions and one for the encrypted partition. All four paritions will need to be set up for LVM.
+
+Let's start with the root partition. Select the line under ``RAID1 device #2``:
+
+.. image :: install-debian-lenny/lvm-1.png
+
+Select ``Use as``:
+
+.. image :: install-debian-lenny/lvm-2.png
+
+Select ``physical volume for LVM``:
+
+.. image :: install-debian-lenny/lvm-3.png
+
+You're done:
+
+.. image :: install-debian-lenny/lvm-4.png
+.. image :: install-debian-lenny/lvm-5.png
+
+Now do the same for the first data device by selecting the line under ``RAID1 device #3``:
+:
+
+.. image :: install-debian-lenny/lvm-6.png
+
+Select ``Use as``:
+
+.. image :: install-debian-lenny/lvm-7.png
+
+Select ``physical volume for LVM``:
+
+.. image :: install-debian-lenny/lvm-8.png
+
+You're done:
+
+.. image :: install-debian-lenny/lvm-9.png
+.. image :: install-debian-lenny/lvm-10.png
+
+
+
+
+Now do the same for the second data device by selecting the line under ``RAID1 device #4``:
+:
+
+.. image :: install-debian-lenny/lvm-11.png
+
+Select ``Use as``:
+
+.. image :: install-debian-lenny/lvm-12.png
+
+Select ``physical volume for LVM``:
+
+.. image :: install-debian-lenny/lvm-13.png
+
+You're done:
+
+.. image :: install-debian-lenny/lvm-14.png
+.. image :: install-debian-lenny/lvm-15.png
+
+
+We also want to use LVM on the encrypted partition, so let's set it up too: Select the line under ``Encrypted volume (md5_crypt)``:
+
+.. image :: install-debian-lenny/lvm-16.png
+
+Take care not to select RAID1 device #5 by mistake or you will see this error:
+
+.. image :: install-debian-lenny/lvm-17.png
+
+
+The encrypted partition was defaulted to ext3 when it was created. We'll change this to LVM now. Select ``Use as``:
+
+.. image :: install-debian-lenny/lvm-18.png
+
+Select ``physical volume for LVM``:
+
+.. image :: install-debian-lenny/lvm-19.png
+
+You're done:
+
+.. image :: install-debian-lenny/lvm-20.png
+.. image :: install-debian-lenny/lvm-21.png
+
+At this point you want to configure LVM but the option is off the top of the screen, use the up arrow to navigate to it and press ENTER:
+
+.. image :: install-debian-lenny/lvm-22.png
+
+You'll see this screen. Since the only changes that need to be made after configuring LVM are to set the filesystems on primary partitions for the root and ``/boot`` mount points we can continue. If you want to continue, choose ``Yes``:
+
+.. image :: install-debian-lenny/lvm-23.png
+
+You'll see this screen:
+
+.. image :: install-debian-lenny/lvm-24.png
+
+Choose to ``Create a new volume group``:
+
+.. image :: install-debian-lenny/lvm-25.png
+
+We're going to name the data volume groups starting with ``vg_``. Let's start with the root parition. We'll name it ``vg_root``:
+
+.. image :: install-debian-lenny/lvm-26.png
+
+You can now select all the volumes that should make up this group. Notice that you can also add the encrypted volume into volume group but doing this would make very little sense. Just select the ``/dev/md2`` device and select ``Continue``:
+
+.. image :: install-debian-lenny/lvm-27.png
+
+You are returned to this screen.
+
+.. image :: install-debian-lenny/lvm-28.png
+
+Now let's create a volume group for all the data partitions. We can later
+create different *logical volumes* on top of the combined volume group is, for
+example we might want a different logical volume for each virtual machine to
+run on the system. Select ``Create volume group`` again:
+
+.. image :: install-debian-lenny/lvm-29.png
+
+Let's call this volume group ``vg_data``:
+
+.. image :: install-debian-lenny/lvm-30.png
+
+Select all the data partitions available. In this case they are ``/dev/md3`` and ``/dev/md4``. 
+
+.. image :: install-debian-lenny/lvm-31.png
+
+You are returned to this screen.
+
+.. image :: install-debian-lenny/lvm-32.png
+
+Now create a volume group for the encrypted data. Select ``Create volume group`` again:
+
+.. image :: install-debian-lenny/lvm-33.png
+
+Let's call this volume group ``vg_encrypt``:
+
+.. image :: install-debian-lenny/lvm-34.png
+
+Select the envrypted device: 
+
+.. image :: install-debian-lenny/lvm-35.png
+
+You are returned to this screen.
+
+.. image :: install-debian-lenny/lvm-36.png
+
+Create Logical Volumes
+----------------------
+
+Before the volume groups can be used you need to create logical volumes on top
+of them. You can split each volume group into as many logical volumes as you
+like. We're going to create one logic volume for the root partition named
+``lv_root``, one for the data names ``lv_data_01`` and one for the encrypted
+parition named ``lv_encrypt``. The ``lv_root`` and ``lv_encrypt`` will fill
+their respective volume groups, but ``lv_data_01`` will only use 750Mb, we'll
+leave the rest of the space on that volume group free to be paritioned once you
+need it.
+
+Select ``Create logical volume``:
+
+.. image :: install-debian-lenny/lvm-37.png
+
+Let's start with ``lv_root``. Select ``vg_root``:
+
+.. image :: install-debian-lenny/lvm-38.png
+
+Enter the name ``lv_root``:
+
+.. image :: install-debian-lenny/lvm-39.png
+
+We'll use the maximum size available:
+
+.. image :: install-debian-lenny/lvm-40.png
+
+You are returned to this screen.
+
+.. image :: install-debian-lenny/lvm-41.png
+
+Now do the same for the encrypted drive. Select ``Create logical volume``:
+
+.. image :: install-debian-lenny/lvm-42.png
+
+Let's start with ``lv_root``. Select ``vg_root``:
+
+.. image :: install-debian-lenny/lvm-43.png
+
+Enter the name ``lv_root``:
+
+.. image :: install-debian-lenny/lvm-44.png
+
+We'll use the maximum size available:
+
+.. image :: install-debian-lenny/lvm-45.png
+
+You are returned to this screen.
+
+.. image :: install-debian-lenny/lvm-46.png
+
+
+Finally let's set up the data logical volume. Select ``Create logical volume``:
+
+.. image :: install-debian-lenny/lvm-47.png
+
+Let's start with ``lv_root``. Select ``vg_root``:
+
+.. image :: install-debian-lenny/lvm-48.png
+
+Enter the name ``lv_root``:
+
+.. image :: install-debian-lenny/lvm-49.png
+
+This time change the size to 730MB:
+
+.. image :: install-debian-lenny/lvm-50.png
+
+You are returned to this screen.
+
+.. image :: install-debian-lenny/lvm-51.png
+
+Now, with the logical volumes set up, you can select ``Finish``.
+
+.. image :: install-debian-lenny/lvm-52.png
+
+Once again the paritioner starts:
+
+.. image :: install-debian-lenny/lvm-53.png
+
+and you are taken back to the main paritioner screen:
+
+.. image :: install-debian-lenny/lvm-54.png
+
+Filesystems and Mount Points
+============================
+
+Now we need to set up the filesystems and mount points. Let's take them in turn.
+
+/boot
+-----
+
+The ``/boot`` filesystem is to be mounted directly on the ``/dev/md0`` RAID1 device. Scroll down and select the boot partition:
+
+.. image :: install-debian-lenny/filesystem-1.png
+
+Select ``Use as:``:
+
+.. image :: install-debian-lenny/filesystem-2.png
+
+Choose to use the ``Ext3 journaling file system``. Whilst it is technically
+possible to choose other filesystems for the ``/boot`` partition, I strongly
+recommend you use ext3 because support will already be built into standard
+kernels. If you use something like XFS you may find you need to recompile
+support into your kernels in order to get the system to boot. Using ext3 also
+makes any rescue you have to perform easier since the drivers are more likely
+to be available on a rescue disk:
+
+
+
+.. image :: install-debian-lenny/filesystem-3.png
+.. image :: install-debian-lenny/filesystem-4.png
+.. image :: install-debian-lenny/filesystem-5.png
+.. image :: install-debian-lenny/filesystem-6.png
+.. image :: install-debian-lenny/filesystem-7.png
+.. image :: install-debian-lenny/filesystem-8.png
+
+/
+-
+
+Now let's set up the ``/`` mount point:
+
+.. image :: install-debian-lenny/filesystem-9.png
+
+Be sure to select rather than RAID Device #2 or you'll get this message:
+
+.. image :: install-debian-lenny/filesystem-10.png
+
+Now select ``Use as``:
+
+.. image :: install-debian-lenny/filesystem-11.png
+
+If you prefer to select a different filesystem such as Xfs for the root partition, feel free to do so. I'm using Ext3 here:
+
+.. image :: install-debian-lenny/filesystem-12.png
+.. image :: install-debian-lenny/filesystem-13.png
+.. image :: install-debian-lenny/filesystem-14.png
+.. image :: install-debian-lenny/filesystem-15.png
+.. image :: install-debian-lenny/filesystem-16.png
+
+/data
+-----
+
+Now let's set up the ``/data`` mount point:
+
+.. image :: install-debian-lenny/filesystem-17.png
+
+Now select ``Use as``:
+
+.. image :: install-debian-lenny/filesystem-18.png
+
+If you prefer to select a different filesystem such as Xfs for the root partition, feel free to do so. I'm using Ext3 here:
+
+.. image :: install-debian-lenny/filesystem-19.png
+.. image :: install-debian-lenny/filesystem-20.png
+.. image :: install-debian-lenny/filesystem-21.png
+.. image :: install-debian-lenny/filesystem-22.png
+.. image :: install-debian-lenny/filesystem-23.png
+.. image :: install-debian-lenny/filesystem-24.png
+
+Finally let's set up the ``/encrypt`` mount point. 
+
+.. image :: install-debian-lenny/filesystem-25.png
+
+Make sure you select the ``vg_encrypt`` volume group, not Encrypted volume md5_crypt or you'll see this error:
+
+.. image :: install-debian-lenny/filesystem-26.png
+.. image :: install-debian-lenny/filesystem-27.png
+.. image :: install-debian-lenny/filesystem-28.png
+.. image :: install-debian-lenny/filesystem-29.png
+.. image :: install-debian-lenny/filesystem-30.png
+.. image :: install-debian-lenny/filesystem-31.png
+.. image :: install-debian-lenny/filesystem-32.png
+.. image :: install-debian-lenny/filesystem-33.png
+
+swap
+----
+
+The swap partition is already set up so it needs no further attention:
+
+.. image :: install-debian-lenny/filesystem-34.png
+
+Finsih Partitioning
+-------------------
+
+You can now finsih the partitioning. Scroll all the way to the bottom:
+
+.. image :: install-debian-lenny/filesystem-35.png
+
+You are given a summary, if you want to proceed, choose ``Yes``:
+
+.. image :: install-debian-lenny/filesystem-36.png
+
+You are shown a warning again, this can be safely ignored. You'll reboot shortly:
+
+.. image :: install-debian-lenny/filesystem-37.png
+
+The filesystems are created:
+
+.. image :: install-debian-lenny/filesystem-38.png
+
+Parition Summary
+================
+
+With all the partitioning done, the set up is as follows:
+
++--------------------+---------------+---------------------------+------------------+---------------------+--------+---------+----------------------------+
+| Mount Points       | ``/boot``     |                           | ``/``            | ``/data``           | FREE   | FREE    | ``/encrypt``               |
++====================+===============+===========================+==================+=====================+========+=========+============================+ 
+| Filesystems        | ext3          | swap                      | ext3             | ext3                | None   | None    | ext3                       |
++--------------------+---------------+---------------------------+------------------+---------------------+--------+---------+----------------------------+
+| LVM Volumes        |               |                           | ``/dev/vg_root`` | ``/dev/lv_data_01`` | FREE   | FREE    | ``/dev/lv_encrypt``        |
++--------------------+---------------+---------------------------+------------------+---------------------+--------+---------+----------------------------+
+| LVM Volume Groups  |               |                           | ``/dev/vg_root`` |              ``/dev/vg_data``          | ``/dev/vg_encrypt``        |
++--------------------+---------------+---------------------------+------------------+---------------------+------------------+----------------------------+
+| Encrypted Volumes  |               | ``/dev/mapper/md1_crypt`` |                  |                     |                  | ``/dev/mapper/md5_crypt``  |
++--------------------+---------------+---------------------------+------------------+---------------------+------------------+----------------------------+
+| RAID Devices       | ``/dev/md0``  | ``/dev/md1``              | ``/dev/md2``     | ``/dev/md3``        | ``/dev/md4``     | ``/dev/md5``               |
++--------------------+---------------+---------------------------+------------------+---------------------+------------------+----------------------------+
+| Drive Partitions   | ``/dev/hda1`` | ``/dev/hda2``             | ``/dev/hda3``    | ``/dev/hda5``       | ``/dev/hda6``    | ``/dev/hda7``              |
++--------------------+---------------+---------------------------+------------------+---------------------+------------------+----------------------------+
+
+

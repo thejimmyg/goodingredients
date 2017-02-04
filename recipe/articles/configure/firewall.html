@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Firewall</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../../index.html">Home</a></li>
+          <li><a href="../../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="../index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Firewall<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../../Context/breadcrumbs.cti" -->
+<a href="../../index.html">Recipes</a> &gt;
+<a href="../index.html">Core Recipes</a> &gt;
+.. &gt;
+Firewall
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><p>It is very important to have a firewall, if for no other reason it is likely to discourage someone looking for an easy target. Firewalls are actually really easy to set up.</p>
+<p>You can get the output of your current rules like this:</p>
+<pre class="literal-block">
+$ sudo iptables-save
+</pre>
+<p>If you want to start modifying your firewall rules it is a good idea to keep a copy of the current ones first.</p>
+<pre class="literal-block">
+$ sudo iptables-save &gt; ~/iptables.current.rules
+</pre>
+<p>This saves the current firewall rules to a <tt class="docutils literal"><span class="pre">iptables.current.rules</span></tt> in your home directory. Copy this to <tt class="docutils literal"><span class="pre">/etc/iptables.rules</span></tt>:</p>
+<pre class="literal-block">
+$ sudo cp ~/iptables.current.rules /etc/iptables.rules
+</pre>
+<p>Now you can edit the <tt class="docutils literal"><span class="pre">/etc/iptables.rules</span></tt> file with your own rules. Here's mine which you can use as a basis:</p>
+<pre class="literal-block">
+# Generated by iptables-save v1.4.2 on Wed Jun 10 16:16:07 2009
+*nat
+:PREROUTING ACCEPT [6:774]
+:POSTROUTING ACCEPT [43:3724]
+:OUTPUT ACCEPT [42:3320]
+COMMIT
+# Completed on Wed Jun 10 16:16:07 2009
+# Generated by iptables-save v1.4.2 on Wed Jun 10 16:16:07 2009
+*mangle
+:PREROUTING ACCEPT [686:69307]
+:INPUT ACCEPT [438:37769]
+:FORWARD ACCEPT [244:30990]
+:OUTPUT ACCEPT [349:42626]
+:POSTROUTING ACCEPT [593:73616]
+COMMIT
+# Completed on Wed Jun 10 16:16:07 2009
+# Generated by iptables-save v1.4.2 on Wed Jun 10 16:16:07 2009
+*filter
+:INPUT ACCEPT [438:37769]
+
+# Allow loopback traffic but drop all traffic to 127/8 that doesn't use lo0
+-A INPUT -i lo -j ACCEPT
+-A INPUT -i ! lo -d 127.0.0.0/8 -j REJECT
+
+# Allow all established inbound connections
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow HTTP and HTTPS connections from anywhere
+-A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Allow SSH connections (make sure --dport is the same as the one in your `/etc/ssh/sshd_config' file or you will not be able to SSH in)
+-A INPUT -p tcp -m state --state NEW --dport 30000 -j ACCEPT
+
+# Allow ping
+-A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+
+# log iptables denied calls
+-A INPUT -m limit --limit 5/min -j LOG --log-prefix &quot;iptables denied: &quot; --log-level 7
+
+# Reject all other inbound - default deny unless explicitly allowed policy
+-A INPUT -j REJECT
+
+:FORWARD ACCEPT [244:30990]
+
+
+:OUTPUT ACCEPT [349:42626]
+# Allow all outbound traffic (modify to only allow certain traffic if you like)
+-A OUTPUT -j ACCEPT
+
+COMMIT
+# Completed on Wed Jun 10 16:16:07 2009
+</pre>
+<p>In the <tt class="docutils literal"><span class="pre">:FORWARD</span> <span class="pre">ACCEPT</span></tt> section you might want to use this if you are not using OpenVZ:</p>
+<pre class="literal-block">
+# Reject all forwarded traffic
+-A FORWARD -j REJECT
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>If you are using OpenVZ and have VEs on a private network
+<tt class="docutils literal"><span class="pre">192.168.100.0/24</span></tt> you might want to replace the <tt class="docutils literal"><span class="pre">*nat</span></tt> section with this
+to give them access to the internet via the HE. Replace <tt class="docutils literal"><span class="pre">188.40.40.131</span></tt> with
+the external IP address of the HE:</p>
+<pre class="last literal-block">
+# Generated by iptables-save v1.4.2 on Wed Jun 10 16:16:07 2009
+*nat
+:PREROUTING ACCEPT [6:774]
+:POSTROUTING ACCEPT [43:3724]
+:OUTPUT ACCEPT [42:3320]
+-A POSTROUTING -s 192.168.100.0/24 -o eth0 -j SNAT --to-source 188.40.40.131
+COMMIT
+</pre>
+</div>
+<p>You can apply rules from your configuration with:</p>
+<pre class="literal-block">
+$ sudo iptables-restore &lt; /etc/iptables.rules
+</pre>
+<p>Again, test that you can still sign in using SSH before you exit the shell.</p>
+<p>You can list all the filter rules like this:</p>
+<pre class="literal-block">
+$ sudo iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+ACCEPT     0    --  anywhere             anywhere
+REJECT     0    --  anywhere             loopback/8          reject-with icmp-port-unreachable
+ACCEPT     0    --  anywhere             anywhere            state RELATED,ESTABLISHED
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:www
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:https
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:30000
+ACCEPT     icmp --  anywhere             anywhere            icmp echo-request
+LOG        0    --  anywhere             anywhere            limit: avg 5/min burst 5 LOG level debug prefix `iptables denied: '
+REJECT     0    --  anywhere             anywhere            reject-with icmp-port-unreachable
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+REJECT     0    --  anywhere             anywhere            reject-with icmp-port-unreachable
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+ACCEPT     0    --  anywhere             anywhere
+</pre>
+<p>At the moment, every time you reboot the rules will be lost.</p>
+<p>TEST YOUR FIREWALL NOW, if there are any problems you can reboot to reset the rules.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>If you want to clear all firewall rules, inlcuding the NAT ones you can use this:</p>
+<pre class="last literal-block">
+$ sudo iptables -F
+$ sudo iptables -X
+$ sudo iptables -t nat -F
+$ sudo iptables -t nat -X
+$ sudo iptables -t mangle -F
+$ sudo iptables -t mangle -X
+$ sudo iptables -P INPUT ACCEPT
+$ sudo iptables -P OUTPUT ACCEPT
+</pre>
+</div>
+<p>Once you are happy you can make the rules permanant by editing
+<tt class="docutils literal"><span class="pre">/etc/network/interfaces</span></tt> and adding a <tt class="docutils literal"><span class="pre">pre-up</span></tt> linejust after <tt class="docutils literal"><span class="pre">iface</span> <span class="pre">lo</span>
+<span class="pre">inet</span> <span class="pre">loopback</span></tt>:</p>
+<pre class="literal-block">
+...
+auto lo
+iface lo inet loopback
+pre-up iptables-restore &lt; /etc/iptables.rules
+...
+</pre>
+<p>This line will restore the iptables rules from the <tt class="docutils literal"><span class="pre">/etc/iptables.rules</span></tt> file every time the network is configured.</p><p class="text-right">(<a href="firewall.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

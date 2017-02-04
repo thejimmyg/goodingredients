@@ -1,0 +1,468 @@
+Before I start altering the partition table of the second drive I frist check that status of the array by issuing this command
+
+::
+
+    watch -n 6 cat /proc/mdstat
+
+The output looks like this and refreshes every 6 seconds:
+
+::
+
+    Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:25:16 2009
+    
+    Personalities : [raid1]
+    md5 : active raid1 hda7[0]
+          489856 blocks [2/1] [U_]
+    
+    md4 : active (auto-read-only) raid1 hda6[0]
+          979840 blocks [2/1] [U_]
+    
+    md3 : active raid1 hda5[0]
+          979840 blocks [2/1] [U_]
+    
+    md2 : active raid1 hda3[0]
+          979840 blocks [2/1] [U_]
+    
+    md1 : active raid1 hda2[0]
+          128448 blocks [2/1] [U_]
+    
+    md0 : active raid1 hda1[0]
+          64128 blocks [2/1] [U_]
+    
+    unused devices: <none>
+
+As you can see, only one of the two active raid devices are currently used. This means I can (should) add another one to make sure that if one disk fails everything is still operational. Exit the montioring with "ctrl-c".
+
+I have to find out which harddrive is which (what they are named). I issue:
+
+::
+
+    server1:~# fdisk -l 
+    
+    Disk /dev/hda: 4194 MB, 4194304000 bytes
+    255 heads, 63 sectors/track, 509 cylinders
+    Units = cylinders of 16065 * 512 = 8225280 bytes
+    Disk identifier: 0x0002dc02
+    
+       Device Boot      Start         End      Blocks   Id  System
+    /dev/hda1   *           1           8       64228+  fd  Linux raid autodetect
+    /dev/hda2               9          24      128520   fd  Linux raid autodetect
+    /dev/hda3              25         146      979965   fd  Linux raid autodetect
+    /dev/hda4             147         451     2449912+   5  Extended
+    /dev/hda5             147         268      979933+  fd  Linux raid autodetect
+    /dev/hda6             269         390      979933+  fd  Linux raid autodetect
+    /dev/hda7             391         451      489951   fd  Linux raid autodetect
+    
+    Disk /dev/hdb: 4194 MB, 4194304000 bytes
+    255 heads, 63 sectors/track, 509 cylinders
+    Units = cylinders of 16065 * 512 = 8225280 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/hdb doesn't contain a valid partition table
+    
+    Disk /dev/md0: 65 MB, 65667072 bytes
+    2 heads, 4 sectors/track, 16032 cylinders
+    Units = cylinders of 8 * 512 = 4096 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/md0 doesn't contain a valid partition table
+    
+    Disk /dev/md1: 131 MB, 131530752 bytes
+    2 heads, 4 sectors/track, 32112 cylinders
+    Units = cylinders of 8 * 512 = 4096 bytes
+    Disk identifier: 0xa7838a99
+    
+    Disk /dev/md1 doesn't contain a valid partition table
+    
+    Disk /dev/md2: 1003 MB, 1003356160 bytes
+    2 heads, 4 sectors/track, 244960 cylinders
+    Units = cylinders of 8 * 512 = 4096 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/md2 doesn't contain a valid partition table
+    
+    Disk /dev/md3: 1003 MB, 1003356160 bytes
+    2 heads, 4 sectors/track, 244960 cylinders
+    Units = cylinders of 8 * 512 = 4096 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/md3 doesn't contain a valid partition table
+    
+    Disk /dev/md4: 1003 MB, 1003356160 bytes
+    2 heads, 4 sectors/track, 244960 cylinders
+    Units = cylinders of 8 * 512 = 4096 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/md4 doesn't contain a valid partition table
+    
+    Disk /dev/md5: 501 MB, 501612544 bytes
+    2 heads, 4 sectors/track, 122464 cylinders
+    Units = cylinders of 8 * 512 = 4096 bytes
+    Disk identifier: 0x08040000
+    
+    Disk /dev/md5 doesn't contain a valid partition table
+    
+    Disk /dev/dm-0: 1002 MB, 1002438656 bytes
+    255 heads, 63 sectors/track, 121 cylinders
+    Units = cylinders of 16065 * 512 = 8225280 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/dm-0 doesn't contain a valid partition table
+    
+    Disk /dev/dm-1: 131 MB, 131530752 bytes
+    255 heads, 63 sectors/track, 15 cylinders
+    Units = cylinders of 16065 * 512 = 8225280 bytes
+    Disk identifier: 0x5e1bbddf
+    
+    Disk /dev/dm-1 doesn't contain a valid partition table
+    
+    Disk /dev/dm-2: 500 MB, 500559872 bytes
+    255 heads, 63 sectors/track, 60 cylinders
+    Units = cylinders of 16065 * 512 = 8225280 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/dm-2 doesn't contain a valid partition table
+    
+    Disk /dev/dm-3: 729 MB, 729808896 bytes
+    255 heads, 63 sectors/track, 88 cylinders
+    Units = cylinders of 16065 * 512 = 8225280 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/dm-3 doesn't contain a valid partition table
+    
+    Disk /dev/dm-4: 499 MB, 499122176 bytes
+    255 heads, 63 sectors/track, 60 cylinders
+    Units = cylinders of 16065 * 512 = 8225280 bytes
+    Disk identifier: 0x00000000
+    
+    Disk /dev/dm-4 doesn't contain a valid partition table
+    server1:~# 
+
+From this you can see that ``/dev/hda`` is the drive we setup and ``/dev/sdb`` is the new drive. View the parition table of ``/dev/hda`` like this:
+
+::
+
+    server1:~# sfdisk -d /dev/hda
+    # partition table of /dev/hda
+    unit: sectors
+    
+    /dev/hda1 : start=       63, size=   128457, Id=fd, bootable
+    /dev/hda2 : start=   128520, size=   257040, Id=fd
+    /dev/hda3 : start=   385560, size=  1959930, Id=fd
+    /dev/hda4 : start=  2345490, size=  4899825, Id= 5
+    /dev/hda5 : start=  2345553, size=  1959867, Id=fd
+    /dev/hda6 : start=  4305483, size=  1959867, Id=fd
+    /dev/hda7 : start=  6265413, size=   979902, Id=fd
+    
+    For an idea about what is missing have a look at the tasksel wiki:
+    http://wiki.debian.org/tasksel
+
+Apply it to ``/dev/hdb`` like this:
+
+::
+
+    server1:~# sfdisk -d /dev/hda | sfdisk /dev/hdb
+    Checking that no-one is using this disk right now ...
+    OK
+    
+    Disk /dev/hdb: 509 cylinders, 255 heads, 63 sectors/track
+    
+    sfdisk: ERROR: sector 0 does not have an msdos signature
+     /dev/hdb: unrecognized partition table type
+    Old situation:
+    No partitions found
+    New situation:
+    Units = sectors of 512 bytes, counting from 0
+    
+       Device Boot    Start       End   #sectors  Id  System
+    /dev/hdb1   *        63    128519     128457  fd  Linux raid autodetect
+    /dev/hdb2        128520    385559     257040  fd  Linux raid autodetect
+    /dev/hdb3        385560   2345489    1959930  fd  Linux raid autodetect
+    /dev/hdb4       2345490   7245314    4899825   5  Extended
+    /dev/hdb5       2345553   4305419    1959867  fd  Linux raid autodetect
+    /dev/hdb6       4305483   6265349    1959867  fd  Linux raid autodetect
+    /dev/hdb7       6265413   7245314     979902  fd  Linux raid autodetect
+    Successfully wrote the new partition table
+    
+    Re-reading the partition table ...
+    
+    If you created or changed a DOS partition, /dev/foo7, say, then use dd(1)
+    to zero the first 512 bytes:  dd if=/dev/zero of=/dev/foo7 bs=512 count=1
+    (See fdisk(8).)
+
+Zeroing the Superblock
+======================
+
+Just to make sure we zero out the superblock on each partition on the new drive:
+
+::
+
+    server1:~# mdadm --zero-superblock /dev/hdb1
+    mdadm: Unrecognised md component device - /dev/hdb1
+    server1:~# mdadm --zero-superblock /dev/hdb2
+    mdadm: Unrecognised md component device - /dev/hdb2
+    server1:~# mdadm --zero-superblock /dev/hdb3
+    mdadm: Unrecognised md component device - /dev/hdb3
+    server1:~# mdadm --zero-superblock /dev/hdb5
+    mdadm: Unrecognised md component device - /dev/hdb5
+    server1:~# mdadm --zero-superblock /dev/hdb6
+    mdadm: Unrecognised md component device - /dev/hdb6
+    server1:~# mdadm --zero-superblock /dev/hdb7
+    mdadm: Unrecognised md component device - /dev/hdb7
+
+You will get a lot of errors - which according to Howtoforge is good if it's a new drive that has not been used before.
+
+Adding the New Partitions to the RAID Array
+===========================================
+
+Now run those commands:
+
+::
+
+    server1:~# mdadm --add /dev/md0 /dev/hdb1
+    mdadm: added /dev/hdb1
+    server1:~# mdadm --add /dev/md1 /dev/hdb2
+    mdadm: added /dev/hdb2
+    server1:~# mdadm --add /dev/md2 /dev/hdb3
+    mdadm: added /dev/hdb3
+    server1:~# mdadm --add /dev/md3 /dev/hdb5
+    mdadm: added /dev/hdb5
+    server1:~# mdadm --add /dev/md4 /dev/hdb6
+    mdadm: added /dev/hdb6
+    server1:~# mdadm --add /dev/md5 /dev/hdb7
+    mdadm: added /dev/hdb7
+
+Monitoring the RAID Re-Build
+============================
+
+::
+
+    Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:35:56 2009
+    
+    Personalities : [raid1]
+    md5 : active raid1 hdb7[2] hda7[0]
+          489856 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md4 : active raid1 hdb6[2] hda6[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md3 : active raid1 hdb5[2] hda5[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md2 : active raid1 hdb3[2] hda3[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md1 : active raid1 hdb2[2] hda2[0]
+          128448 blocks [2/1] [U_]
+          [============>........]  recovery = 64.2% (83648/128448) finish=0.0min spe
+    ed=11949K/sec
+
+::
+
+    Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:36:15 2009
+    
+    Personalities : [raid1]
+    md5 : active raid1 hdb7[2] hda7[0]
+          489856 blocks [2/1] [U_]
+          [====>................]  recovery = 20.0% (99264/489856) finish=1.0min spe
+    ed=6204K/sec
+    
+    md4 : active raid1 hdb6[2] hda6[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md3 : active raid1 hdb5[2] hda5[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md2 : active raid1 hdb3[2] hda3[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md1 : active raid1 hdb2[1] hda2[0]
+          128448 blocks [2/2] [UU]
+    
+    md0 : active raid1 hdb1[1] hda1[0]
+          64128 blocks [2/2] [UU]
+    
+    unused devices: <none>
+
+
+::
+
+    Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:37:38 2009
+    
+    Personalities : [raid1]
+    md5 : active raid1 hdb7[1] hda7[0]
+          489856 blocks [2/2] [UU]
+    
+    md4 : active raid1 hdb6[2] hda6[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md3 : active raid1 hdb5[2] hda5[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md2 : active raid1 hdb3[2] hda3[0]
+          979840 blocks [2/1] [U_]
+          [====>................]  recovery = 22.5% (221184/979840) finish=1.1min sp
+    eed=10532K/sec
+    
+    md1 : active raid1 hdb2[1] hda2[0]
+          128448 blocks [2/2] [UU]
+    
+    md0 : active raid1 hdb1[1] hda1[0]
+          64128 blocks [2/2] [UU]
+    
+    unused devices: <none>
+
+::
+
+    Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:39:02 2009
+    
+    Personalities : [raid1]
+    md5 : active raid1 hdb7[1] hda7[0]
+          489856 blocks [2/2] [UU]
+    
+    md4 : active raid1 hdb6[2] hda6[0]
+          979840 blocks [2/1] [U_]
+            resync=DELAYED
+    
+    md3 : active raid1 hdb5[2] hda5[0]
+          979840 blocks [2/1] [U_]
+          [=>...................]  recovery =  7.1% (70592/979840) finish=2.5min spe
+    ed=5882K/sec
+    
+    md2 : active raid1 hdb3[1] hda3[0]
+          979840 blocks [2/2] [UU]
+    
+    md1 : active raid1 hdb2[1] hda2[0]
+          128448 blocks [2/2] [UU]
+    
+    md0 : active raid1 hdb1[1] hda1[0]
+          64128 blocks [2/2] [UU]
+    
+    unused devices: <none>
+
+::
+
+    Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:42:53 2009
+    
+    Personalities : [raid1]
+    md5 : active raid1 hdb7[1] hda7[0]
+          489856 blocks [2/2] [UU]
+    
+    md4 : active raid1 hdb6[2] hda6[0]
+          979840 blocks [2/1] [U_]
+          [=======>.............]  recovery = 35.4% (347136/979840) finish=1.5min sp
+    eed=6720K/sec
+    
+    md3 : active raid1 hdb5[1] hda5[0]
+          979840 blocks [2/2] [UU]
+    
+    md2 : active raid1 hdb3[1] hda3[0]
+          979840 blocks [2/2] [UU]
+    
+    md1 : active raid1 hdb2[1] hda2[0]
+          128448 blocks [2/2] [UU]
+    
+    md0 : active raid1 hdb1[1] hda1[0]
+          64128 blocks [2/2] [UU]
+    
+    unused devices: <none>
+
+
+
+Then eventually:
+
+::
+
+    Every 6.0s: cat /proc/mdstat                            Mon Apr 20 00:44:48 2009
+    
+    Personalities : [raid1]
+    md5 : active raid1 hdb7[1] hda7[0]
+          489856 blocks [2/2] [UU]
+    
+    md4 : active raid1 hdb6[1] hda6[0]
+          979840 blocks [2/2] [UU]
+    
+    md3 : active raid1 hdb5[1] hda5[0]
+          979840 blocks [2/2] [UU]
+    
+    md2 : active raid1 hdb3[1] hda3[0]
+          979840 blocks [2/2] [UU]
+    
+    md1 : active raid1 hdb2[1] hda2[0]
+          128448 blocks [2/2] [UU]
+    
+    md0 : active raid1 hdb1[1] hda1[0]
+          64128 blocks [2/2] [UU]
+    
+    unused devices: <none>
+
+The RAID re-build is complete.
+
+Add Grub to the New Hard Drive
+==============================
+
+Grub is not mirrored by onto the new hard drive apparantly so we have to manually add it. Run:
+
+:: 
+
+    # grub
+
+Then run in the grub prompt:
+
+:: 
+    grub> root (hd1,0)
+    grub> setup (hd1)
+
+The first command means that grub shall use the partition /dev/hdb1 as /boot partition. The second command means that grub shall install itself into the boot sector of /dev/hdb. Grub start counting hard drives and partitions with "0". So hda would be hd0 and hence hdb is hd1
+
+Here's the output:
+
+::
+
+    server1:~# grub
+    Probing devices to guess BIOS drives. This may take a long time.
+    
+    
+        GNU GRUB  version 0.97  (640K lower / 3072K upper memory)
+    
+           [ Minimal BASH-like line editing is supported.   For
+             the   first   word,  TAB  lists  possible  command
+             completions.  Anywhere else TAB lists the possible
+             completions of a device/filename. ]
+    grub> root (hd1,0)
+    root (hd1,0)
+     Filesystem type is ext2fs, partition type 0xfd
+    grub> setup (hd1)
+    setup (hd1)
+     Checking if "/boot/grub/stage1" exists... no
+     Checking if "/grub/stage1" exists... yes
+     Checking if "/grub/stage2" exists... yes
+     Checking if "/grub/e2fs_stage1_5" exists... yes
+     Running "embed /grub/e2fs_stage1_5 (hd1)"...  17 sectors are embedded.
+    succeeded
+     Running "install /grub/stage1 d (hd1) (hd1)1+17 p (hd0,0)/grub/stage2 /grub/menu.lst"... succeeded
+    Done.
+    grub> 
+
+Don't worry that Grub thinks your filesystem is ``ext2fs``.
+
+Exit grub by entering "quit":
+
+::
+
+    grub> quit
+    quit
+    server1:~# 
+
+You have now an encrypted RAID1 setup with LVM. Each partition can be run alone.
+
+

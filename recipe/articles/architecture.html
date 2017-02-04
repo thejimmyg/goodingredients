@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Server Architecture</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../index.html">Home</a></li>
+          <li><a href="../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Server Architecture<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../Context/breadcrumbs.cti" -->
+<a href="../index.html">Recipes</a> &gt;
+<a href="index.html">Core Recipes</a> &gt;
+Server Architecture
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><!-- contents -->
+<p>The goal of the Good Ingredients server architecture is to provide a platform
+which can reliably run all the services required by a modern web application in
+such a way that all the services can be run on a dedicated server or moved
+individually to their own servers to scale the service when needed.</p>
+<p>As such the Good Ingredients server architecture provides an excellent basis on
+which to build production web applications or enterprise applications.</p>
+<div class="section" id="protocol-level-proxy-architecture">
+<h2>Protocol-Level Proxy Architecture</h2>
+<p>The base architecture looks like this:</p>
+<pre class="literal-block">
+Server A                            Server B
+-----------------------             -----------------------------
+
+Primary SMTP Mail Relay             Backup MX SMTP Mail Relay
+Master PostgreSQL A                 (Possible slave PostgreSQL B)
+Primary DNS Nameserver              Secondary DNS Nameserver
+HTTP Reverse Proxy A                HTTP Reverse Proxy B
+</pre>
+<ul class="simple">
+<li>The DNS servers are set up to round-robin requests to both the HTTP Reverse
+Proxies so that both are utilised fairly evenly.</li>
+<li>The PostgreSQL server is used only to store data for the SMTP mail relays and
+other components, not as a general purpose server. You could add a slave on
+Server B and configure Postfix and Dovecot to use it if you wanted extra
+resilience</li>
+<li>The HTTP reverse proxies handle HTTPS connections and proxy to backend HTTP
+servers</li>
+</ul>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The architecture could also set up IMAP proxies to handle authentication
+and proxy to back-end IMAP servers.</p>
+</div>
+<p>These two servers together form a farily reliable way of forwarding email and
+browser requests on to other services. They don't do anything useful in their
+own right but provide a convenient protocol-level interface for dealing with
+such requests.</p>
+<p>Behind the PLPs you build the real servers which will run your applications.</p>
+</div>
+<div class="section" id="web-server-architecture">
+<h2>Web Server Architecture</h2>
+<p>You can now set up any number of web servers and have their DNS entries
+managed by the PLPs. More interestingly the HTTP proxy coukd also provide the
+following services for you:</p>
+<ul class="simple">
+<li>HTTPS decoding</li>
+<li>GZIP encoding</li>
+<li>Caching of large uploads to help prevent simple DoS attacks</li>
+<li>Load balancing and failover</li>
+<li>Server side includes</li>
+</ul>
+<p>Because all requests go through the PLPs it is easy to reconfigure them to send
+requests elsewhere, allowing you to add extra back-end servers for capacity or
+temporarily route requests to another server for maintainence.</p>
+</div>
+<div class="section" id="mail-servers">
+<h2>Mail Servers</h2>
+<p>Many of the domains you'll set up will simply need mail forwarding rather than
+hosting so that mail just goes to say your Gmail account. The PLPs will handle
+email redirection for you and provide outgoing SMTP capabilities but if you
+actually want to host mail to you can set up another server to receive the
+email from the PLPs.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can even use DRBD to duplicate data and setup multiple
+IMAP servers to serve the email. Once again by sending the requests through
+from the IMAP proxy you have a point at which to control how mail is handled.</p>
+</div>
+<p>SMTP failover is achived with the backup MX server.</p>
+</div>
+<div class="section" id="hardware-server">
+<h2>Hardware Server</h2>
+<p>Whilst ideally Server A and Server B should be on different machines in
+different data centres for network and server fault-tolerence, there are still
+some benefits to be gained by running them as two virtual servers on the same
+physical machine rather than just having one server.  Namely that it allows you
+to take down one of them for some purpose without breaking the rest of your
+infrastrucutre - you just need to configure the nameservers to direct web and
+IMAP services to the other machine and wait for the time to live to expire.</p>
+<p>For a very simple setup, you might want to use virtual machines for each of the
+servers so far. The choices are:</p>
+<ul class="simple">
+<li>Xen</li>
+<li>KVM</li>
+<li>OpenVZ</li>
+</ul>
+<p>Redhat and Ubuntu have said that the future lies with KVM rather than Xen, so
+although Xen is a great product there seems little point in using it. The
+choice is then KVM or OpenVZ and boils down to this:</p>
+<ul class="simple">
+<li>KVM provides much stronger isolation between virtual machines (akin to Xen)
+but at the cost that unused resources on one virtual machine can't be used
+by others. It can run other operating systems such as Windows.</li>
+<li>OpenVZ uses a single kernel for all virtual machines and thus allows them
+all to share memory at the expense of slightly weaker isolation. It cannot
+run other operating system.</li>
+</ul>
+<p>Since RAM is often the item at a premium in servers and since you are setting
+up all the virtual machines for your own use and not giving access to
+unpriveledge users on any of the virtual machines it seems to make sense to use
+OpenVZ.</p>
+<p>There is some more discussion in
+<a class="reference external" href="kvm-vs-openvz-virtualization.html">KVM vs OpenVZ</a>.</p>
+</div>
+<div class="section" id="recommended-base-server-setup">
+<h2>Recommended Base Server Setup</h2>
+<p>When setting up each of the servers there are some very sensible defaults to
+use:</p>
+<ul class="simple">
+<li>Debian Lenny (there's some more explaination of the choice of Debian in <a class="reference external" href="why-debian.html">Why Debian?</a></li>
+<li>Software RAID-1</li>
+<li>LVM2</li>
+</ul>
+<p>Here are some benefits:</p>
+<ul class="simple">
+<li>By setting up RAID-1 and LVM2 on the base server, all the virtual
+machines automatically benefit from it whilst being isolated from the
+details. You can then easily take snapshots to back up individual virtual
+machines. By setting up an encrypted drive you can store sensitive data
+reliably.</li>
+<li>Since all data is proxied through the PLPs, you only need three external IP
+addresses. All other machines can be on a private network and have relevant
+ports (like SSH) forwarded on from the host</li>
+<li>You can setup an apt-cache on the host so that machines don't all have to
+download the same updates.</li>
+</ul>
+<p>Depending on your application you might also want to use:</p>
+<ul class="simple">
+<li>Encrypted Partitions</li>
+</ul>
+<p>Start by following one of these tutorials:</p>
+<ul class="simple">
+<li><a class="reference external" href="install/production-debian-lenny-install.html">Install Debian Lenny on a Production Server</a></li>
+<li><a class="reference external" href="install/quick-installation.html">Quick Installation on a Production Server</a></li>
+</ul>
+<p>You can also install everything in a virtualised environment for testing before a production deployment:</p>
+<ul class="simple">
+<li><a class="reference external" href="install/kvm-virtual-production-installation.html">KVM Virtual Install of a Debian Lenny Production Setup</a></li>
+</ul>
+<p>When you are done, you'll want to setup the Protocol Level Proxies:</p>
+<ul class="simple">
+<li><a class="reference external" href="plps.html">Protocol Level Proxies</a></li>
+</ul>
+</div><p class="text-right">(<a href="architecture.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

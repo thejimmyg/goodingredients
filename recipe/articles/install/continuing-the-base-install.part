@@ -1,0 +1,105 @@
+
+Base Install
+============
+
+The base system now installs:
+
+.. image :: install-debian-lenny/base.png
+
+Users
+-----
+
+Enter a root password:
+
+.. image :: install-debian-lenny/base-1.png
+
+and confirm it:
+
+.. image :: install-debian-lenny/base-2.png
+
+Now you need to set up a username and password for an ordinary user. First enter their name:
+
+.. image :: install-debian-lenny/base-3.png
+
+Then choose a username:
+
+.. image :: install-debian-lenny/base-4.png
+
+Next choose a password:
+
+.. image :: install-debian-lenny/base-5.png
+
+and confirm it:
+
+.. image :: install-debian-lenny/base-6.png
+
+Mirrors
+-------
+
+Let Debian know the country you are in so it can suggest a mirror nearby:
+
+.. image :: install-debian-lenny/base-7.png
+
+Now select a mirror from one of the options:
+
+.. image :: install-debian-lenny/base-8.png
+
+Proxy
+-----
+
+If you access the internet through a proxy, enter the details now. I don't so I leave it blank:
+
+.. image :: install-debian-lenny/base-9.png
+
+Apt is configured:
+
+.. image :: install-debian-lenny/base-10.png
+
+Apt downloads and installs any updates you need. This can take a few minutes.
+
+.. image :: install-debian-lenny/base-11.png
+
+The post install scripts run:
+
+.. image :: install-debian-lenny/base-12.png
+
+You are given the choice of participating in the popularity contest.
+
+.. image :: install-debian-lenny/base-13.png
+
+System Packages
+---------------
+
+You are asked which packages to install but we don't want the default. Unselect Statndard System, we'll install everything we want ourselves.
+
+.. image :: install-debian-lenny/base-15.png
+
+New packages are downloaded:
+
+.. image :: install-debian-lenny/base-16.png
+
+You are asked if you want to install Grub:
+
+.. image :: install-debian-lenny/base-17.png
+
+Grub is installed:
+
+.. image :: install-debian-lenny/base-18.png
+
+Final changes are made:
+
+.. image :: install-debian-lenny/base-19.png
+
+The installation is finished:
+
+.. image :: install-debian-lenny/base-20.png
+
+information is gathered for the final report:
+
+.. image :: install-debian-lenny/base-21.png
+
+The system reboots:
+
+.. image :: install-debian-lenny/base-22.png
+
+

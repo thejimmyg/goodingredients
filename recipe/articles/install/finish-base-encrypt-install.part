@@ -1,0 +1,27 @@
+
+.. image :: install-debian-lenny/base-35.png
+.. image :: install-debian-lenny/base-36.png
+.. image :: install-debian-lenny/base-37.png
+.. image :: install-debian-lenny/base-38.png
+
+Notice that the system recognises only one disk of the RAID array is present:
+
+.. image :: install-debian-lenny/base-39.png
+
+On each boot you'll have to enter the passphrase you set up for the encrypted
+partition, this is why having a remote server with any encrypted partition
+using a passphrase can be problematic unless you have a serial console.
+
+Enter the password. If you make a mistake you'll see this:
+
+.. image :: install-debian-lenny/base-40.png
+
+My password was ``password``, so when I entere it I see this:
+
+.. image :: install-debian-lenny/base-41.png
+
+Now login as ``root`` with the password you set up earlier:
+
+.. image :: install-debian-lenny/base-42.png
+
+

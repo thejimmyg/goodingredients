@@ -1,0 +1,10 @@
+digraph "NP" {
+    "Mail Recieved" -> "Matched in forward table?"
+    "Matched in forward table?" -> "Check relay recipients" [label="Yes"]
+    "Matched in forward table?" -> "Continue delivery" [label="No"]
+    "Check relay recipients" -> "Matched?"
+    "Matched?" -> "Continue delivery" [label="Yes"]
+    "Matched?" -> "Forward to external address" [label="No"]
+    "Forward to external address" [color=Green, shape=box]
+}
+

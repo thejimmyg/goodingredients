@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Bind Primary Nameserver</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../index.html">Home</a></li>
+          <li><a href="../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Bind Primary Nameserver<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../Context/breadcrumbs.cti" -->
+<a href="../index.html">Recipes</a> &gt;
+<a href="index.html">Core Recipes</a> &gt;
+Bind Primary Nameserver
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">Pre-Requisites:</th><td class="field-body">None</td>
+</tr>
+<tr class="field"><th class="docinfo-name">Required Reading:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#masters-and-slaves-primary-and-secondary-nameservers" id="id1">Masters and Slaves (Primary and Secondary Nameservers)</a></li>
+<li><a class="reference internal" href="#installation" id="id2">Installation</a><ul>
+<li><a class="reference internal" href="#configuring-logging" id="id3">Configuring Logging</a></li>
+<li><a class="reference internal" href="#starting-bind-9" id="id4">Starting BIND 9</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forward-dns-reverse-dns-and-zones" id="id5">Forward DNS, Reverse DNS and Zones</a></li>
+<li><a class="reference internal" href="#configuring-bind" id="id6">Configuring BIND</a><ul>
+<li><a class="reference internal" href="#updating-named-conf-options" id="id7">Updating <tt class="docutils literal"><span class="pre">named.conf.options</span></tt></a></li>
+<li><a class="reference internal" href="#updating-named-conf-local" id="id8">Updating <tt class="docutils literal"><span class="pre">named.conf.local</span></tt></a></li>
+<li><a class="reference internal" href="#a-sample-forward-zone" id="id9">A Sample Forward Zone</a></li>
+<li><a class="reference internal" href="#a-sample-reverse-zone" id="id10">A Sample Reverse Zone</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restarting-bind" id="id11">Restarting Bind</a></li>
+<li><a class="reference internal" href="#testing-dns" id="id12">Testing DNS</a></li>
+<li><a class="reference internal" href="#setting-up-domains-with-the-nameserver" id="id13">Setting up Domains with the Nameserver</a></li>
+<li><a class="reference internal" href="#making-servers-use-this-dns-server" id="id14">Making servers use this DNS server</a></li>
+<li><a class="reference internal" href="#testing-round-robin" id="id15">Testing Round-Robin</a></li>
+</ul>
+</div>
+<p>In this article (based partly on <a class="reference external" href="http://www.dmo.ca/blog/20081009143754/">this one</a>) we'll set up Bind 9 in a chroot to
+serve as a the primary nameserver for a set of domains.</p>
+<p>Whilst
+there are extensions (such as <a class="reference external" href="http://bind-dlz.sourceforge.net/">DLZ</a>) that
+allow you to run BIND 9 from a MySQL database, for the number of domains I host
+it is less hassle to use the standard config files. After all, we're not trying
+to re-create <a class="reference external" href="http://www.ispconfig.org/">ISPConfig</a>.</p>
+<div class="section" id="masters-and-slaves-primary-and-secondary-nameservers">
+<h2><a class="toc-backref" href="#id1">Masters and Slaves (Primary and Secondary Nameservers)</a></h2>
+<p>There are two types of nameservers: primary nameservers (also called masters)
+and secondary nameservers. Whilst a small cluster can probably get away with
+one nameserver to serve DNS entries, most people choose to have at least two.
+This is useful for handling large amounts of trafic and in case one nameserver
+goes down. Some sites will have 5 or 6 nameservers or even more. To avoid
+having to update each nameserver every time there is a change to one of the DNS
+entries you make all but one of the nameservers <em>secondary nameservers</em> so that
+they take their configuration from the primary. Slaves can tell when
+information from a master has changed based on the serial numbers.</p>
+<p>In our setup it makes sense to use PLP A as the primary and PLP B as the secondary.</p>
+<p>One server can be the Start of Authority (SOA) for one zone, while providing
+secondary service for another zone, all the while providing caching services
+for hosts on the local LAN. So as you can imagaine you can have some fairly complex</p>
+</div>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="#id2">Installation</a></h2>
+<p>Install BIND, and some tools to help with debugging:</p>
+<pre class="literal-block">
+$ sudo apt-get install bind9 dnsutils
+</pre>
+<p>You could also install <tt class="docutils literal"><span class="pre">bind9-doc</span></tt> if you want the documentation.</p>
+<p>If you run <tt class="docutils literal"><span class="pre">netstat</span></tt> you'll see BIND (known as <tt class="docutils literal"><span class="pre">named</span></tt>) is running:</p>
+<pre class="literal-block">
+$ sudo netstat -tap | grep named
+tcp        0      0 plpa.example.com:domain   *:*                     LISTEN      1028/named
+tcp        0      0 localhost.locald:domain *:*                     LISTEN      1028/named
+tcp        0      0 localhost.localdoma:953 *:*                     LISTEN      1028/named
+tcp6       0      0 [::]:domain             [::]:*                  LISTEN      1028/named
+tcp6       0      0 ip6-localhost:953       [::]:*                  LISTEN      1028/named
+</pre>
+<p>Before we can put it in a chroot jail we need to shut it down:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 stop
+Stopping domain name service...: bind9 waiting for pid 1028 to die.
+</pre>
+<p>Create the chroot directories and devices:</p>
+<pre class="literal-block">
+sudo mkdir -p /var/chroot/bind9/{etc,dev,var/cache/bind,var/run/bind/run}
+sudo chown -R bind:bind /var/chroot/bind9/var/*
+sudo mknod /var/chroot/bind9/dev/null c 1 3
+sudo mknod /var/chroot/bind9/dev/random c 1 8
+sudo chmod 666 /var/chroot/bind9/dev/{null,random}
+</pre>
+<p>Move the BIND configuration directory and add a link so that any future Debian
+updates will still work:</p>
+<pre class="literal-block">
+sudo mv /etc/bind /var/chroot/bind9/etc
+sudo ln -s /var/chroot/bind9/etc/bind /etc/bind
+</pre>
+<div class="section" id="configuring-logging">
+<h3><a class="toc-backref" href="#id3">Configuring Logging</a></h3>
+<p>Even though BIND is now running in a chroot, we still want to see its log
+events. Create <tt class="docutils literal"><span class="pre">/etc/rsyslog.d/bind-chroot.conf</span></tt> and add the line below (this
+time you do need to add the <tt class="docutils literal"><span class="pre">$</span></tt> character too):</p>
+<pre class="literal-block">
+$AddUnixListenSocket /var/chroot/bind9/dev/log
+</pre>
+<p>Restart syslogd:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/rsyslog restart
+Restarting system log daemon: syslogd.
+</pre>
+<p>It should automatically create <tt class="docutils literal"><span class="pre">/dev/log</span></tt> inside the chroot:</p>
+<pre class="literal-block">
+$ ls -la /var/chroot/bind9/dev/log
+srw-rw-rw- 1 root root 0 2009-05-25 14:38 /var/chroot/bind9/dev/log
+</pre>
+</div>
+<div class="section" id="starting-bind-9">
+<h3><a class="toc-backref" href="#id4">Starting BIND 9</a></h3>
+<p>Edit <tt class="docutils literal"><span class="pre">/etc/default/bind9</span></tt> and replace this:</p>
+<pre class="literal-block">
+OPTIONS=&quot;-u bind&quot;
+</pre>
+<p>with this:</p>
+<pre class="literal-block">
+OPTIONS=&quot;-u bind -t /var/chroot/bind9&quot;
+</pre>
+<p>This tells BIND to use the chroot. Now start BIND:</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 start
+Starting domain name service...: bind.
+</pre>
+<p>and make sure it is running on the same ports as before:</p>
+<pre class="literal-block">
+$ sudo netstat -tap | grep named
+tcp        0      0 plpa.example.com:domain   *:*                     LISTEN      1152/named
+tcp        0      0 localhost.locald:domain *:*                     LISTEN      1152/named
+tcp        0      0 localhost.localdoma:953 *:*                     LISTEN      1152/named
+tcp6       0      0 [::]:domain             [::]:*                  LISTEN      1152/named
+tcp6       0      0 ip6-localhost:953       [::]:*                  LISTEN      1152/named
+</pre>
+<p>Finally check that the log messages get written to syslog:</p>
+<pre class="literal-block">
+$ sudo tail -f -n 40 /var/log/syslog
+...
+May 25 14:39:53 plpa named[1152]: starting BIND 9.5.1-P1 -u bind -t /var/chroot/bind9
+May 25 14:39:53 plpa named[1152]: found 2 CPUs, using 2 worker threads
+May 25 14:39:53 plpa named[1152]: using up to 4096 sockets
+May 25 14:39:53 plpa named[1152]: loading configuration from '/etc/bind/named.conf'
+May 25 14:39:53 plpa named[1152]: max open files (1024) is smaller than max sockets (4096)
+May 25 14:39:53 plpa named[1152]: using default UDP/IPv4 port range: [1024, 65535]
+May 25 14:39:53 plpa named[1152]: using default UDP/IPv6 port range: [1024, 65535]
+May 25 14:39:53 plpa named[1152]: listening on IPv6 interfaces, port 53
+May 25 14:39:53 plpa named[1152]: listening on IPv4 interface lo, 127.0.0.1#53
+May 25 14:39:53 plpa named[1152]: listening on IPv4 interface venet0:0, 192.168.100.2#53
+May 25 14:39:53 plpa named[1152]: automatic empty zone: 254.169.IN-ADDR.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: 2.0.192.IN-ADDR.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: 255.255.255.255.IN-ADDR.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: 0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: D.F.IP6.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: 8.E.F.IP6.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: 9.E.F.IP6.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: A.E.F.IP6.ARPA
+May 25 14:39:53 plpa named[1152]: automatic empty zone: B.E.F.IP6.ARPA
+May 25 14:39:53 plpa named[1152]: command channel listening on 127.0.0.1#953
+May 25 14:39:53 plpa named[1152]: command channel listening on ::1#953
+May 25 14:39:53 plpa named[1152]: zone 0.in-addr.arpa/IN: loaded serial 1
+May 25 14:39:53 plpa named[1152]: zone 127.in-addr.arpa/IN: loaded serial 1
+May 25 14:39:53 plpa named[1152]: zone 255.in-addr.arpa/IN: loaded serial 1
+May 25 14:39:53 plpa named[1152]: zone localhost/IN: loaded serial 2
+May 25 14:39:53 plpa named[1152]: running
+</pre>
+<p>That's it. Now you need to set up zones.</p>
+</div>
+</div>
+<div class="section" id="forward-dns-reverse-dns-and-zones">
+<h2><a class="toc-backref" href="#id5">Forward DNS, Reverse DNS and Zones</a></h2>
+<p>Before I explain how to configure BIND you need to know a bit of theory.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>DNS for rocket scientists is a really excellent resource for learning about
+BIND and DNS. It contains all the details you need to if you get stuck I'd
+encourage you to look at it:</p>
+<ul class="last simple">
+<li><a class="reference external" href="http://www.zytrax.com/books/dns/">http://www.zytrax.com/books/dns/</a></li>
+</ul>
+</div>
+<p>As you are no doubt aware, DNS is used to find an IP address from a domain
+name. This is called a <em>forward DNS lookup</em> and you might be used to
+configuring <tt class="docutils literal"><span class="pre">A</span></tt> records for this purpose. You can also find out a domain name
+from an IP address using a <em>reverse DNS lookup</em>. Reverse DNS entries rely on
+<tt class="docutils literal"><span class="pre">PTR</span></tt> records. For each domain name and IP address you are setting up you
+need to configure both the forward and reverse DNS entries.</p>
+<p>A set of forward DNS entries for a particular domain is called a <em>zone</em>. A set
+of reverse DNS entries forms a <em>reverse zone</em>. You need a zone and reverse zone
+for every domain you wish to configure. The existence of the zones is specified
+in your <tt class="docutils literal"><span class="pre">named.conf.local</span></tt> file but the entries themselves (called <em>resourse
+records</em> are stored in two files, the forward entries go in db.domain where
+<tt class="docutils literal"><span class="pre">domain</span></tt> is replaced with the the domain name. For example <tt class="docutils literal"><span class="pre">db.example.com</span></tt>
+and the reverse DNS entries go into a file named based on the IP address
+associated with the domain. For example <tt class="docutils literal"><span class="pre">db.192.168.100.in-addr.arpa</span></tt>. For each A record
+you configure in <tt class="docutils literal"><span class="pre">db.example.com</span></tt> you need to create a <tt class="docutils literal"><span class="pre">PTR</span></tt> record in
+<tt class="docutils literal"><span class="pre">db.192.168.100</span></tt>.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Technically you can name the zones anything you like, but the convention
+above helps to keep everything clear</p>
+</div>
+<p>Any time you make a change to a zone or reverse zone file you need to update
+its serial number as this is what secondary nameservers use to determine
+whether they need to update their own configurations.</p>
+</div>
+<div class="section" id="configuring-bind">
+<h2><a class="toc-backref" href="#id6">Configuring BIND</a></h2>
+<p>BIND configuration is stored in the config files you've just moved to
+<tt class="docutils literal"><span class="pre">/var/chroot/bind9/etc/bind</span></tt> but you can access them at <tt class="docutils literal"><span class="pre">/etc/bind</span></tt> because
+of the symlink you added.</p>
+<p>Here are the files and a decription of what they are for:</p>
+<p><tt class="docutils literal"><span class="pre">named.conf</span></tt></p>
+<blockquote>
+<p>This is the main configuration file for BIND. It imports the options in
+<tt class="docutils literal"><span class="pre">named.conf.options</span></tt> and <tt class="docutils literal"><span class="pre">named.conf.local</span></tt>. It also sets up zones for
+<tt class="docutils literal"><span class="pre">localhost</span></tt>, <tt class="docutils literal"><span class="pre">127.in-addr.arpa</span></tt>, <tt class="docutils literal"><span class="pre">0.in-addr.arpa</span></tt>, <tt class="docutils literal"><span class="pre">255.in-addr.arpa</span></tt>
+and for the root nameservers.</p>
+<p>The idea is that you'll edit <tt class="docutils literal"><span class="pre">named.conf.options</span></tt> and
+<tt class="docutils literal"><span class="pre">named.conf.local</span></tt> to customise BIND and use this file alone</p>
+</blockquote>
+<p><tt class="docutils literal"><span class="pre">named.conf.options</span></tt></p>
+<blockquote>
+This file contains settings controlling how the BIND server itself works</blockquote>
+<p><tt class="docutils literal"><span class="pre">named.conf.local</span></tt></p>
+<blockquote>
+This file contains definitions for all the zones you are setting up.</blockquote>
+<p><tt class="docutils literal"><span class="pre">db.0</span></tt>, <tt class="docutils literal"><span class="pre">db.255</span></tt>, <tt class="docutils literal"><span class="pre">db.local</span></tt>, <tt class="docutils literal"><span class="pre">db.127</span></tt>, <tt class="docutils literal"><span class="pre">db.root</span></tt></p>
+<blockquote>
+These files all contain the DNS entries used by the zones defined in
+<tt class="docutils literal"><span class="pre">named.conf</span></tt>. You should leave these files alone.  The root servers change
+over time, so <tt class="docutils literal"><span class="pre">db.root</span></tt> must be maintained now and then but this is usually
+done automatically as updates to bind.</blockquote>
+<p><tt class="docutils literal"><span class="pre">zones.rfc1918</span></tt></p>
+<blockquote>
+<p>This contains zone entries for the private networks described in <a class="reference external" href="http://www.faqs.org/rfcs/rfc1918.html">http://www.faqs.org/rfcs/rfc1918.html</a>.</p>
+<ul class="simple">
+<li>10.0.0.0        -   10.255.255.255  (10/8 prefix)</li>
+<li>172.16.0.0      -   172.31.255.255  (172.16/12 prefix)</li>
+<li>192.168.0.0     -   192.168.255.255 (192.168/16 prefix)</li>
+</ul>
+<p>These zones are not inluded by default because the line is commented out in <tt class="docutils literal"><span class="pre">named.conf.local</span></tt>.</p>
+</blockquote>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">db.empty</span></tt></dt>
+<dd>This contains empty reverse DNS entries used by the zones defined in <tt class="docutils literal"><span class="pre">zones.rfc1918</span></tt></dd>
+<dt><tt class="docutils literal"><span class="pre">rndc.key</span></tt></dt>
+<dd>A key which allows the rndc commands to work</dd>
+</dl>
+<p>See also:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://help.ubuntu.com/8.10/serverguide/C/dns.html">https://help.ubuntu.com/8.10/serverguide/C/dns.html</a></li>
+</ul>
+<div class="section" id="updating-named-conf-options">
+<h3><a class="toc-backref" href="#id7">Updating <tt class="docutils literal"><span class="pre">named.conf.options</span></tt></a></h3>
+<p>With the comments removed the <tt class="docutils literal"><span class="pre">/etc/bind/named.conf.options</span></tt> file starts out like this:</p>
+<pre class="literal-block">
+options {
+        directory &quot;/var/cache/bind&quot;;
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+</pre>
+<p>It's a good idea to add a couple more options between the curly braces:</p>
+<pre class="literal-block">
+version none;
+allow-transfer { none; };
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">version</span> <span class="pre">none;</span></tt> option means BIND won't tell you its version when you
+ask. This is useful because it prevents a potential attacker easily working out
+which attack to use.</p>
+<p>The <tt class="docutils literal"><span class="pre">allow-transfer</span> <span class="pre">{</span> <span class="pre">none;</span> <span class="pre">};</span></tt> option prevents other servers from
+downloading zone information. You'll change this if you set up a slave
+nameserver.</p>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">BIND is rather fussy when it comes to syntax and won't start if you make a
+mistake. Every statement must end with a semi-colon which is why there are
+<tt class="docutils literal"><span class="pre">;</span></tt> characters before <em>and</em> after the <tt class="docutils literal"><span class="pre">}</span></tt> characters in the options shown
+above.</p>
+</div>
+</div>
+<div class="section" id="updating-named-conf-local">
+<h3><a class="toc-backref" href="#id8">Updating <tt class="docutils literal"><span class="pre">named.conf.local</span></tt></a></h3>
+<p>This is the file where you add your zone entries. Let's set up the domains
+<tt class="docutils literal"><span class="pre">plpa.example.com</span></tt>, <tt class="docutils literal"><span class="pre">plpb.example.com</span></tt> and <tt class="docutils literal"><span class="pre">maila.example.com</span></tt> so that we can
+test the mail servers properly.</p>
+<p>These domains are all part of the <tt class="docutils literal"><span class="pre">example.com</span></tt> zone.</p>
+<p>Let's add an entry for example.com <tt class="docutils literal"><span class="pre">/etc/bind/named.conf.local</span></tt>:</p>
+<pre class="literal-block">
+zone &quot;example.com&quot; {
+    type master;
+    file &quot;/etc/bind/db.example.com&quot;;
+};
+</pre>
+<p>Let's also add an entry for the reverse zone:</p>
+<pre class="literal-block">
+zone &quot;122.168.192.in-addr.arpa&quot; {
+    type master;
+    file &quot;/etc/bind/db.122.168.192.in-addr.arpa&quot;;
+};
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p>Notice that we're creating the reverse zone for <tt class="docutils literal"><span class="pre">122.168.192.in-addr.arpa</span></tt>
+rather than <tt class="docutils literal"><span class="pre">2.122.168.192.in-addr.arpa</span></tt>. This allows us to put all the
+entries for the <tt class="docutils literal"><span class="pre">192.168.100.*</span></tt>.</p>
+<p class="last">Note that if you are using a server where the subnet is owned by the hosting
+provider it is likely they will set up these reverse DNS entries instead since
+they will own the subnet. They will probably provide a web based interface to
+allow you to update the reverse DNS entries or their tech support people should
+be able to set them up.</p>
+</div>
+<p>Now we need to create the zone files themselves.</p>
+</div>
+<div class="section" id="a-sample-forward-zone">
+<h3><a class="toc-backref" href="#id9">A Sample Forward Zone</a></h3>
+<p>Here's an example zone file for the example.com domain. I haven't used any of the
+shortcuts you might have seen so what I've written here is pretty much what
+you'll get in the Save it as <tt class="docutils literal"><span class="pre">/etc/bind/db.example.com</span></tt>:</p>
+<pre class="literal-block">
+$TTL 84924 ; zone default = 1 day or 84924 seconds
+$ORIGIN example.com.
+example.com.    IN      SOA   ns0.example.com. example.com. (
+    2009052300 ; serial number
+    3h         ; refresh =  3 hours
+    15M        ; update retry = 15 minutes
+    1W12h      ; expiry = 1 week + 12 hours
+    2h20M      ; minimum = 2 hours + 20 minutes
+)
+example.com.       84924  IN  NS  ns0.example.com.
+example.com.       84924  IN  NS  ns1.example.com.
+example.com.       84924  IN  MX  10  plpa.example.com.
+example.com.       84924  IN  MX  20  plpb.example.com.
+example.com.       84924  IN  A   192.168.100.141
+plpa.example.com.  84924  IN  A   192.168.100.2
+plpb.example.com.  84924  IN  A   192.168.100.3
+maila.example.com. 84924  IN  A   192.168.100.4
+ns0.example.com.   84924  IN  A   192.168.100.2
+ns1.example.com.   84924  IN  A   192.168.100.3
+www.example.com.   84924  IN  A   192.168.100.2 ; Let's use DNS round robin for the www sub-domain
+www.example.com.   84924  IN  A   192.168.100.3
+</pre>
+<p>For an explanation of these records you'll need to read these two guides:</p>
+<ul class="simple">
+<li><cite>http://debianclusters.cs.uni.edu/index.php/Forward_DNS_-_Name_to_IP_Address_(db.yourdomain)</cite></li>
+<li><a class="reference external" href="http://www.zytrax.com/books/dns/ch8/">http://www.zytrax.com/books/dns/ch8/</a></li>
+</ul>
+</div>
+<div class="section" id="a-sample-reverse-zone">
+<h3><a class="toc-backref" href="#id10">A Sample Reverse Zone</a></h3>
+<p>Now a reverse DNS zone. Save it as <tt class="docutils literal"><span class="pre">/etc/bind/db.2.122.168.192.in-addr.arpa</span></tt>:</p>
+<pre class="literal-block">
+$TTL 84924 ; zone default = 1 day or 84924 seconds
+$ORIGIN example.com.
+2.122.168.192.in-addr.arpa.   IN      SOA   ns0.example.com. example.com. (
+    2009052300 ; serial number
+    3h         ; refresh =  3 hours
+    15M        ; update retry = 15 minutes
+    1W12h      ; expiry = 3 weeks + 12 hours
+    2h20M      ; minimum = 2 hours + 20 minutes
+)
+                              IN    NS   ns0.example.com.
+                              IN    NS   ns1.example.com.
+141.122.168.192.in-addr.arpa. IN   PTR   example.com.
+2.122.168.192.in-addr.arpa.   IN   PTR   plpb.example.com.
+3.122.168.192.in-addr.arpa.   IN   PTR   plpa.example.com.
+4.122.168.192.in-addr.arpa.   IN   PTR   maila.example.com.
+</pre>
+</div>
+</div>
+<div class="section" id="restarting-bind">
+<h2><a class="toc-backref" href="#id11">Restarting Bind</a></h2>
+<p>Once all the changes are made restart bind.</p>
+<pre class="literal-block">
+$ sudo /etc/init.d/bind9 restart
+</pre>
+<p>Then check there haven't been any problems by looking syslog:</p>
+<pre class="literal-block">
+$ sudo tail -f /var/log/syslog
+</pre>
+<p>The output should include these lines:</p>
+<pre class="literal-block">
+May 25 19:49:57 plpa named[761]: zone 122.168.192.in-addr.arpa/IN: loaded serial 2009052300
+May 25 19:49:57 plpa named[761]: zone example.com/IN: loaded serial 2009052300
+May 25 19:49:57 plpa named[761]: zone localhost/IN: loaded serial 2
+May 25 19:49:57 plpa named[761]: zone example.com/IN: sending notifies (serial 2009052300)
+May 25 19:49:57 plpa named[761]: running
+</pre>
+</div>
+<div class="section" id="testing-dns">
+<h2><a class="toc-backref" href="#id12">Testing DNS</a></h2>
+<p>If everything is working you should be able to dig the different domains set up:</p>
+<pre class="literal-block">
+$ dig &#64;localhost www.example.com
+; &lt;&lt;&gt;&gt; DiG 9.5.1-P1 &lt;&lt;&gt;&gt; &#64;localhost www.example.com
+; (1 server found)
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 13439
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 2, ADDITIONAL: 2
+
+;; QUESTION SECTION:
+;www.example.com.                   IN      A
+
+;; ANSWER SECTION:
+www.example.com.            84924   IN      A       192.168.100.2
+www.example.com.            84924   IN      A       192.168.100.3
+
+;; AUTHORITY SECTION:
+example.com.                84924   IN      NS      ns0.example.com.
+example.com.                84924   IN      NS      ns1.example.com.
+
+;; ADDITIONAL SECTION:
+ns0.example.com.            84924   IN      A       192.168.100.2
+ns1.example.com.            84924   IN      A       192.168.100.3
+
+;; Query time: 4 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Mon May 25 19:51:05 2009
+;; MSG SIZE  rcvd: 131
+</pre>
+<p>You can check reverse DNS like this:</p>
+<pre class="literal-block">
+$ nslookup 192.168.100.4
+Server:             192.168.100.1
+Address:            192.168.100.1#53
+
+4.122.168.192.in-addr.arpa      name = maila.example.com.
+</pre>
+</div>
+<div class="section" id="setting-up-domains-with-the-nameserver">
+<h2><a class="toc-backref" href="#id13">Setting up Domains with the Nameserver</a></h2>
+<p>Certain domain <em>registrars</em> will require that nameservers are registered with
+the <em>registry</em> before they can be used with their control panels. This means
+you will need to create what is known as a &quot;Glue Record&quot; (<a class="reference external" href="https://www.dyndns.com/support/kb/what_is_domain_registration.html#glue">glue records are
+described here</a>).
+Technically these are only really needed if the nameserver domain for a domain
+is under the domain itself because without a glue record specifying the IP
+address explicitly there would be no way to resolve the nameserver.</p>
+</div>
+<div class="section" id="making-servers-use-this-dns-server">
+<h2><a class="toc-backref" href="#id14">Making servers use this DNS server</a></h2>
+<p>Once you have made sure BIND is working correctly you change all of the
+machines on the network to use the new nameserver instead of the current one.
+This is very useful for testing as it means you can use internal IP addresses
+(as we've done in this article) and the machines will use these rather than the
+values live on the internet. You'd probably want to skip this for production
+use though.</p>
+<p>To make the change edit the file <tt class="docutils literal"><span class="pre">/etc/resolv.conf</span></tt> and replace the content with:</p>
+<pre class="literal-block">
+nameserver 192.168.100.2
+</pre>
+<p>Once this change is made you won't need to add the <tt class="docutils literal"><span class="pre">&#64;localhost</span></tt> to the
+<tt class="docutils literal"><span class="pre">dig</span></tt> commands because they will use localhost anyway.</p>
+</div>
+<div class="section" id="testing-round-robin">
+<h2><a class="toc-backref" href="#id15">Testing Round-Robin</a></h2>
+<p>You can now test the DNS round robin for the www subdomain like this:</p>
+<pre class="literal-block">
+$ ping www.example.com
+PING www.example.com (192.168.100.2) 56(84) bytes of data.
+64 bytes from plpa.example.com (192.168.100.2): icmp_seq=1 ttl=64 time=0.075 ms
+64 bytes from plpa.example.com (192.168.100.2): icmp_seq=2 ttl=64 time=0.061 ms
+^C
+--- www.example.com ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 0.061/0.068/0.075/0.007 ms
+$ ping www.example.com
+PING www.example.com (192.168.100.3) 56(84) bytes of data.
+64 bytes from plpb.example.com (192.168.100.3): icmp_seq=1 ttl=64 time=0.110 ms
+64 bytes from plpb.example.com (192.168.100.3): icmp_seq=2 ttl=64 time=0.085 ms
+^C
+--- www.example.com ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 999ms
+rtt min/avg/max/mdev = 0.085/0.097/0.110/0.015 ms
+</pre>
+<p>Notice that the first ping went to 192.168.100.2 but the second went to
+192.168.100.3.</p>
+<p>One problem though is what happens if a you need to resolve a domain which
+isn't one of the domains in the BIND config files? Let's try it:</p>
+<pre class="literal-block">
+$ ping google.com
+ping: unknown host google.com
+</pre>
+<p>The lookup fails. To get this to work you need to set up BIND as a <em>caching
+nameserver</em>.</p>
+</div><p class="text-right">(<a href="bind-primary-nameserver.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

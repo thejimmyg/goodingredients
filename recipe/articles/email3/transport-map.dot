@@ -1,0 +1,9 @@
+digraph "NP" {
+    "Relay recipients matched?" -> "Rejected" [label=No]
+    "Relay recipients matched?" -> "Domain in transport table?" [label=Yes]
+    "Domain in transport table?" -> Error [label=No]
+    "Domain in transport table?" -> Matched [label=Yes]
+    "Error" [color=Red, shape=box]
+    "Matched" [color=Green, shape=box]
+    "Rejected" [color=Red, shape=box]
+}

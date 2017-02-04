@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="../../Templates/jimmyg.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" --><title>Set up OpenVZ</title><!-- InstanceEndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- InstanceBeginEditable name="meta" -->
+<meta name="description" content="3aims Web Development, a Knowledge Interaction Technology consultancy based in London and specialising in Python" />
+<meta name="keywords" content="3aims Python Pylons Web Development Programming NHS Consultancy Database" />
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" --><!--  InstanceEndEditable -->
+<style type="text/css">
+html, body, div, p { margin: 0; padding: 0; border: 0; }
+body { background: #213502; font-family: Arial, Georgia, serif; color: #333; font-size: 14px; line-height: 145%; }
+.main { /* margin:0 auto; */ width: 90%; }
+.dp20,
+.dp25,
+.dp33,
+.dp40,
+.dp50,
+.dp75,
+.dp80,
+.dp100{float:left; display: inline; *margin-left:-0.04em; } /* IE margin hack */
+.dp20{width:20%;}
+.dp25{width:25%;}
+.dp33{width:33.33%;}
+.dp40{width:40%;}
+.dp50{width:50%;}
+.dp80{width:80%;}
+.dp75{width:75%;}
+.dp100{width:100%;}
+.clear{ clear:both; overflow: auto; width: 100%; }
+.noborder{border: 0px;}
+#logobar { height: 68px; padding-top: 16px; padding-left: 20px; }
+#links { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; padding-top: 49px; }
+#links a:link, #links a:visited, #links a:hover { color: #fff; text-decoration: none; }
+#links a:hover { color: #fff; text-decoration: underline; }
+#footer a:link, #footer a:visited, #footer a:hover { color: #fff; text-decoration: underline; }
+#footer p { color: #fff }
+#search { text-align: right; }
+#search form { padding-top: 15px; margin: 0px; }
+
+#content { background: #fff; margin-top: 5px; margin-bottom: 10px;}
+#content_content { padding: 20px; padding-right: 40px; }
+
+#navcontainer ul { margin: 0; padding: 0; list-style-type: none; } 
+#navcontainer ul li { display: inline; }
+#navcontainer ul li a { text-decoration: none; padding: .2em .55em; }
+#navcontainer ul li.first a { padding: .2em .55em .2em 0; }
+#navcontainer ul li.highlight a { color: #fcff02; background: #008cca; }
+h1 { font-family: Arial, serif; font-weight: normal; font-size: 26px; }
+h2 { font-weight: normal; font-size: 22px;}
+p { color: #333; }
+li.norm { color: #333; }
+p.large { font-size: 16px; }
+p { padding-top: 15px; }
+p.first { padding-top: 0px; }
+li.norm a, li.norm a:visited, li.norm a:link, p a, p a:visited, p a:link { color: #3883a9 ; }
+p a:hover { color: #58aecb; }
+
+pre { overflow:auto; border-top: 1px solid #71ae1b; border-bottom: 1px solid #71ae1b; background: #e0f8bf; padding: 3px; font-size: 13px; margin-bottom: 0px; line-height: 130%; }
+table { margin-top: 15px; }
+#linksbar { background: #71ae1b;  border-bottom: 1px solid #9ddb44; border-top: 3px solid #142200; padding: 13px 0 13px 0; }
+#linksbar h2 { padding: 0px; margin: 0px; padding-left: 20px; color: #fff; font-family: Arial, sans-serif; font-size: 22px; }
+
+#footerbar { padding-bottom: 20px; }
+#footer { padding: 13px 40px 13px 20px; }
+
+</style>
+</head>
+<body bgcolor="#ffffff">
+<!-- InstanceBeginEditable name="body_top" --><!-- InstanceEndEditable -->
+<a name="top"></a>
+<div class="main">
+  <div class="clear">
+    <div class="dp20">
+      <div id="logobar">
+        <a href="http://goodingredients.org"><img src="../../img/good-ingredients.png" class="noborder" alt="Good Ingredients" /></a>
+      </div>
+    </div>
+    <div id="links" class="dp40">
+      <div id="navcontainer">
+        <ul>
+          <li class="first"><a href="../../index.html">Home</a></li>
+          <li><a href="../../ingredients/index.html">Ingredients</a></li>
+          <li><a href="index.html">Recipes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="search" class="dp40">
+      <form>
+        <input type="text" value="Search site" /><input type="submit" value="Search" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div id="linksbar" class="dp100">
+    <h2>Good Server Infrastrucutre<h2>
+  </div>
+</div>
+<div class="main">
+
+<div id="content" class="dp100">
+<div id="content_content">
+<h1 class="heading">
+<!-- InstanceBeginEditable name="heading" -->Set up OpenVZ<!-- InstanceEndEditable -->
+</h1>
+<!-- InstanceBeginEditable name="breadcrumbs" -->
+<!-- #BeginContextItem "../../Context/breadcrumbs.cti" -->
+<a href="../index.html">Recipes</a> &gt;
+<a href="index.html">Core Recipes</a> &gt;
+Set up OpenVZ
+<!-- #EndContextItem -->
+<!--  InstanceEndEditable -->
+<!-- InstanceBeginEditable name="content" --><table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr class="field"><th class="docinfo-name">Pre-Requisites:</th><td class="field-body">Debian Installed</td>
+</tr>
+<tr class="field"><th class="docinfo-name">Required Reading:</th><td class="field-body">Rsync, SSH Keys</td>
+</tr>
+</tbody>
+</table>
+<p>In this tutorial you'll learn how to set up OpenVZ on a Debian 5.0 server. I'll assume you have a running server properly configured and ready to go.</p>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<p>An OpenVZ kernel and the <tt class="docutils literal"><span class="pre">vzctl</span></tt> and <tt class="docutils literal"><span class="pre">vzquota</span></tt> packages are available in
+the Debian Lenny repositories, so we can install them as follows:</p>
+<pre class="literal-block">
+$ sudo apt-get install linux-image-openvz-amd64 vzctl vzquota
+</pre>
+<p>This uses an additional 83 Mb space taking the total for a minimum Debian and OpenVZ to 648Mb. (Handy to know when planning partitioning schemes).</p>
+</div>
+<div class="section" id="updating-host-settings">
+<h2>Updating Host Settings</h2>
+<p>Now uncomment the following lines in <tt class="docutils literal"><span class="pre">/etc/sysctl.conf</span></tt>:</p>
+<pre class="literal-block">
+net.ipv4.conf.all.rp_filter=1
+net.ipv4.ip_forward=1
+net.ipv4.icmp_echo_ignore_broadcasts=1
+</pre>
+<p>Then add the following at the end:</p>
+<pre class="literal-block">
+net.ipv4.conf.default.forwarding=1
+net.ipv4.conf.default.proxy_arp = 0
+kernel.sysrq = 1
+net.ipv4.conf.default.send_redirects = 1
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.eth0.proxy_arp=1
+</pre>
+<p>Now update the configuration:</p>
+<pre class="literal-block">
+$ sudo sysctl -p
+</pre>
+<p>Open <tt class="docutils literal"><span class="pre">/etc/vz/vz.conf</span></tt> and set <tt class="docutils literal"><span class="pre">NEIGHBOUR_DEVS</span></tt> to all:</p>
+<pre class="literal-block">
+$ sudo vim /etc/vz/vz.conf
+</pre>
+<p>Once installation is complete reboot into new kernel:</p>
+<pre class="literal-block">
+$ sudo reboot
+</pre>
+<div class="tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you are running a virtual machine under KVM, the first time you reboot
+after installing the OpenVZ kernel on the virtual machine, it hangs. Just
+destroy the running instance and start it up again and everything works as
+expected.</p>
+</div>
+</div>
+<div class="section" id="first-boot-of-the-host-environment">
+<h2>First Boot of the Host Environment</h2>
+<p>In OpenVZ terminology, the host is called the <em>host environments</em> (HEs).</p>
+<p>Once the system has booted check the kernel:</p>
+<pre class="literal-block">
+$ uname -r
+2.6.26-2-openvz-amd64
+</pre>
+<p>Then check that OpenVZ kernel facility <tt class="docutils literal"><span class="pre">vzmond</span></tt> is running:</p>
+<pre class="literal-block">
+$ ps aux | grep vz
+root      1804  0.0  0.0      0     0 ?        S    17:04   0:00 [vzmond]
+</pre>
+<p>Finally check a network interface for containers is present (<tt class="docutils literal"><span class="pre">venet0</span></tt>):</p>
+<pre class="literal-block">
+$ /sbin/ifconfig
+eth0      Link encap:Ethernet  HWaddr 00:16:36:11:de:2e
+          inet addr:192.168.100.141  Bcast:192.168.100.255  Mask:255.255.255.0
+          inet6 addr: fe80::216:36ff:fe11:de2e/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:1332 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:861 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:284375 (277.7 KiB)  TX bytes:112752 (110.1 KiB)
+          Interrupt:10 Base address:0x4000
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+venet0    Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+          UP BROADCAST POINTOPOINT RUNNING NOARP  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+</pre>
+<p>If everything is present we can continue.</p>
+</div>
+<div class="section" id="create-a-virtual-environment">
+<h2>Create a Virtual Environment</h2>
+<p>In OpenVZ terminology, guests are called <em>virtual environments</em> (VEs).</p>
+<p>Now get an image template for the VE:</p>
+<pre class="literal-block">
+$ cd /var/lib/vz/template/cache
+$ sudo wget http://download.openvz.org/template/precreated/contrib/debian-5.0-amd64-minimal.tar.gz
+--2009-04-18 23:36:09--  http://download.openvz.org/template/precreated/contrib/debian-5.0-amd64-minimal.tar.gz
+Resolving download.openvz.org... 64.131.90.11
+Connecting to download.openvz.org|64.131.90.11|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 61459687 (59M) [application/x-gzip]
+Saving to: `debian-5.0-amd64-minimal.tar.gz'
+
+53% [===================&gt;                   ] 33,037,136   718K/s  eta 44s
+</pre>
+<p>It is 59Mb:</p>
+<pre class="literal-block">
+$ ls -lah debian-5.0-amd64-minimal.tar.gz
+-rw-r--r-- 1 james james 59M 2009-01-13 07:44 debian-5.0-amd64-minimal.tar.gz
+</pre>
+<p>and the version I used has the following checksum:</p>
+<pre class="literal-block">
+$ md5sum debian-5.0-amd64-minimal.tar.gz
+17049c3bcc694a84975dcf12f79aa597  debian-5.0-amd64-minimal.tar.gz
+</pre>
+<p>Create a symlink from <tt class="docutils literal"><span class="pre">/var/lib/vz</span></tt> to <tt class="docutils literal"><span class="pre">/vz</span></tt> to provide backward compatibility:</p>
+<pre class="literal-block">
+$ sudo ln -s /var/lib/vz /vz
+</pre>
+<p>To set up a VE from the template you've just downloaded run:</p>
+<pre class="literal-block">
+$ sudo vzctl create 221 --ostemplate debian-5.0-amd64-minimal --config vps.basic
+Creating VE private area (debian-5.0-amd64-minimal)
+Performing postcreate actions
+VE private area was created
+</pre>
+<p>The 221 must be a unique ID. You can use the last part of the virtual machine's
+IP address for it. For example, if the virtual machine's IP address is
+192.168.100.221, you can use 221 as the ID.</p>
+<p>Set up networking:</p>
+<pre class="literal-block">
+$ sudo vzctl set 221 --hostname test.example.com --save
+Saved parameters for VE 221
+$ sudo vzctl set 221 --ipadd 192.168.100.2 --save
+Saved parameters for VE 221
+</pre>
+<p>The nameservers will probably the same as those on the HE. On the host run:</p>
+<pre class="literal-block">
+$ cat /etc/resolv.conf
+nameserver 192.168.100.1
+</pre>
+<p>Then use these IP addresses for the nameservers of the VEs. In this case <tt class="docutils literal"><span class="pre">192.168.100.1</span></tt> is the nameserver:</p>
+<p>Set up the nameservers:</p>
+<pre class="literal-block">
+$ sudo vzctl set 221 --nameserver 192.168.100.1 --save
+Saved parameters for VE 221
+</pre>
+<p>Set this option:</p>
+<pre class="literal-block">
+$ sudo vzctl set 221 --numothersock 120 --save
+Saved parameters for VE 221
+</pre>
+<p>You can get information about the <tt class="docutils literal"><span class="pre">vzctl</span></tt> command with:</p>
+<pre class="literal-block">
+# man vzctl
+</pre>
+<p>For example the <tt class="docutils literal"><span class="pre">--nameserver</span></tt> options is explained like this:</p>
+<pre class="literal-block">
+--nameserver addr
+    Sets DNS server IP address for a VE. If you want to set several nameservers, you should do it at once, so  use  --nameserver  option  multiple
+    times in one call to vzctl, as all the name server values set in previous calls to vzctl gets overwritten.
+</pre>
+<p>Now start the server:</p>
+<pre class="literal-block">
+$ sudo vzctl start 221
+Starting VE ...
+VE is mounted
+Adding IP address(es): 192.168.100.221
+Setting CPU units: 1000
+Configure meminfo: 65536
+Set hostname: test.example.com
+File resolv.conf was modified
+VE start in progress...
+</pre>
+<p>Enter the server with a root prompt:</p>
+<pre class="literal-block">
+$ sudo vzctl enter 221
+root&#64;test:/#
+</pre>
+<p>You should now be able to ping addresses on the internet, the HE and other machines connected to the network:</p>
+<pre class="literal-block">
+root&#64;test:/# ping google.com
+PING google.com (74.125.67.100) 56(84) bytes of data.
+64 bytes from google.com (74.125.67.100): icmp_seq=2 ttl=52 time=120 ms
+64 bytes from google.com (74.125.67.100): icmp_seq=3 ttl=52 time=116 ms
+^C
+--- google.com ping statistics ---
+3 packets transmitted, 2 received, 33% packet loss, time 2018ms
+rtt min/avg/max/mdev = 116.485/118.490/120.495/2.005 ms
+root&#64;test:/# ping 192.168.100.1
+PING 192.168.100.1 (192.168.100.1) 56(84) bytes of data.
+64 bytes from 192.168.100.1: icmp_seq=1 ttl=63 time=0.788 ms
+64 bytes from 192.168.100.1: icmp_seq=2 ttl=63 time=0.590 ms
+^C
+--- 192.168.100.1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.590/0.689/0.788/0.099 ms
+root&#64;test:/# ping 192.168.1.1
+PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=253 time=21.6 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=253 time=145 ms
+^C
+--- 192.168.1.1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1006ms
+rtt min/avg/max/mdev = 21.696/83.472/145.248/61.776 ms
+</pre>
+<p>If you want to have the vm started at boot, run</p>
+<pre class="literal-block">
+$ sudo vzctl set 221 --onboot yes --save
+</pre>
+</div>
+<div class="section" id="updated-apt-sources">
+<h2>Updated Apt Sources</h2>
+<p>You'll probably need to update the <tt class="docutils literal"><span class="pre">/etc/apt/sources.list</span></tt> file because the
+default uses mirrors in Germany and doesn't include source URIs. Here's how it
+looks:</p>
+<pre class="literal-block">
+deb  http://ftp2.de.debian.org/debian lenny main contrib non-free
+deb  http://ftp2.de.debian.org/debian-security lenny/updates main contrib non-free
+</pre>
+<p>A good idea is to use the same settings as the base system. For me this means I
+use these settings:</p>
+<pre class="literal-block">
+deb http://ftp.uk.debian.org/debian/ lenny main
+deb-src http://ftp.uk.debian.org/debian/ lenny main
+
+deb http://security.debian.org/ lenny/updates main
+deb-src http://security.debian.org/ lenny/updates main
+
+deb http://volatile.debian.org/debian-volatile lenny/volatile main
+deb-src http://volatile.debian.org/debian-volatile lenny/volatile main
+</pre>
+<p>You'll need to update the packages and you might as well upgrade just to check
+there aren't any new packages:</p>
+<pre class="literal-block">
+$ sudo apt-get update
+$ sudo apt-get upgrade
+</pre>
+</div>
+<div class="section" id="monitoring-openvz-and-dealing-with-problems">
+<h2>Monitoring OpenVZ and Dealing with Problems</h2>
+<p>If you are fairly new to OpenVZ and certain things that you expect to work
+don't quite seem to, it is well worth running the <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">cat</span>
+<span class="pre">/proc/user_beancounters</span></tt> command to get the OpenVZ status. If there are any
+values which are not <tt class="docutils literal"><span class="pre">0</span></tt> in the last column this indicated a problem and you
+should probably give the VE more resources.</p>
+<pre class="literal-block">
+$ sudo cat  /proc/user_beancounters
+Version: 2.5
+       uid  resource                     held              maxheld              barrier                limit              failcnt
+        2:  kmemsize                  5215561              6133691             14372700             14790164                    0
+            lockedpages                     0                    0                  256                  256                    0
+            privvmpages                 43069                54099                65536                69632                    0
+            shmpages                      640                  656                21504                21504                    0
+            dummy                           0                    0                    0                    0                    0
+            numproc                        44                   49                  240                  240                    0
+            physpages                    7641                14347                    0  9223372036854775807                    0
+            vmguarpages                     0                    0                33792  9223372036854775807                    0
+            oomguarpages                 7641                14347                26112  9223372036854775807                    0
+            numtcpsock                      9                   11                  360                  360                    0
+            numflock                       12                   16                  188                  206                    0
+            numpty                          1                    2                   16                   16                    0
+            numsiginfo                      0                    4                  256                  256                    0
+            tcpsndbuf                  185432               210568              1720320              2703360                    0
+            tcprcvbuf                  147456                    0              1720320              2703360                    0
+            othersockbuf                 6936               114064              1126080              2097152                    0
+            dgramrcvbuf                     0                 4360               262144               262144                    0
+            numothersock                   54                  120                  120                  120                   32
+            dcachesize                 232872               334284              3409920              3624960                    0
+            numfile                       881                 1012                 9312                 9312                    0
+            dummy                           0                    0                    0                    0                    0
+            dummy                           0                    0                    0                    0                    0
+            dummy                           0                    0                    0                    0                    0
+            numiptent                      10                   10                  128                  128                    0
+</pre>
+<p>Here <tt class="docutils literal"><span class="pre">failcnt</span></tt> indicated <tt class="docutils literal"><span class="pre">numothersock</span></tt> needs increasing.</p>
+</div>
+<div class="section" id="destroying-a-ve">
+<h2>Destroying a VE</h2>
+<p>To destroy a VE you can use the following commands:</p>
+<pre class="literal-block">
+$ sudo vzclt stop 221
+$ sudo vzclt destroy 221
+</pre>
+</div><p class="text-right">(<a href="set-up-openvz.rst">view source</a>)</p><!--  InstanceEndEditable -->
+</div>
+</div>
+</div>
+
+<div class="main">
+  <div id="footerbar" class="dp100">
+    <div id="footer" class="dp100">
+      <p> 
+        Copyright &copy; <a href="http://jimmyg.org">James Gardner</a> 2009. All Rights Reserved. 
+        See the <a href="../../disclaimer.html">Disclaimer</a>. <br />
+        <a href="http://3aims.com/contact.html">Contact</a> | 
+        <a href="http://validator.w3.org/check?uri=referer" title="Validate this page for XHTML 1.0 Strict compliance">XHTML &amp; CSS</a>
+      </p> 
+    </div>
+  </div>
+</div>
+</body>
+<!-- InstanceEnd --></html>

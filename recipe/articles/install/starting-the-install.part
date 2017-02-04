@@ -1,0 +1,48 @@
+Now we can start the base install. Select ``Install`` to start the text 
+installer.
+
+.. image :: install-debian-lenny/boot-screen.png
+
+I speak ``English`` so that's what I choose:
+
+.. image :: install-debian-lenny/choose-language.png
+
+Next you choose your country. The choice of country determines the mirror 
+which will be used for packages so answer accurately. I choose 
+``United Kingdom``
+
+.. image :: install-debian-lenny/choose-language-2.png
+
+Select a keyboard layout:
+
+.. image :: install-debian-lenny/select-a-keyboard-layout.png
+
+Hardware drivers are loaded along with additional components, network 
+drivers are loaded and then DHCP is configured if there is a DHCP 
+server on the network.
+
+.. image :: install-debian-lenny/loading-additional-components.png
+.. image :: install-debian-lenny/configuring-the-network-with-dhcp.png
+
+Eventually you are asked for a hostname. So that this tutorial is consistent with other tutorials such as the ones on howtoforge.com we're going to call
+this server ``server1.example.com``, so you should enter ``server1`` as the hostname: 
+
+You should choose your own hostname.
+
+.. image :: install-debian-lenny/configure-the-network.png
+
+This machine is to be accessed on the internet as ``doppler.3aims.com``. The
+domain is therefore ``3aims.com``. You should enter your own domain. The 
+settings can be changed later but it is worth getting them right now.
+
+.. image :: install-debian-lenny/configure-the-network-2.png
+
+The installer performs some processing including getting the current time:
+
+.. image :: install-debian-lenny/getting-time.png
+
+Then the partitioner starts.
+
+.. image :: install-debian-lenny/partition-disks-0.png
+
+

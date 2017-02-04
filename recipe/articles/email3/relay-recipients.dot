@@ -1,0 +1,11 @@
+digraph "NP" {
+    "Domain in domain table?" -> "Not Matched" [label=No]
+    "Domain in domain table?" -> "Email in user table?" [label=Yes]
+    "Email in user table?" -> "Email in relay table" [label=No]
+    "Email in user table?" -> "Matched" [label=Yes]
+    "Email in relay table" -> "Not Matched" [label=No]
+    "Email in relay table" -> "Matched" [label=Yes]
+    "Matched" [color=Green, shape=box]
+    "Not Matched" [color=Red, shape=box]
+}
+
